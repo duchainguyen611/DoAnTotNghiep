@@ -350,7 +350,7 @@
                                     <span><i class="fa fa-remove"></i></span></a></div>
                                 <div style="width: 13%;align-items: flex-end;padding-right: 0;" class="a-center">
                                     <span class="cart-price">
-                                        <span class="money product_total" th:id="${cart.id}"
+                                        <span class="money product_total product_total2" th:id="${cart.id}"
                                               th:text="${cart.unitPrice*cart.cartQuantity}"></span>
                                     </span>
                                 </div>
@@ -441,7 +441,7 @@
                                 </div>
                                 <div style="width: 13%;align-items: flex-end;padding-right: 0;" class="a-center" hidden="hidden">
                                     <span class="cart-price">
-                                        <span class="money product_total" th:id="${cart.id}">0</span>
+                                        <span class="money product_total">0</span>
                                     </span>
                                 </div>
                                 <a class="button remove-item remove-item-cart"
@@ -740,7 +740,7 @@
     function calculateTotalAmount() {
         let totalAmountElements = document.querySelectorAll('.totalAmountElement');
         let totalAmountElementsMobile = document.querySelectorAll('.totalAmountElementsMobile');
-        let productTotalElements = document.querySelectorAll('.product_total');
+        let productTotalElements = document.querySelectorAll('.product_total2');
         let sumPriceHeaders = document.querySelectorAll('.sumPriceHeader');
         let totalAmount = 0;
 
