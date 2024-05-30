@@ -3,7 +3,6 @@ package com.ra.controller.payment;
 import com.ra.model.entity.ENUM.PaymentMethods;
 import com.ra.model.entity.dto.response.user.CheckOutInforDTO;
 import com.ra.model.service.ShoppingCartService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,18 +40,20 @@ public class PaymentController {
     }
 
     @PostMapping("/user/payment")
-    public RedirectView getPay(@RequestParam("typePay") String typePay, @ModelAttribute("checkOutInfor") CheckOutInforDTO checkOutInfor
-            , @RequestParam("totalPriceAll") double totalPriceAll, HttpServletRequest request) throws UnsupportedEncodingException {
+    public RedirectView getPay(@RequestParam("typePay") String typePay, @ModelAttribute("checkOutInfor") CheckOutInforDTO checkOutInfor,
+                               @RequestParam("totalPriceAll") double totalPriceAll) throws UnsupportedEncodingException {
         checkOutInforStatic = checkOutInfor;
         System.out.println(checkOutInforStatic.getReceiveName());
+
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "other";
-        long amount = (long) (totalPriceAll * 100);
+        long amount = (long) (totalPriceAll * 100); // Amount in smallest currency unit
         String bankCode = typePay;
         String vnp_TxnRef = Config.getRandomNumber(8);
-        String vnp_IpAddr = getClientIp(request); // Lấy địa chỉ IP thực tế của client
+        String vnp_IpAddr = "127.0.0.1"; // Replace with the actual IP address of the client
         String vnp_TmnCode = Config.vnp_TmnCode;
+
         Map<String, String> vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", vnp_Version);
         vnp_Params.put("vnp_Command", vnp_Command);
@@ -67,6 +68,7 @@ public class PaymentController {
         vnp_Params.put("vnp_ReturnUrl", Config.vnp_ReturnUrl);
         vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
 
+        // Add creation date and expiry date
         Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
         String vnp_CreateDate = formatter.format(cld.getTime());
@@ -76,42 +78,30 @@ public class PaymentController {
         String vnp_ExpireDate = formatter.format(cld.getTime());
         vnp_Params.put("vnp_ExpireDate", vnp_ExpireDate);
 
+        // Build data for hash and query string
         List<String> fieldNames = new ArrayList<>(vnp_Params.keySet());
         Collections.sort(fieldNames);
         StringBuilder hashData = new StringBuilder();
         StringBuilder query = new StringBuilder();
         for (String fieldName : fieldNames) {
             String fieldValue = vnp_Params.get(fieldName);
-            if ((fieldValue != null) && (fieldValue.length() > 0)) {
-                // Build hash data
+            if (fieldValue != null && !fieldValue.isEmpty()) {
                 hashData.append(fieldName).append('=').append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
-                // Build query
                 query.append(URLEncoder.encode(fieldName, StandardCharsets.US_ASCII.toString())).append('=').append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
-                if (fieldNames.indexOf(fieldName) < fieldNames.size() - 1) {
-                    query.append('&');
+                if (!fieldName.equals(fieldNames.get(fieldNames.size() - 1))) {
                     hashData.append('&');
+                    query.append('&');
                 }
             }
         }
-        String queryUrl = query.toString();
-        String vnp_SecureHash = Config.hmacSHA512(Config.secretKey, hashData.toString());
-        queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
-        String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
-        return new RedirectView(paymentUrl);
-    }
 
-    private String getClientIp(HttpServletRequest request) {
-        String remoteAddr = "";
-        if (request != null) {
-            remoteAddr = request.getHeader("'x-forwarded-for");
-            if (remoteAddr == null || "".equals(remoteAddr)) {
-                remoteAddr = request.getRemoteAddr();
-            }else {
-                String[] forwardedIps  = remoteAddr.split(",");
-                remoteAddr = forwardedIps[0];
-            }
-        }
-        return remoteAddr;
+        // Calculate secure hash
+        String vnp_SecureHash = Config.hmacSHA512(Config.secretKey, hashData.toString());
+        query.append("&vnp_SecureHashType=SHA512&vnp_SecureHash=").append(URLEncoder.encode(vnp_SecureHash, StandardCharsets.US_ASCII.toString()));
+
+        // Construct payment URL
+        String paymentUrl = Config.vnp_PayUrl + "?" + query.toString();
+        return new RedirectView(paymentUrl);
     }
 
 
