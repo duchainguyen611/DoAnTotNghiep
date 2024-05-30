@@ -50,7 +50,7 @@ public class PaymentController {
         long amount = (long) (totalPriceAll * 100);
         String bankCode = typePay;
         String vnp_TxnRef = Config.getRandomNumber(8);
-        String vnp_IpAddr = "23.22.130.173";
+        String vnp_IpAddr = "54.243.238.66";
         String vnp_TmnCode = Config.vnp_TmnCode;
         Map<String, String> vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", vnp_Version);
