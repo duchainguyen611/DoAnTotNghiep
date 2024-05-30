@@ -25,5 +25,4 @@ public class ChangeProfileDTO {
     private String address;
     @NotBlank(message = "Ngày sinh không được để trống!")
     private String dateOfBirth;
-    private Boolean gender;
 }

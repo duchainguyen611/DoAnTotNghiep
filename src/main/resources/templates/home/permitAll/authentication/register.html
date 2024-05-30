@@ -191,6 +191,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <fieldset class="form-group">
+                                        <label for="fullName">Họ và tên</label>
                                         <input type="text" class="form-control form-control-lg" th:value="*{fullName}" name="fullName"
                                                id="fullName" placeholder="Họ và tên*">
                                         <div th:if="${#fields.hasErrors('fullName')}" class="myRed" th:errors="*{fullName}"></div>
@@ -198,6 +199,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <fieldset class="form-group">
+                                        <label for="email">Email</label>
                                         <input type="email"
                                                class="form-control form-control-lg" th:value="*{email}" name="email" id="email"
                                                placeholder="Email*">
@@ -206,6 +208,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <fieldset class="form-group">
+                                        <label for="phone">Số điện thoại</label>
                                         <input type="number"
                                                class="form-control form-control-lg" th:value="*{phone}" name="phone" id="phone"
                                                placeholder="Số điện thoại*">
@@ -214,6 +217,25 @@
                                 </div>
                                 <div class="col-md-12">
                                     <fieldset class="form-group">
+                                        <label for="address">Địa chỉ</label>
+                                        <input type="text"
+                                               class="form-control form-control-lg" th:value="*{address}" name="address" id="address"
+                                               placeholder="Địa chỉ*">
+                                        <div th:if="${#fields.hasErrors('address')}" class=" myRed" th:errors="*{address}"></div>
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-12">
+                                    <fieldset class="form-group">
+                                        <label for="dateOfBirth">Ngày sinh</label>
+                                        <input type="date"
+                                               class="form-control form-control-lg" th:value="*{dateOfBirth}" name="dateOfBirth" id="dateOfBirth"
+                                               placeholder="Ngày sinh*">
+                                        <div th:if="${#fields.hasErrors('dateOfBirth')}" class="myRed" th:errors="*{dateOfBirth}"></div>
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-12">
+                                    <fieldset class="form-group">
+                                        <label for="username">Tên đăng nhập</label>
                                         <input type="text"
                                                class="form-control form-control-lg" th:value="*{username}" name="username" id="username"
                                                placeholder="Tên đăng nhập*" >
@@ -222,6 +244,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <fieldset class="form-group">
+                                        <label for="password">Mật khẩu</label>
                                         <input type="password" class="form-control form-control-lg" th:value="*{password}"
                                                name="password" id="password" placeholder="Mật khẩu*">
                                         <div th:if="${#fields.hasErrors('password')}" class=" myRed" th:errors="*{password}"></div>

@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -46,9 +45,6 @@ public class User extends BaseModel {
 
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
-
-    @Column(name = "gender")
-    private Boolean gender;
 
 
     @ManyToMany(fetch = FetchType.EAGER)

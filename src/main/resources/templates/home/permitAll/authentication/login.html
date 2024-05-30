@@ -197,13 +197,15 @@
 						</div>
 						<div class="form-signup clearfix">
 							<fieldset class="form-group">
+								<label for="username">Tên đăng nhập</label>
 								<input type="text"
-									   class="form-control form-control-lg" value="" name="username" id="customer_username"
+									   class="form-control form-control-lg" value="" name="username" id="username"
 									   placeholder="Tên đăng nhập*">
 							</fieldset>
 							<fieldset class="form-group">
+								<label for="password">Mật khẩu</label>
 								<input type="password" class="form-control form-control-lg" value="" name="password"
-									   id="customer_password" placeholder="Mật khẩu*">
+									   id="password" placeholder="Mật khẩu*">
 							</fieldset>
 							<div th:if="${param.error}" class="myRed">
 								<p>Đăng nhập thất bại! Vui lòng thử lại!</p>

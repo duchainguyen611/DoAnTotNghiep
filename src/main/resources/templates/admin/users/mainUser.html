@@ -71,7 +71,6 @@
 													<th>Họ và tên</th>
 													<th>Email</th>
 													<th>Số điện thoại</th>
-													<th>Giới tính</th>
 													<th>Địa chỉ</th>
 													<th>Tên đăng nhập</th>
 													<th>Trạng thái</th>
@@ -87,7 +86,6 @@
 													<td th:text="*{user.fullName}"></td>
 													<td th:text="*{user.email}"></td>
 													<td th:text="*{user.phone}"></td>
-													<td th:text="*{user.gender}?'Male':'Female'"></td>
 													<td th:text="*{user.address}"></td>
 													<td th:text="*{user.username}"></td>
 													<td><span class="badge" th:name="*{user.id}" th:text="*{user.status}"></span></td>

@@ -47,7 +47,7 @@ public class UserProfileController {
         }
         model.addAttribute("sumPriceHeader", NumberFormat.getInstance(new Locale("vi", "VN")).format(sumPriceHeader)+ "₫");
         model.addAttribute("countProductHeader", countProductHeader);
-        model.addAttribute("user", user);
+        model.addAttribute("user", userService.UEntityMapResponse(user));
         model.addAttribute("keyword", keyword);
         List<UCategoryResponseDTO> categories = categoryService.UFindAllByStatus(ActiveStatus.ACTIVE);
         model.addAttribute("categories",categories);
@@ -67,7 +67,7 @@ public class UserProfileController {
         model.addAttribute("countProductHeader", countProductHeader);
         List<UInvoiceResponseDTO> invoiceList = invoiceService.displayAllByUser(user);
         model.addAttribute("invoiceList", invoiceList);
-        model.addAttribute("user", user);
+        model.addAttribute("user",  userService.UEntityMapResponse(user));
         model.addAttribute("keyword", keyword);
         List<UCategoryResponseDTO> categories = categoryService.UFindAllByStatus(ActiveStatus.ACTIVE);
         model.addAttribute("categories",categories);
@@ -87,7 +87,7 @@ public class UserProfileController {
         model.addAttribute("countProductHeader", countProductHeader);
         ChangePasswordDTO changePassword = new ChangePasswordDTO();
         model.addAttribute("changePassword", changePassword);
-        model.addAttribute("user", user);
+        model.addAttribute("user",  userService.UEntityMapResponse(user));
         model.addAttribute("keyword", keyword);
         List<UCategoryResponseDTO> categories = categoryService.UFindAllByStatus(ActiveStatus.ACTIVE);
         model.addAttribute("categories",categories);
@@ -109,7 +109,7 @@ public class UserProfileController {
         model.addAttribute("addressRequest", addressRequest);
         List<AddressResponseDTO> addresses = addressService.displayAllByUser(user);
         model.addAttribute("addresses", addresses);
-        model.addAttribute("user", user);
+        model.addAttribute("user",  userService.UEntityMapResponse(user));
         model.addAttribute("keyword", keyword);
         List<UCategoryResponseDTO> categories = categoryService.UFindAllByStatus(ActiveStatus.ACTIVE);
         model.addAttribute("categories",categories);
@@ -127,7 +127,7 @@ public class UserProfileController {
         }
         model.addAttribute("sumPriceHeader", NumberFormat.getInstance(new Locale("vi", "VN")).format(sumPriceHeader)+ "₫");
         model.addAttribute("countProductHeader", countProductHeader);
-        model.addAttribute("user", user);
+        model.addAttribute("user",  userService.UEntityMapResponse(user));
         model.addAttribute("keyword", keyword);
         ChangeProfileDTO changeProfile = userService.AEntityMapProfileRequest(user);
         model.addAttribute("changeProfile", changeProfile);

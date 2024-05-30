@@ -33,4 +33,10 @@ public class RegisterDTO {
 
     @NotBlank(message = "Mật khẩu không được để trống!")
     private String password;
+
+    @NotBlank(message = "Ngày sinh không được để trống")
+    private String dateOfBirth;
+
+    @NotBlank(message = "Địa chỉ không được để trống")
+    private String address;
 }

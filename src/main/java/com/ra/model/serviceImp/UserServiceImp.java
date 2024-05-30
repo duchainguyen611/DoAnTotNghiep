@@ -10,6 +10,7 @@ import com.ra.model.entity.dto.request.ChangeProfileDTO;
 import com.ra.model.entity.dto.request.user.RegisterDTO;
 import com.ra.model.entity.dto.response.StringError;
 import com.ra.model.entity.dto.response.admin.AUserResponseDTO;
+import com.ra.model.entity.dto.response.user.UUserResponseDTO;
 import com.ra.model.repository.UserRepository;
 import com.ra.model.service.AddressService;
 import com.ra.model.service.RoleService;
@@ -55,8 +56,10 @@ public class UserServiceImp implements UserService {
                 .image("img.png")
                 .password(passwordEncoder.encode(register.getPassword()))
                 .status(ActiveStatus.ACTIVE)
-                .roles(roles).
-                build();
+                .address(register.getAddress())
+                .dateOfBirth(LocalDate.parse(register.getDateOfBirth()))
+                .roles(roles)
+                .build();
         userRepository.save(newUser);
         Address newAddress = Address.builder()
                 .user(newUser)
@@ -145,12 +148,28 @@ public class UserServiceImp implements UserService {
     public AUserResponseDTO AEntityMapResponse(User user) {
         return AUserResponseDTO.builder()
                 .id(user.getId())
-                .dateOfBirth(user.getDateOfBirth().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                .dateOfBirth(user.getDateOfBirth()==null?null:user.getDateOfBirth().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
                 .image(user.getImage())
                 .fullName(user.getFullName())
                 .email(user.getEmail())
                 .phone(user.getPhone())
-                .gender(user.getGender().toString())
+                .address(user.getAddress())
+                .username(user.getUsername())
+                .createdDate(user.getCreatedDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                .modifyDate(user.getModifyDate()==null?null:user.getModifyDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                .status(user.getStatus().toString())
+                .build();
+    }
+
+    @Override
+    public UUserResponseDTO UEntityMapResponse(User user) {
+        return UUserResponseDTO.builder()
+                .id(user.getId())
+                .dateOfBirth(user.getDateOfBirth()==null?null:user.getDateOfBirth().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                .image(user.getImage())
+                .fullName(user.getFullName())
+                .email(user.getEmail())
+                .phone(user.getPhone())
                 .address(user.getAddress())
                 .username(user.getUsername())
                 .createdDate(user.getCreatedDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
@@ -168,7 +187,6 @@ public class UserServiceImp implements UserService {
                 .phone(changeProfile.getPhone())
                 .address(changeProfile.getAddress())
                 .dateOfBirth(LocalDate.parse(changeProfile.getDateOfBirth()))
-                .gender(changeProfile.getGender())
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .status(user.getStatus())
@@ -185,7 +203,6 @@ public class UserServiceImp implements UserService {
                 .phone(user.getPhone())
                 .address(user.getAddress())
                 .dateOfBirth(String.valueOf(user.getDateOfBirth()))
-                .gender(user.getGender())
                 .build();
     }
 

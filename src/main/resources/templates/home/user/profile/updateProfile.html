@@ -215,15 +215,6 @@
                                         <div th:if="${#fields.hasErrors('address')}" class="myRed" th:errors="*{address}" ></div>
                                     </fieldset>
                                     <fieldset class="form-group">
-                                            <label>Giới tính</label>
-                                            <input type="radio" name="sex" th:field="*{gender}"
-                                                   value="true">
-                                            Nam<br>
-                                            <input type="radio" name="sex" th:field="*{gender}"
-                                                   value="false">
-                                            Nữ<br>
-                                    </fieldset>
-                                    <fieldset class="form-group">
                                         <label for="email">Email</label>
                                         <input type="text" name="email" id="email"
                                                class="form-control form-control-lg" th:field="*{email}">

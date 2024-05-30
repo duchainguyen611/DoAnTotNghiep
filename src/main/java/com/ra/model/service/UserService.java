@@ -7,6 +7,7 @@ import com.ra.model.entity.dto.request.ChangeProfileDTO;
 import com.ra.model.entity.dto.request.user.RegisterDTO;
 import com.ra.model.entity.dto.response.StringError;
 import com.ra.model.entity.dto.response.admin.AUserResponseDTO;
+import com.ra.model.entity.dto.response.user.UUserResponseDTO;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public interface UserService {
     StringError updateProfile(ChangeProfileDTO changeProfile, User user);
     StringError updatePassword(ChangePasswordDTO changePassword, User user);
     AUserResponseDTO AEntityMapResponse(User user);
+    UUserResponseDTO UEntityMapResponse(User user);
     User AEntityMapProfileRequest(ChangeProfileDTO changeProfile, User user);
     ChangeProfileDTO AEntityMapProfileRequest(User user);
 }

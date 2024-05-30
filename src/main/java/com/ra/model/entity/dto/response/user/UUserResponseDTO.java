@@ -1,4 +1,4 @@
-package com.ra.model.entity.dto.response.admin;
+package com.ra.model.entity.dto.response.user;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AUserResponseDTO {
+public class UUserResponseDTO {
     private Long id;
     private String dateOfBirth;
     private String image;
