@@ -1,0 +1,55 @@
+<script th:fragment="changeStatusInvoice">
+    function changeColorInvoice(id) {
+        const badgeSpans = document.querySelectorAll('#responsive-data-table .badge');
+        badgeSpans.forEach(function (span) {
+            span.classList.remove(...span.classList);
+            switch (span.textContent.trim()) {
+                case 'WAITING': {
+                    span.classList.add('badge-warning', 'badge');
+                    break;
+                }
+                case 'SUCCESS': {
+                    $("tr[name='" + id + "']").remove();
+                    break;
+                }
+                case 'DELIVERY': {
+                    span.classList.add('badge-primary', 'badge');
+                    break;
+                }
+                case 'CONFIRM': {
+                    span.classList.add('badge-info', 'badge');
+                    break;
+                }
+                case 'CANCEL': {
+                    span.classList.add('badge-danger', 'badge');
+                    break;
+                }
+                case 'DENIED': {
+                    span.classList.add('badge-secondary', 'badge');
+                    break;
+                }
+            }
+        });
+    }
+    window.addEventListener('DOMContentLoaded', changeColorInvoice);
+
+    function changeStatusInvoice(status, id) {
+        // Gửi yêu cầu AJAX đến controller
+        $.ajax({
+            type: "GET",
+            url: '/admin/changeStatusInvoice/' + id,
+            data: {status: status},
+            success: function (data) {
+                // Xử lý kết quả nếu cần
+                // $('.badge').html(data.status.toString);
+                $("span[name='" + id + "']").text(data.statusInvoice);
+                changeColorInvoice(id);
+                console.log('Yêu cầu đã được gửi thành công.');
+            },
+            error: function (xhr, status, error) {
+                // Xử lý lỗi nếu có
+                console.error('Đã xảy ra lỗi: ' + error);
+            }
+        });
+    }
+</script>

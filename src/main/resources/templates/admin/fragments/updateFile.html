@@ -1,0 +1,18 @@
+<script th:fragment="updateFileFragment">
+    // Lắng nghe sự kiện khi người dùng chọn file
+    document.getElementById('imageInput').addEventListener('change', function(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+
+        // Đọc nội dung của file
+        reader.onload = function(e) {
+            var imageUrl = e.target.result;
+
+            // Gán URL của ảnh vào thuộc tính src của thẻ <img>
+            document.getElementById('previewImage').src = imageUrl;
+        };
+
+        // Đọc file dưới dạng URL
+        reader.readAsDataURL(file);
+    });
+</script>

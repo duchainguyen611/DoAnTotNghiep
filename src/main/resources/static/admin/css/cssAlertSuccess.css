@@ -1,0 +1,20 @@
+.autoHide {
+    animation: autoHide 0s ease-in 4s forwards;
+    position: absolute;
+    z-index: auto;
+    top: 5%;
+    right: 20%;
+}
+
+@keyframes autoHide {
+    to {
+        width: 0;
+        height: 0;
+        display:none;
+    }
+}
+
+.alert i[class^="bi-"]{
+    font-size: 1.5em;
+    line-height: 1;
+}

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>
+        Mục yêu thích Bigshop
+    </title>
+    <!-- ================= Page description ================== -->
+
+    <!-- ================= Meta ================== -->
+    <meta name="keywords" content="Giỏ hàng, Bigshop, bigshop-1.mysapo.net"/>
+    <link rel="canonical" href="https://bigshop-1.mysapo.net/cart"/>
+    <meta name='revisit-after' content='1 days'/>
+    <meta name="robots" content="noodp,index,follow"/>
+    <!-- ================= Favicon ================== -->
+
+    <link rel="icon" href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/favicon.png?1676016752114"
+          type="image/x-icon"/>
+
+    <!-- Facebook Open Graph meta tags -->
+
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Giỏ hàng">
+    <meta property="og:image"
+          content="http://bizweb.dktcdn.net/100/286/763/themes/802001/assets/logo.png?1676016752114">
+    <meta property="og:image:secure_url"
+          content="https://bizweb.dktcdn.net/100/286/763/themes/802001/assets/logo.png?1676016752114">
+
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://bigshop-1.mysapo.net/cart">
+    <meta property="og:site_name" content="Bigshop">
+
+
+    <meta name="twitter:card" content="summary">
+
+
+    <!-- Header JS -->
+    <script src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/jquery-2.2.3.min.js?1676016752114"
+            type="text/javascript"></script>
+
+    <link rel="stylesheet" href="/home/css/cssAlertSuccess.css">
+
+    <script>
+
+        var template = 'cart';
+
+    </script>
+
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/plugin.scss.css?1676016752114">
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/plugin.scss.css?1676016752114" rel="stylesheet"
+          type="text/css" media="all"/>
+    <!-- Build Main CSS -->
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/base.scss.css?1676016752114">
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/style.scss.css?1676016752114">
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/module.scss.css?1676016752114">
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/responsive.scss.css?1676016752114">
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/base.scss.css?1676016752114" rel="stylesheet"
+          type="text/css" media="all"/>
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/style.scss.css?1676016752114" rel="stylesheet"
+          type="text/css" media="all"/>
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/module.scss.css?1676016752114" rel="stylesheet"
+          type="text/css" media="all"/>
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/responsive.scss.css?1676016752114" rel="stylesheet"
+          type="text/css" media="all"/>
+
+    <!-- Theme CSS -->
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/main.scss.css?1676016752114">
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/green.scss.css?1676016752114">
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/owl.carousel.scss.css?1676016752114">
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/bootstrap-select.min.scss.css?1676016752114">
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/theme-update.scss.css?1676016752114">
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/main.scss.css?1676016752114" rel="stylesheet"
+          type="text/css" media="all"/>
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/green.scss.css?1676016752114" rel="stylesheet"
+          type="text/css" media="all"/>
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/owl.carousel.scss.css?1676016752114"
+          rel="stylesheet" type="text/css" media="all"/>
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/bootstrap-select.min.scss.css?1676016752114"
+          rel="stylesheet" type="text/css" media="all"/>
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/theme-update.scss.css?1676016752114"
+          rel="stylesheet" type="text/css" media="all"/>
+
+    <!-- Bizweb javascript customer -->
+
+    <script>
+        (function () {
+            function asyncLoad() {
+                var urls = [];
+                for (var i = 0; i < urls.length; i++) {
+                    var s = document.createElement('script');
+                    s.type = 'text/javascript';
+                    s.async = true;
+                    s.src = urls[i];
+                    var x = document.getElementsByTagName('script')[0];
+                    x.parentNode.insertBefore(s, x);
+                }
+            };
+            window.attachEvent ? window.attachEvent('onload', asyncLoad) : window.addEventListener('load', asyncLoad, false);
+        })();
+    </script>
+
+
+    <script src="/home/dist/js/stats.minbadf.js?v=96f2ff2"></script>
+    <style>
+        .addToCart {
+            --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+            --main-theme-color: #f79837;
+            --dark-bg-color: #f8f9ff;
+            --heading-color: #0a0d14;
+            --paragraph-color: #777c87;
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            font-family: "Poppins", sans-serif;
+            --bs-gutter-x: 1.5rem;
+            --bs-gutter-y: 0;
+            caption-side: bottom;
+            border-collapse: collapse;
+            text-align: center;
+            box-sizing: border-box;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out 0.1s;
+            outline: 0 !important;
+            margin: 0;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            border-radius: 0;
+            padding: 10px 16px;
+            background-color: #000;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .money {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-size-adjust: 100%;
+            font-size: 14px;
+            font-family: 'Arial', sans-serif;
+            text-align: center !important;
+            box-sizing: border-box;
+            line-height: 6;
+            color: #252525;
+            font-weight: 400;
+        }
+    </style>
+
+
+</head>
+
+<body>
+<div class="alert alert-success autoHide" th:if="${success}">
+    <strong>Success!</strong> <span th:text="${success}"></span>
+</div>
+<div class="alert alert-warning autoHide" th:if="${error}">
+    <strong>Warning!</strong> <span th:text="${error}"></span>
+</div>
+<!-- Main content -->
+<!-- ============================================== HEADER ============================================== -->
+<header th:replace="home/user/fragments/header::headerUser(${keyword},${sumPriceHeader},${countProductHeader},${categories})"></header>
+
+<!-- ============================================== HEADER : END ============================================== -->
+<section class="bread-crumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="breadcrumb">
+                    <li class="home">
+                        <a href="/user"><span>Trang chủ</span></a>
+                        <span> / </span>
+                    </li>
+
+                    <li><strong>Mục sản phẩm yêu thích</strong></li>
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="box-heading box-heading-line cart-heading relative" style="    margin-bottom: -40px;">
+        <h1 class="title-head page_title">Sản phẩm yêu thích của bạn
+        </h1>
+    </div>
+</div>
+<section class="main-cart-page main-container col1-layout">
+    <div class="main container hidden-xs">
+        <div class="col-main cart_desktop_page cart-page">
+            <div class="cart page_cart hidden-xs">
+                <div class="bg-scroll">
+                    <div class="cart-thead">
+                        <div style="width: 18%;text-align: left;">Sản phẩm</div>
+                        <div style="width: 20%"><span class="nobr"></span></div>
+                        <div style="width: 17%" class="a-center"><span class="nobr">Đơn giá</span></div>
+                        <div style="width: 15%" class="a-center">Tình trạng tồn kho</div>
+                        <div style="width: 5%" class="a-center">Xóa</div>
+                        <div style="width: 25%;text-align: center!important;" class="a-center">Thêm vào giỏ hàng</div>
+                    </div>
+                    <div class="cart-tbody">
+                        <div th:each="wishList:${wishLists}">
+                            <div class="item-cart" th:name="${wishList.id}">
+                                <div style="width: 18%" class="image"><a class="product-image"
+                                                                         th:title="*{wishList.nameProduct}"
+                                                                         th:href="@{/user/shop/productDetail/{id}(id=${wishList.productId})}"><img
+                                        width="120"
+                                        height="auto"
+                                        th:alt="*{wishList.nameProduct}"
+                                        th:src="@{|/uploads/*{wishList.imageProduct}|}"></a>
+                                </div>
+                                <div style="width: 20%;align-items: flex-start;" class="a-center">
+                                    <h2 class="product-name"><a
+                                            th:href="@{/user/shop/productDetail/{id}(id=${wishList.productId})}"
+                                            th:text="*{wishList.nameProduct}"></a></h2>
+                                    <div style="height: 30px;position: relative;width: 78px;padding: 10px 0;"></div>
+                                </div>
+                                <div style="width: 17%" class="a-center"><span class="item-price"> <span class="money"
+                                                                                                         th:text="*{wishList.unitPrice}"></span></span>
+                                </div>
+                                <div style="width: 15%" class="a-center">
+                                    <span class="money"
+                                          th:text="*{wishList.stockQuantity>0}?'Còn hàng':'Tạm thời hết hàng'"></span>
+                                </div>
+                                <div style="width: 5%" class="a-center"><a class="button remove-item remove-item-cart"
+                                                                           th:name="*{wishList.id}"
+                                                                           title="Xóa"
+                                                                           onclick="deleteData(this.getAttribute('name'))">
+                                    <span><i class="fa fa-remove"></i></span></a></div>
+                                <form th:action="@{/user/addProductFromWishListToShoppingCart/{productId}(productId=${wishList.productId})}"
+                                      method="post">
+                                    <div style="width: 25%;text-align: center!important;" class="a-center">
+                                        <button class="addToCart" type="submit">Thêm vào giỏ hàng</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cart-mobile hidden-md hidden-lg hidden-sm">
+        <div class="header-cart" style="background:#fff;">
+            <div class="title-cart">
+                <h3>Sản phẩm yêu thích của bạn</h3>
+            </div>
+        </div>
+        <div class="header-cart-content" style="background:#fff;">
+            <div class="cart_page_mobile content-product-list">
+                <div th:each="wishList:${wishLists}">
+                    <div class="item-product item" th:name="${wishList.id}">
+                        <div class="item-product-cart-mobile">
+                            <a th:title="*{wishList.nameProduct}"
+                               th:href="@{/user/shop/productDetail/{id}(id=${wishList.productId})}"
+                               class="product-images1">
+                                <img max-width="80"
+                                     th:alt="*{wishList.nameProduct}"
+                                     th:src="@{|/uploads/*{wishList.imageProduct}|}">
+                            </a>
+                        </div>
+                        <div class="title-product-cart-mobile">
+                            <h3>
+                                <a th:href="@{/user/shop/productDetail/{id}(id=${wishList.productId})}"
+                                   th:text="*{wishList.nameProduct}">
+
+                                </a>
+                            </h3>
+                            <p>Giá: <span class="product-price" th:text="*{wishList.unitPrice}"></span></p></div>
+                        <a class="button remove-item remove-item-cart"
+                           th:name="*{wishList.id}"
+                           title="Xóa"
+                           onclick="deleteData(this.getAttribute('name'))" style="cursor: pointer">Xoá</a></div>
+                    <form th:action="@{/user/addProductFromWishListToShoppingCart/{productId}(productId=${wishList.productId})}"
+                          method="post">
+                            <button class="addToCart" style="width:100% ;" type="submit">Thêm vào giỏ hàng</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+<div class="container">
+    <div id="brands-carousel" class="logo-slider wow fadeInUp">
+        <h3 class="section-title">Thương hiệu</h3>
+        <div class="logo-slider-inner">
+            <div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme" data-xl-items='6'
+                 data-lg-items='5' data-md-items='4' data-sm-items='2' data-xs-items='1' data-margin='0'
+                 data-nav='true'>
+
+
+                <div class="item">
+                    <a href="#" class="image">
+                        <img class="lazyload"
+                             src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/rolling.svg?1676016752114"
+                             data-src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/brand1.jpg?1676016752114"
+                             alt="Nokia">
+                    </a>
+                </div>
+
+
+                <div class="item">
+                    <a href="#" class="image">
+                        <img class="lazyload"
+                             src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/rolling.svg?1676016752114"
+                             data-src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/brand2.jpg?1676016752114"
+                             alt="Canon">
+                    </a>
+                </div>
+
+
+                <div class="item">
+                    <a href="#" class="image">
+                        <img class="lazyload"
+                             src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/rolling.svg?1676016752114"
+                             data-src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/brand3.jpg?1676016752114"
+                             alt="Samsung">
+                    </a>
+                </div>
+
+
+                <div class="item">
+                    <a href="#" class="image">
+                        <img class="lazyload"
+                             src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/rolling.svg?1676016752114"
+                             data-src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/brand4.jpg?1676016752114"
+                             alt="Apple">
+                    </a>
+                </div>
+
+
+                <div class="item">
+                    <a href="#" class="image">
+                        <img class="lazyload"
+                             src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/rolling.svg?1676016752114"
+                             data-src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/brand5.jpg?1676016752114"
+                             alt="HTC">
+                    </a>
+                </div>
+
+
+                <div class="item">
+                    <a href="#" class="image">
+                        <img class="lazyload"
+                             src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/rolling.svg?1676016752114"
+                             data-src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/brand6.jpg?1676016752114"
+                             alt="LG">
+                    </a>
+                </div>
+
+
+                <div class="item">
+                    <a href="#" class="image">
+                        <img class="lazyload"
+                             src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/rolling.svg?1676016752114"
+                             data-src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/brand7.jpg?1676016752114"
+                             alt="Nokia 2">
+                    </a>
+                </div>
+
+
+            </div>
+            <!-- /.owl-carousel #logo-slider -->
+        </div>
+        <!-- /.logo-slider-inner -->
+    </div>
+</div>
+
+
+<!-- ============================================================= FOOTER ============================================================= -->
+<footer th:replace="home/user/fragments/footer::footerUser"></footer>
+<!-- ============================================================= FOOTER : END============================================================= -->
+<div class="ajax-load">
+	<span class="loading-icon">
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+             width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;"
+             xml:space="preserve">
+			<rect x="0" y="10" width="4" height="10" fill="#333" opacity="0.2">
+				<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0s" dur="0.6s"
+                         repeatCount="indefinite"/>
+				<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0s" dur="0.6s"
+                         repeatCount="indefinite"/>
+				<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0s" dur="0.6s"
+                         repeatCount="indefinite"/>
+			</rect>
+			<rect x="8" y="10" width="4" height="10" fill="#333" opacity="0.2">
+				<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.15s" dur="0.6s"
+                         repeatCount="indefinite"/>
+				<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.15s" dur="0.6s"
+                         repeatCount="indefinite"/>
+				<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.15s" dur="0.6s"
+                         repeatCount="indefinite"/>
+			</rect>
+			<rect x="16" y="10" width="4" height="10" fill="#333" opacity="0.2">
+				<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.3s" dur="0.6s"
+                         repeatCount="indefinite"/>
+				<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.3s" dur="0.6s"
+                         repeatCount="indefinite"/>
+				<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.3s" dur="0.6s"
+                         repeatCount="indefinite"/>
+			</rect>
+		</svg>
+	</span>
+</div>
+
+
+<div class="error-popup awe-popup">
+    <div class="overlay no-background"></div>
+    <div class="popup-inner content">
+        <div class="error-message"></div>
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+</div>
+
+<a href="tel:19006750" class="suntory-alo-phone center-left suntory-alo-green " id="suntory-alo-phoneIcon">
+
+    <div class="suntory-alo-ph-img-circle"><i class="fa fa-phone"></i></div>
+</a>
+
+
+<div id="popupCartModal" class="modal fade" role="dialog">
+</div>
+
+
+<!-- Bizweb javascript -->
+<script src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/option-selectors.js?1676016752114"
+        type="text/javascript"></script>
+<script src="//bizweb.dktcdn.net/assets/themes_support/api.jquery.js" type="text/javascript"></script>
+<!-- Plugin JS -->
+<script src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/addtocart.js?1676016752114"
+        type="text/javascript"></script>
+
+
+<script src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/api.jquery.custom.js?1676016752114"
+        type="text/javascript"></script>
+
+
+<script src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/swiper.min.js?1676016752114"
+        type="text/javascript"></script>
+<script src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/main.js?1676016752114"
+        type="text/javascript"></script>
+
+
+<script src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/scripts.js?1676016752114"
+        type="text/javascript"></script>
+
+<script>
+
+    $('.xemthem').click(function (e) {
+        e.preventDefault();
+        $('nav.megamenu-horizontal ul.nav>li').css('display', 'block');
+        $(this).hide();
+        $('.thugon').show();
+    })
+    $('.thugon').click(function (e) {
+        e.preventDefault();
+        $('nav.megamenu-horizontal ul.nav>li').css('display', 'none');
+        $(this).hide();
+        $('.xemthem').show();
+    })
+
+    window.onload = function (e) {
+        var lil = $('.side-menu nav.megamenu-horizontal .menu-item').length;
+        var vw = $(window).width();
+
+        if (lil < 9 && vw < 1500 && vw > 1200) {
+            $('li.hidden-lgg').remove();
+        }
+    }
+</script>
+
+<script type='text/javascript'>
+
+    //<![CDATA[
+    function loadCSS(e, t, n) {
+        "use strict";
+        var i = window.document.createElement("link");
+        var o = t || window.document.getElementsByTagName("footer")[0];
+        i.rel = "stylesheet";
+        i.href = e;
+        i.media = "only x";
+        o.parentNode.insertBefore(i, o);
+        setTimeout(function () {
+            i.media = n || "all"
+        })
+    }
+
+    loadCSS("/home/font-awesome/4.5.0/css/font-awesome.min.css");
+    //]]>
+</script>
+<script th:inline="javascript">
+
+    function deleteData(id) {
+        $.ajax({
+            type: "GET",
+            url: '/user/wishList/deleteProduct/' + id,
+            success: function () {
+                $("div[name='" + id + "']").remove();
+                console.log('id=' + id);
+            },
+            error: function (xhr, status, error) {
+                console.error('Đã xảy ra lỗi: ' + error);
+            }
+        })
+
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Select all search_item divs
+        const searchItems = document.querySelectorAll('.search_item');
+        searchItems.forEach(function (item) {
+            item.addEventListener('click', function () {
+                document.getElementById('categoryId').value = this.getAttribute('data-value');
+            });
+        });
+    });
+</script>
+</body>
+</html>

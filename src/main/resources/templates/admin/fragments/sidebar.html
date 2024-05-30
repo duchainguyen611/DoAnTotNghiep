@@ -1,0 +1,191 @@
+<div th:fragment="sidebarFragment" class="ec-left-sidebar ec-bg-sidebar">
+    <div id="sidebar" class="sidebar ec-sidebar-footer">
+        <div class="ec-brand">
+            <a href="/admin">
+                <img class="ec-brand-icon" src="/admin/img/logo/icon.png" alt="" />
+                <span class="ec-brand-name text-truncate">BIGSHOP</span>
+            </a>
+        </div>
+        <div class="ec-navigation" data-simplebar>
+            <ul class="nav sidebar-inner" id="sidebar-menu">
+                <li class="">
+                    <a class="sidenav-item-link" href="/admin">
+                        <i class="mdi mdi-view-dashboard-outline"></i>
+                        <span class="nav-text">Trang chủ</span>
+                    </a>
+                    <hr>
+                </li>
+                <li class="has-sub">
+                    <a class="sidenav-item-link" href="javascript:void(0)">
+                        <i class="mdi mdi-chart-bar"></i>
+                        <span class="nav-text">Báo cáo thống kê</span> <b class="caret"></b>
+                    </a>
+                    <div class="collapse">
+                        <ul class="sub-menu" id="dashbroad" data-parent="#sidebar-menu">
+                            <li class="">
+                                <a class="sidenav-item-link" href="/admin/dashboardRevenue">
+                                    <span class="nav-text">Báo cáo doanh thu</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="sidenav-item-link" href="/admin/dashboardProduct">
+                                    <span class="nav-text">Báo cáo sản phẩm</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="sidenav-item-link" href="/admin/dashboardImportGoods">
+                                    <span class="nav-text">Báo cáo nhập hàng</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="sidenav-item-link" href="/admin/dashboardSellGoods">
+                                    <span class="nav-text">Báo cáo bán hàng</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="has-sub">
+                    <a class="sidenav-item-link" href="javascript:void(0)">
+                        <i class="mdi mdi-briefcase-outline"></i>
+                        <span class="nav-text">Nhà cung cấp</span> <b class="caret"></b>
+                    </a>
+                    <div class="collapse">
+                        <ul class="sub-menu" id="vendors" data-parent="#sidebar-menu">
+                            <li class="">
+                                <a class="sidenav-item-link" href="/admin/vendor">
+                                    <span class="nav-text">Danh sách nhà cung cấp</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="sidenav-item-link" href="/admin/addVendor">
+                                    <span class="nav-text">Thêm nhà cung cấp</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="has-sub">
+                    <a class="sidenav-item-link" href="javascript:void(0)">
+                        <i class="mdi mdi-account-multiple-outline"></i>
+                        <span class="nav-text">Khách hàng</span> <b class="caret"></b>
+                    </a>
+                    <div class="collapse">
+                        <ul class="sub-menu" id="users" data-parent="#sidebar-menu">
+                            <li class="">
+                                <a class="sidenav-item-link" href="/admin/user">
+                                    <span class="nav-text">Danh sách khách hàng</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <hr>
+                </li>
+                <li class="has-sub">
+                    <a class="sidenav-item-link" href="javascript:void(0)">
+                        <i class="mdi mdi-shape"></i>
+                        <span class="nav-text">Danh mục</span> <b class="caret"></b>
+                    </a>
+                    <div class="collapse">
+                        <ul class="sub-menu" id="categorys" data-parent="#sidebar-menu">
+                            <li class="">
+                                <a class="sidenav-item-link" href="/admin/category">
+                                    <span class="nav-text">Danh sách danh mục</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="sidenav-item-link active" href="/admin/addCategory">
+                                    <span class="nav-text">Thêm danh mục</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Products -->
+                <li class="has-sub">
+                    <a class="sidenav-item-link" href="javascript:void(0)">
+                        <!-- <i class="mdi mdi-palette-advanced"></i> -->
+                        <i class="mdi mdi-package-variant-closed"></i>
+                        <span class="nav-text">Sản phẩm</span> <b class="caret"></b>
+                    </a>
+                    <div class="collapse">
+                        <ul class="sub-menu" id="products" data-parent="#sidebar-menu">
+                            <li class="">
+                                <a class="sidenav-item-link" href="/admin/product">
+                                    <span class="nav-text">Danh sách sản phẩm</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="sidenav-item-link" href="/admin/addProduct">
+                                    <span class="nav-text">Thêm sản phẩm</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Orders -->
+                <li class="has-sub">
+                    <a class="sidenav-item-link" href="javascript:void(0)">
+                        <i class="mdi mdi-cart-outline"></i>
+                        <span class="nav-text">Phiếu nhập hàng</span> <b class="caret"></b>
+                    </a>
+                    <div class="collapse">
+                        <ul class="sub-menu" id="order" data-parent="#sidebar-menu">
+                            <li class="">
+                                <a class="sidenav-item-link" href="/admin/order">
+                                    <span class="nav-text">Danh sách phiếu nhập hàng</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="sidenav-item-link" href="/admin/addOrder">
+                                    <span class="nav-text">Thêm phiếu nhập hàng</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Invoice -->
+                <li class="has-sub">
+                    <a class="sidenav-item-link" href="javascript:void(0)">
+                        <i class="mdi mdi-receipt"></i>
+                        <span class="nav-text">Hóa đơn khách hàng</span> <b class="caret"></b>
+                    </a>
+                    <div class="collapse">
+                        <ul class="sub-menu" id="authentication1" data-parent="#sidebar-menu">
+                            <li class="">
+                                <a href="/admin/invoice">
+                                    <span class="nav-text">Danh sách hóa đơn</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Brands -->
+                <li class="has-sub">
+                    <a class="sidenav-item-link"  href="javascript:void(0)">
+                        <i class="mdi mdi-tag-outline"></i>
+                        <span class="nav-text">Thương hiệu</span><b class="caret"></b>
+                    </a>
+                    <div class="collapse">
+                        <ul class="sub-menu" id="brand" data-parent="#sidebar-menu">
+                            <li class="">
+                                <a class="sidenav-item-link" href="/admin/brand">
+                                    <span class="nav-text">Danh sách thương hiệu</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="sidenav-item-link" href="/admin/addBrand">
+                                    <span class="nav-text">Thêm thương hiệu</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

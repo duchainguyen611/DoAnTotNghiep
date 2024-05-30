@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+
+<!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/add-vendor.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Feb 2024 08:33:56 GMT -->
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="BIGSHOP - Admin ">
+	<title>BIGSHOP - Admin </title>
+
+	<!-- GOOGLE FONTS -->
+	<link rel="preconnect" href="https://fonts.googleapis.com/">
+	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+
+	<link href="/admin/css/materialdesignicons.min.css" rel="stylesheet" />
+
+	<!-- PLUGINS CSS STYLE -->
+	<link href="/admin/plugins/simplebar/simplebar.css" rel="stylesheet" />
+
+	<!-- custom css -->
+	<link id="style.css" rel="stylesheet" href="/admin/css/style.css" />
+
+	<!-- FAVICON -->
+	<link href="/admin/img/logo/icon.png" rel="shortcut icon" />
+
+</head>
+
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
+
+	<!-- WRAPPER -->
+	<div class="wrapper">
+
+		<!-- LEFT MAIN SIDEBAR -->
+		<div th:replace="admin/fragments/sidebar :: sidebarFragment"></div>
+
+		<!-- PAGE WRAPPER -->
+		<div class="ec-page-wrapper">
+
+			<!-- Header -->
+			<header th:replace="admin/fragments/header :: headerFragment"></header>
+
+			<!-- CONTENT WRAPPER -->
+			<div class="ec-content-wrapper">
+				<div class="content">
+					<div class="breadcrumb-wrapper breadcrumb-contacts">
+						<div>
+							<h1>Thương hiệu</h1>
+							<p class="breadcrumbs"><span><a href="/admin">Trang chủ</a></span>
+								<span><i class="mdi mdi-chevron-right"></i></span> Thêm thương hiệu
+							</p>
+						</div>
+                        <div>
+                            <a href="/admin/brand" class="btn btn-primary">Tất cả thương hiệu</a>
+                        </div>
+					</div>
+					
+					<div class="card bg-white profile-content">
+						<div class="row">
+						
+							<div class="col-lg-12 col-xl-12">
+								<div class="profile-content-right profile-right-spacing px-5 pb-5">
+                                    <div class="tab-widget mt-5">
+                                        <div class="user_profile_top_heading">
+                                            <h3>Thêm thương hiệu</h3>
+                                        </div>
+                                    <div class="tab-pane-content mt-5">
+                                        <form id="form" method="post" th:action="@{/admin/addBrand}" th:object="${aBrandRequest}" enctype="multipart/form-data">
+                                            <div class="row mb-2">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="brandName">Tên thương hiệu</label>
+                                                        <input type="text" class="form-control" id="brandName" name="brandName" th:field="*{brandName}" th:errorclass="is-invalid">
+														<div th:if="${#fields.hasErrors('brandName')}" class="invalid-feedback" th:errors="*{brandName}"></div>
+													</div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group mb-4">
+                                                        <label for="email">Email</label>
+                                                        <input type="email" class="form-control" id="email" name="email" th:field="*{email}" th:errorclass="is-invalid" >
+														<div th:if="${#fields.hasErrors('email')}" class="invalid-feedback" th:errors="*{email}"></div>
+													</div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group mb-4">
+                                                        <label for="number">Số điện thoại</label>
+                                                        <input type="number" class="form-control" id="number" name="phone" th:field="*{phone}" th:errorclass="is-invalid">
+														<div th:if="${#fields.hasErrors('phone')}" class="invalid-feedback" th:errors="*{phone}"></div>
+													</div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="lastName">Địa chỉ</label>
+                                                        <input type="text" class="form-control" id="lastName"  name="address" th:field="*{address}" th:errorclass="is-invalid">
+														<div th:if="${#fields.hasErrors('address')}" class="invalid-feedback" th:errors="*{address}"></div>
+													</div>
+                                                </div>
+												<div class="ec-vendor-img-upload">
+													<div class="ec-vendor-main-img">
+														<div class="avatar-upload">
+															<div class="col-md-3 mb-3">
+																<img width="100%" id="previewImage">
+															</div>
+															<div class="col-md-9 mb-3">
+																<label class="form-label">Hình ảnh</label>
+																<input type="file" class="form-control" th:name="imageBrand" onchange="handleInputImage()">
+																<input type="hidden" class="form-control" th:field="*{image}" id="imageChoose">
+																<div th:if="${#fields.hasErrors('image')}" class="invalid-feedback" th:errors="*{image}"></div>
+															</div>
+														</div>
+													</div>
+												</div>
+                                                <div class="col-lg-12">
+                                                    <div class="d-flex justify-content-end mt-5">
+                                                        <button type="submit"
+                                                            class="btn btn-primary mb-2 btn-pill">Thêm</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div> <!-- End Content -->
+			</div> <!-- End Content Wrapper -->
+
+			<!-- Footer -->
+			<footer class="footer mt-auto">
+				<div class="copyright bg-white">
+					<p>
+						Copyright © 2023. All right reserved.
+					</p>
+				</div>
+			</footer>
+
+		</div> <!-- End Page Wrapper -->
+	</div> <!-- End Wrapper -->
+
+
+	<!-- Common Javascript -->
+	<script src="/admin/plugins/jquery/jquery-3.5.1.min.js"></script>
+	<script src="/admin/js/bootstrap.bundle.min.js"></script>
+	<script src="/admin/plugins/simplebar/simplebar.min.js"></script>
+	<script src="/admin/plugins/jquery-zoom/jquery.zoom.min.js"></script>
+	<script src="/admin/plugins/slick/slick.min.js"></script>
+
+	<!-- Option Switcher -->
+	<script src="/admin/plugins/options-sidebar/optionswitcher.js"></script>
+
+	<!-- custom js -->
+	<script src="/admin/js/custom.js"></script>
+	<script th:replace="admin/fragments/inputFIle :: inputFileFragment"></script>
+</body>
+
+
+<!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/add-vendor.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Feb 2024 08:33:56 GMT -->
+</html>

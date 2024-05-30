@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+
+<!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/product-add.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Feb 2024 08:33:56 GMT -->
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="BIGSHOP - Admin ">
+	<title>BIGSHOP - Admin </title>
+
+	<!-- GOOGLE FONTS -->
+	<link rel="preconnect" href="https://fonts.googleapis.com/">
+	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+
+	<link href="/admin/css/materialdesignicons.min.css" rel="stylesheet" />
+
+	<!-- PLUGINS CSS STYLE -->
+	<link href="/admin/plugins/simplebar/simplebar.css" rel="stylesheet" />
+
+	<!-- custom css -->
+	<link id="style.css" rel="stylesheet" href="/admin/css/style.css" />
+
+	<!-- FAVICON -->
+	<link href="/admin/img/logo/icon.png" rel="shortcut icon" />
+
+</head>
+
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
+
+	<!-- WRAPPER -->
+	<div class="wrapper">
+
+		<!-- LEFT MAIN SIDEBAR -->
+		<div th:replace="admin/fragments/sidebar :: sidebarFragment"></div>
+
+		<!-- PAGE WRAPPER -->
+		<div class="ec-page-wrapper">
+
+			<!-- Header -->
+			<header th:replace="admin/fragments/header :: headerFragment"></header>
+
+			<!-- CONTENT WRAPPER -->
+			<div class="ec-content-wrapper">
+				<div class="content">
+					<div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
+						<div>
+							<h1>Chi tiết phiếu nhập hàng</h1>
+							<p class="breadcrumbs"><span><a href="/admin">Trang chủ</a></span>
+								<span><i class="mdi mdi-chevron-right"></i></span>Cập nhật sản phẩm trong chi tiết phiếu nhập hàng</p>
+						</div>
+						<div>
+							<a th:href="@{/admin/orderDetail/{id}(id=*{orderId})}" class="btn btn-primary">Chi tiết phiếu nhập hàng
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card card-default">
+								<div class="card-header card-header-border-bottom">
+									<h2>Cập nhật sản phẩm trong chi tiết phiếu nhập hàng</h2>
+								</div>
+								<div class="card-body">
+									<div class="row ec-vendor-uploads">
+										<div class="col-lg-8">
+											<div class="ec-vendor-upload-detail">
+												<form class="row g-3" method="post" th:action="@{/admin/updateOrderDetail/{id}(id=*{id})}" enctype="multipart/form-data"
+													  th:object="${aOrderDetailRequest}">
+													<div class="col-md-6">
+														<label class="form-label">Sản phẩm</label>
+														<select name="categories" id="Categories" class="form-select"
+																th:field="*{productId}" th:errorclass="is-invalid">
+															<!--                                                        <option selected>Menu Category</option>-->
+															<option th:each="item :${products}" th:value="${item.id}"
+																	th:text="${item.productName}"></option>
+															<div th:if="${#fields.hasErrors('productId')}" class="invalid-feedback" th:errors="*{productId}"></div>
+														</select>
+													</div>
+													<div class="col-md-6">
+														<label for="inputEmail8" class="form-label">Số lượng nhập hàng</label>
+														<input type="number" class="form-control" placeholder="Stock quantity"
+															   id="inputEmail8" th:field="*{orderQuantity}">
+														<div th:if="${#fields.hasErrors('orderQuantity')}" class="invalid-feedback" th:errors="*{orderQuantity}"></div>
+													</div>
+													<div class="col-md-6">
+														<label for="inputEmail9" class="form-label">Đơn giá nhập hàng</label>
+														<input type="number" class="form-control " placeholder="Product price"
+															   id="inputEmail9" th:field="*{unitPriceOrder}">
+														<div th:if="${#fields.hasErrors('unitPriceOrder')}" class="invalid-feedback" th:errors="*{unitPriceOrder}"></div>
+													</div>
+													<div class="col-md-12">
+														<div class="product_add_cancel_button">
+															<button type="submit" class="btn btn-primary">Cập nhật
+															</button>
+														</div>
+
+													</div>
+												</form>											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- End Content -->
+			</div> <!-- End Content Wrapper -->
+
+			<!-- Footer -->
+			<footer class="footer mt-auto">
+				<div class="copyright bg-white">
+					<p>
+						Copyright © 2023. All right reserved.
+					  </p>
+				</div>
+			</footer>
+
+		</div> <!-- End Page Wrapper -->
+	</div> <!-- End Wrapper -->
+
+	<!-- Common Javascript -->
+	<script src="/admin/plugins/jquery/jquery-3.5.1.min.js"></script>
+	<script src="/admin/js/bootstrap.bundle.min.js"></script>
+	<script src="/admin/plugins/tags-input/bootstrap-tagsinput.js"></script>
+	<script src="/admin/plugins/simplebar/simplebar.min.js"></script>
+	<script src="/admin/plugins/jquery-zoom/jquery.zoom.min.js"></script>
+	<script src="/admin/plugins/slick/slick.min.js"></script>
+
+	<!-- Option Switcher -->
+	<script src="/admin/plugins/options-sidebar/optionswitcher.js"></script>
+
+	<!-- custom js -->
+	<script src="/admin/js/custom.js"></script>
+
+</body>
+<script>
+	// Lắng nghe sự kiện khi người dùng chọn file
+	document.getElementById('imageInput').addEventListener('change', function(event) {
+		var file = event.target.files[0];
+		var reader = new FileReader();
+
+		// Đọc nội dung của file
+		reader.onload = function(e) {
+			var imageUrl = e.target.result;
+
+			// Gán URL của ảnh vào thuộc tính src của thẻ <img>
+			document.getElementById('previewImage').src = imageUrl;
+		};
+
+		// Đọc file dưới dạng URL
+		reader.readAsDataURL(file);
+	});
+</script>
+
+<!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/product-add.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Feb 2024 08:33:57 GMT -->
+</html>

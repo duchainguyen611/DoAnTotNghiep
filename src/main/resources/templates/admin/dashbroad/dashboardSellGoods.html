@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="BIGSHOP - Admin ">
+    <title>BIGSHOP - Admin </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@400;500;700;900&amp;display=swap"
+            rel="stylesheet">
+    <link rel="stylesheet" href="/admin/css/cssAlertSuccess.css">
+    <link href="/admin/css/materialdesignicons.min.css" rel="stylesheet"/>
+    <link href="/admin/plugins/simplebar/simplebar.css" rel="stylesheet"/>
+    <link href='/admin/plugins/data-tables/datatables.bootstrap5.min.css' rel='stylesheet'>
+    <link href='/admin/plugins/data-tables/responsive.datatables.min.css' rel='stylesheet'>
+    <link id="style.css" rel="stylesheet" href="/admin/css/style.css"/>
+    <link href="/admin/img/logo/icon.png" rel="shortcut icon"/>
+</head>
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
+<div class="wrapper">
+    <div class="m-4 autoHide" role="alert" th:if="${success}">
+        <div class="alert alert-success alert-dismissible d-flex align-items-center fade show">
+            <i class="bi-check-circle-fill"></i>
+            <strong class="mx-2">Success!</strong> <span th:text="${success}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+    <div th:replace="admin/fragments/sidebar :: sidebarFragment"></div>
+    <div class="ec-page-wrapper">
+        <header th:replace="admin/fragments/header :: headerFragment"></header>
+        <div class="ec-content-wrapper">
+            <div class="content">
+                <h1>BÁO CÁO BÁN HÀNG</h1>
+                <form id="myForm" method="get">
+                    <div class="breadcrumb-wrapper breadcrumb-contacts" style="justify-content: flex-start">
+                        <div style="margin-right: 10px">
+                            <label class="form-label">Thương hiệu</label>
+                            <select name="brandId" id="brandId" class="form-select" th:selected="${selectedBrandId}">
+                                <option value="">Chọn thương hiệu sản phẩm</option>
+                                <option th:each="item :${brands}" th:value="${item.id}" th:text="${item.brandName}" th:selected="${#strings.equals(selectedBrandId, item.id)}"></option>
+                            </select>
+                        </div>
+                        <div style="margin-right: 10px">
+                            <label class="form-label">Danh mục</label>
+                            <select name="categoryId" id="categoryId" class="form-select" th:selected="${selectedCategoryId}">
+                                <option value="">Chọn danh mục sản phẩm</option>
+                                <option th:each="item :${categories}" th:value="${item.id}" th:text="${item.categoryName}"  th:selected="${#strings.equals(selectedCategoryId, item.id)}"></option>
+                            </select>
+                        </div>
+                        <div style="margin-right: 10px">
+                            <label class="form-label">Ngày bắt đầu</label>
+                            <input type="date" id="createdDateStart" name="createdDateStart" th:value="${createdDateStart}" class="form-control">
+                        </div>
+                        <div style="margin-right: 10px">
+                            <label class="form-label">Ngày kết thúc</label>
+                            <input type="date" id="createdDateEnd" name="createdDateEnd" th:value="${createdDateEnd}" class="form-control">
+                        </div>
+                        <div style="margin-right: 10px">
+                            <a class="btn btn-primary mb-2 btn-pill" href="/admin/dashboardSellGoods">Xóa lọc</a>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2 btn-pill" onclick="setAction('/admin/dashboardSellGoods')">Tạo thống kê</button>
+                    <button type="submit" class="btn btn-primary mb-2 btn-pill" onclick="setAction('/admin/exportExcelDashboardSellGoods')">Xuất file</button>
+                </form>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="ec-cat-list card card-default">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="responsive-data-table" class="table text-center" style="width: 100%">
+                                        <thead>
+                                        <tr>
+                                            <th>Stt</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Tên thương hiệu</th>
+                                            <th>Tên danh mục</th>
+                                            <th>Số lượng đã bán</th>
+                                            <th>Tổng tiền</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <div>
+                                            <tr th:each="sellGood,item:${sellGoods}">
+                                                <td th:text="*{item.index+1}"></td>
+                                                <td th:text="*{sellGood.productName}"></td>
+                                                <td th:text="*{sellGood.brandName}" ></td>
+                                                <td th:text="*{sellGood.categoryName}" ></td>
+                                                <td th:text="*{sellGood.outputQuantity}"></td>
+                                                <td th:text="*{sellGood.totalAmount}" class="totalAmountElement"></td>
+                                            </tr>
+                                        </div>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End Content -->
+        </div> <!-- End Content Wrapper -->
+
+        <!-- Footer -->
+        <footer class="footer mt-auto">
+            <div class="copyright bg-white">
+                <p>
+                    Copyright © 2023. All right reserved.
+                </p>
+            </div>
+        </footer>
+
+    </div> <!-- End Page Wrapper -->
+
+</div> <!-- End Wrapper -->
+
+<!-- Common Javascript -->
+<script src="/admin/plugins/jquery/jquery-3.5.1.min.js"></script>
+<script src="/admin/js/bootstrap.bundle.min.js"></script>
+<script src="/admin/plugins/tags-input/bootstrap-tagsinput.js"></script>
+<script src="/admin/plugins/simplebar/simplebar.min.js"></script>
+<script src="/admin/plugins/jquery-zoom/jquery.zoom.min.js"></script>
+<script src="/admin/plugins/slick/slick.min.js"></script>
+
+<!-- Data Tables -->
+<script src='/admin/plugins/data-tables/jquery.datatables.min.js'></script>
+<script src='/admin/plugins/data-tables/datatables.bootstrap5.min.js'></script>
+<script src='/admin/plugins/data-tables/datatables.responsive.min.js'></script>
+
+<!-- Option Switcher -->
+<script src="/admin/plugins/options-sidebar/optionswitcher.js"></script>
+
+<!-- custom js -->
+<script src="/admin/js/custom.js"></script>
+
+</body>
+<script>
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+        // Lấy tất cả các input và select trong form
+        var inputs = this.querySelectorAll("input, select");
+
+        // Duyệt qua từng input và select
+        inputs.forEach(function(input) {
+            // Nếu giá trị là rỗng, loại bỏ thuộc tính name để không gửi lên server
+            if (!input.value) {
+                input.removeAttribute("name");
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var totalElement = document.querySelectorAll(".totalAmountElement");
+        totalElement.forEach(function (element) {
+            let price = parseFloat(element.textContent.trim());
+            element.textContent = price.toLocaleString('vi-VN', { minimumFractionDigits: 0 }) + '₫';
+        });
+
+        document.querySelectorAll(".date").forEach(function(tdElement) {
+            // Lấy chuỗi ngày từ nội dung của phần tử
+            var dateString = tdElement.innerText;
+
+            // Tách chuỗi ngày thành các phần tử riêng biệt
+            var dateParts = dateString.split("-");
+
+            // Tạo một đối tượng Date từ các phần tử ngày
+            var dateObject = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+
+            // Chuyển đổi định dạng ngày thành 'dd-mm-yyyy'
+            var formattedDate = dateObject.getDate() + '-' + (dateObject.getMonth() + 1) + '-' + dateObject.getFullYear();
+
+            // Đặt nội dung mới cho phần tử
+            tdElement.innerText = formattedDate;
+        });
+    });
+    function setAction(action) {
+        document.getElementById("myForm").action = action;
+    }
+</script>
+
+<!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/main-category.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Feb 2024 08:33:12 GMT -->
+</html>

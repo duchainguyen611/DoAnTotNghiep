@@ -1,0 +1,64 @@
+<script th:fragment="inputFileFragment">
+    const handleChange = () => {
+        const fileUploader = document.querySelector('#input-file');
+        const getFile = fileUploader.files
+        if (getFile.length !== 0) {
+            const uploadedFile = getFile[0];
+            readFile(uploadedFile);
+        }
+    }
+
+    const readFile = (uploadedFile) => {
+        if (uploadedFile) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const parent = document.querySelector('.preview-box');
+                parent.innerHTML = `<img class="preview-content" src=${reader.result} />`;
+            };
+
+            reader.readAsDataURL(uploadedFile);
+        }
+    };
+    function handleInputImage() {
+        // Lấy đối tượng input file
+        var inputElement = document.querySelector('input[type="file"]');
+        var previewImage = document.getElementById('previewImage');
+        var errorElement = document.getElementById('errorElement');
+
+        // Kiểm tra xem người dùng đã chọn file hay chưa
+        if (inputElement.files && inputElement.files[0]) {
+            var file = inputElement.files[0];
+            var fileReader = new FileReader();
+
+            // Kiểm tra loại file
+            if (!file.type.match('image.*')) {
+                // Hiển thị thông báo lỗi
+                errorElement.innerText = 'Vui lòng chọn một tệp ảnh.';
+                previewImage.src = ''; // Xóa ảnh hiển thị trước đó (nếu có)
+                return;
+            }
+
+            // Đọc nội dung của file
+            fileReader.onload = function (e) {
+                // Lấy dữ liệu file đã được đọc
+                var fileContent = e.target.result;
+
+                // Gán dữ liệu file vào ô input hidden
+                document.getElementById('imageChoose').value = fileContent;
+
+                // Hiển thị ảnh trong thẻ <img>
+                previewImage.src = fileContent;
+            };
+
+            // Đọc file làm dữ liệu đầu vào
+            fileReader.readAsDataURL(file);
+        } else {
+            // Người dùng không chọn file, xóa ảnh hiển thị và reset giá trị ô input hidden
+            previewImage.src = '';
+            document.getElementById('imageChoose').value = '';
+        }
+
+        // Xóa thông báo lỗi (nếu có)
+        errorElement.innerText = '';
+    }
+</script>

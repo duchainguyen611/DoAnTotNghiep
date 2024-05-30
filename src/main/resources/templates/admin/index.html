@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+
+<!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Feb 2024 08:31:44 GMT -->
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="BIGSHOP - Admin ">
+	<title>BIGSHOP - Admin </title>
+	<!-- GOOGLE FONTS -->
+	<link rel="preconnect" href="https://fonts.googleapis.com/">
+	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+	<link rel="preconnect" href="https://fonts.googleapis.com/">
+	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+	<link href="/admin/css/materialdesignicons.min.css" rel="stylesheet" />
+
+	<!-- PLUGINS CSS STYLE -->
+	<link href="/admin/plugins/daterangepicker/daterangepicker.css" rel="stylesheet">
+	<link href="/admin/plugins/simplebar/simplebar.css" rel="stylesheet" />
+
+	<!-- custom css -->
+	<link id="style.css" href="/admin/css/style.css" rel="stylesheet" />
+
+	<!-- FAVICON -->
+	<link href="/admin/img/logo/icon.png" rel="shortcut icon" />
+
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/series-label.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+	<style>
+		.highcharts-figure1,
+		.highcharts-data-table table {
+			min-width: 360px;
+			max-width: 100%;
+			margin: 1em;
+		}
+
+		.highcharts-data-table table {
+			font-family: Verdana, sans-serif;
+			border-collapse: collapse;
+			border: 1px solid #ebebeb;
+			margin: 10px auto;
+			text-align: center;
+			width: 100%;
+			max-width: 500px;
+		}
+
+		.highcharts-data-table caption {
+			padding: 1em 0;
+			font-size: 1.2em;
+			color: #555;
+		}
+
+		.highcharts-data-table th {
+			font-weight: 600;
+			padding: 0.5em;
+		}
+
+		.highcharts-data-table td,
+		.highcharts-data-table th,
+		.highcharts-data-table caption {
+			padding: 0.5em;
+		}
+
+		.highcharts-data-table thead tr,
+		.highcharts-data-table tr:nth-child(even) {
+			background: #f8f8f8;
+		}
+
+		.highcharts-data-table tr:hover {
+			background: #f1f7ff;
+		}
+
+		.card-body .data{
+			right: 38px;
+			bottom: 0;
+			border-radius: 15px;
+			text-align: center;
+			color: #ffffff;
+		}
+	</style>
+
+</head>
+
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-light ec-header-light" id="body">
+
+	<!--  WRAPPER  -->
+	<div class="wrapper">
+
+		<!-- LEFT MAIN SIDEBAR -->
+		<div th:replace="admin/fragments/sidebar :: sidebarFragment"></div>
+
+
+		<!--  PAGE WRAPPER -->
+		<div class="ec-page-wrapper">
+
+			<!-- Header -->
+			<header th:replace="admin/fragments/header :: headerFragment"></header>
+
+			<!-- CONTENT WRAPPER -->
+			<div class="ec-content-wrapper">
+				<div class="content">
+					<div class="row">
+						<div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
+							<div class="card card-mini dash-card card-1">
+								<div class="card-body">
+									<p class="mb-1">Tài khoản khách hàng:</p>
+									<p class="mb-1">Tổng số tài khoản: <b class="data" th:text="${sumUser}"></b></p>
+									<p class="mb-1">Số tài khoản hoạt động: <b class="data"  th:text="${sumUserActive}"></b></p>
+									<p class="mb-1">Số tài khoản không hoạt động: <b class="data" th:text="${sumUserInActive}"></b></p>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
+							<div class="card card-mini dash-card card-2">
+								<div class="card-body">
+									<p class="mb-1">Sản phẩm:</p>
+									<p class="mb-1">Tổng số sản phẩm: <b class="data" th:text="${sumProduct}"></b></p>
+									<p class="mb-1">Số sản phẩm còn hàng: <b class="data"  th:text="${sumProductInStock}"></b></p>
+									<p class="mb-1">Số sản phẩm hết hàng: <b class="data" th:text="${sumProductOutStock}"></b></p>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
+							<div class="card card-mini dash-card card-3">
+								<div class="card-body">
+									<p class="mb-1">Hóa đơn khách hàng:</p>
+									<p class="mb-1">Tổng số hóa đơn: <b class="data" th:text="${sumInvoice}"></b></p>
+									<p class="mb-1">Số hóa đơn thành công: <b class="data"  th:text="${sumInvoiceSuccess}"></b></p>
+									<p class="mb-1">Số hóa đơn bị hủy: <b class="data" th:text="${sumInvoiceCancel}"></b></p>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
+							<div class="card card-mini dash-card card-4">
+								<div class="card-body">
+									<p class="mb-1">Phiếu nhập hàng:</p>
+									<p class="mb-1">Tổng số phiếu: <b class="data" th:text="${sumOrder}"></b></p>
+									<p class="mb-1">Số phiếu đã duyệt: <b class="data"  th:text="${sumOrderConfirm}"></b></p>
+									<p class="mb-1">Số phiếu chưa duyệt: <b class="data" th:text="${sumOrderExceptConfirm}"></b></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xl-12 col-md-12 p-b-15">
+							<!-- Sales Graph -->
+							<div  class="card card-default">
+								<div class="card-body highcharts-figure1">
+									<div class="tab-content pt-4" id="ChartRevenue">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- End Content -->
+			</div> <!-- End Content Wrapper -->
+			<!-- Footer -->
+			<footer class="footer mt-auto">
+				<div class="copyright bg-white">
+					<p>
+						Copyright © 2023. All right reserved.
+					</p>
+				</div>
+			</footer>
+
+		</div> <!-- End Page Wrapper -->
+	</div> <!-- End Wrapper -->
+
+	<!-- Common Javascript -->
+	<script src="/admin/plugins/jquery/jquery-3.5.1.min.js"></script>
+	<script src="/admin/js/bootstrap.bundle.min.js"></script>
+	<script src="/admin/plugins/simplebar/simplebar.min.js"></script>
+	<script src="/admin/plugins/jquery-zoom/jquery.zoom.min.js"></script>
+	<script src="/admin/plugins/slick/slick.min.js"></script>
+
+	<!-- Chart -->
+	<script src="/admin/plugins/charts/Chart.min.js"></script>
+	<script src="/admin/js/chart.js"></script>
+
+	<!-- Google map chart -->
+	<script src="/admin/plugins/charts/google-map-loader.js"></script>
+	<script src="/admin/plugins/charts/google-map.js"></script>
+
+	<!-- Date Range Picker -->
+	<script src="/admin/plugins/daterangepicker/moment.min.js"></script>
+    <script src="/admin/plugins/daterangepicker/daterangepicker.js"></script>
+	<script src="/admin/js/date-range.js"></script>
+	<!-- custom js -->
+	<script src="/admin/js/custom.js"></script>
+</body>
+<script th:inline="javascript">
+	var sevenDaysAgo = [[${sevenDaysAgo}]];
+	var today = [[${today}]];
+	var totalAmountList =[[${totalAmountList}]];
+	var importAmountList = [[${importAmountList}]];
+	var saleAmountList = [[${saleAmountList}]];
+	var inputQuantityImportGoods = [[${inputQuantityImportGoods}]];
+	var inputQuantitySellGoods = [[${inputQuantitySellGoods}]];
+
+	Highcharts.chart('ChartRevenue', {
+		title: {
+			text: 'Biểu đồ lợi nhuận',
+			align: 'left'
+		},
+		yAxis: {
+			title: {
+				text: 'Đơn vị tiền (VND)'
+			}
+		},
+		xAxis: {
+			type: 'datetime',
+			accessibility: {
+				rangeDescription: `Range: ${sevenDaysAgo} to ${today}`
+			}
+		},
+		legend: {
+			layout: 'vertical',
+			align: 'right',
+			verticalAlign: 'middle'
+		},
+		plotOptions: {
+			series: {
+				label: {
+					connectorAllowed: false
+				},
+				pointStart: Date.parse(sevenDaysAgo),
+				pointInterval: 24 * 3600 * 1000 // one day
+			}
+		},
+		series: [{
+			name: 'Lợi nhuận',
+			data: totalAmountList
+		}, {
+			name: 'Số tiền nhập hàng',
+			data: importAmountList
+		}, {
+			name: 'Số tiền bán hàng',
+			data: saleAmountList
+		}],
+		responsive: {
+			rules: [{
+				condition: {
+					maxWidth: 500
+				},
+				chartOptions: {
+					legend: {
+						layout: 'horizontal',
+						align: 'center',
+						verticalAlign: 'bottom'
+					}
+				}
+			}]
+		}
+	});
+
+
+</script>
+
+<!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Feb 2024 08:31:57 GMT -->
+</html>

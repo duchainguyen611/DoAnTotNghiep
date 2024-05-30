@@ -1,0 +1,15 @@
+<script th:fragment="changeStatusColor">
+    function changeColor() {
+        const badgeSpans = document.querySelectorAll('#responsive-data-table .badge');
+        badgeSpans.forEach(function(span) {
+            if (span.textContent.trim() === 'ACTIVE') {
+                span.classList.remove('badge-danger');
+                span.classList.add('badge-success');
+            } else {
+                span.classList.remove('badge-success');
+                span.classList.add('badge-danger');
+            }
+        });
+    }
+    window.addEventListener('DOMContentLoaded', changeColor);
+</script>

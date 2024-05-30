@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>
+        Thay đổi thông tin cá nhân Bigshop
+    </title>
+    <!-- ================= Page description ================== -->
+
+    <!-- ================= Meta ================== -->
+    <meta name="keywords" content="Thay đổi mật khẩu, Bigshop, bigshop-1.mysapo.net"/>
+    <link rel="canonical" href="https://bigshop-1.mysapo.net/account/changepassword"/>
+    <meta name='revisit-after' content='1 days'/>
+    <meta name="robots" content="noodp,index,follow"/>
+    <!-- ================= Favicon ================== -->
+
+    <link rel="icon" href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/favicon.png?1676016752114"
+          type="image/x-icon"/>
+
+    <!-- Facebook Open Graph meta tags -->
+
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Thay đổi thông tin cá nhân">
+    <meta property="og:image"
+          content="http://bizweb.dktcdn.net/100/286/763/themes/802001/assets/logo.png?1676016752114">
+    <meta property="og:image:secure_url"
+          content="https://bizweb.dktcdn.net/100/286/763/themes/802001/assets/logo.png?1676016752114">
+
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://bigshop-1.mysapo.net/account/changepassword">
+    <meta property="og:site_name" content="Bigshop">
+
+
+    <meta name="twitter:card" content="summary">
+
+
+    <!-- Header JS -->
+    <script src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/jquery-2.2.3.min.js?1676016752114"
+            type="text/javascript"></script>
+
+
+    <script>
+
+        var template = 'customers/change_password';
+
+    </script>
+    <link rel="stylesheet" href="/home/css/cssAlertSuccess.css">
+
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/plugin.scss.css?1676016752114">
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/plugin.scss.css?1676016752114" rel="stylesheet"
+          type="text/css" media="all"/>
+    <!-- Build Main CSS -->
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/base.scss.css?1676016752114">
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/style.scss.css?1676016752114">
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/module.scss.css?1676016752114">
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/responsive.scss.css?1676016752114">
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/base.scss.css?1676016752114" rel="stylesheet"
+          type="text/css" media="all"/>
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/style.scss.css?1676016752114" rel="stylesheet"
+          type="text/css" media="all"/>
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/module.scss.css?1676016752114" rel="stylesheet"
+          type="text/css" media="all"/>
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/responsive.scss.css?1676016752114" rel="stylesheet"
+          type="text/css" media="all"/>
+
+    <!-- Theme CSS -->
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/main.scss.css?1676016752114">
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/green.scss.css?1676016752114">
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/owl.carousel.scss.css?1676016752114">
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/bootstrap-select.min.scss.css?1676016752114">
+    <link rel="preload" as='style' type="text/css"
+          href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/theme-update.scss.css?1676016752114">
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/main.scss.css?1676016752114" rel="stylesheet"
+          type="text/css" media="all"/>
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/green.scss.css?1676016752114" rel="stylesheet"
+          type="text/css" media="all"/>
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/owl.carousel.scss.css?1676016752114"
+          rel="stylesheet" type="text/css" media="all"/>
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/bootstrap-select.min.scss.css?1676016752114"
+          rel="stylesheet" type="text/css" media="all"/>
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/theme-update.scss.css?1676016752114"
+          rel="stylesheet" type="text/css" media="all"/>
+    <style>
+        .myRed{
+            display: block;
+            width: 100%;
+            margin-top: 0.25rem;
+            font-size: 0.875em;
+            color: #ec4a58;
+        }
+    </style>
+
+    <!-- Bizweb javascript customer -->
+
+    <script src="/home/assets/themes_support/bizweb-api.js" type="text/javascript"></script>
+    <script src="/home/assets/themes_support/common.js" type="text/javascript"></script>
+    <script src="/home/assets/themes_support/customer.js" type="text/javascript"></script>
+
+
+    <link href="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/account_order_style.scss.css?1676016752114"
+          rel="stylesheet" type="text/css" media="all"/>
+
+    <script>
+        (function () {
+            function asyncLoad() {
+                var urls = [];
+                for (var i = 0; i < urls.length; i++) {
+                    var s = document.createElement('script');
+                    s.type = 'text/javascript';
+                    s.async = true;
+                    s.src = urls[i];
+                    var x = document.getElementsByTagName('script')[0];
+                    x.parentNode.insertBefore(s, x);
+                }
+            };
+            window.attachEvent ? window.attachEvent('onload', asyncLoad) : window.addEventListener('load', asyncLoad, false);
+        })();
+    </script>
+
+
+
+
+    <script src="/home/dist/js/stats.minbadf.js?v=96f2ff2"></script>
+
+</head>
+
+<body>
+<div class="alert alert-success autoHide" th:if="${success}">
+    <strong>Success!</strong> <span th:text="${success}"></span>
+</div>
+
+<!-- Main content -->
+<!-- ============================================== HEADER ============================================== -->
+<header th:replace="home/user/fragments/header::headerUser(${keyword},${sumPriceHeader},${countProductHeader},${categories})"></header>
+<!-- ============================================== HEADER : END ============================================== -->
+
+
+<section class="bread-crumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="breadcrumb">
+                    <li class="home">
+                        <a href="/user"><span>Trang chủ</span></a>
+                        <span> / </span>
+                    </li>
+
+                    <li><strong>Thay đổi thông tin cá nhân</strong></li>
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section class="signup page_customer_account">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-lg-3 col-left-ac">
+                <div class="block-account">
+                    <h5 class="title-account">Trang tài khoản</h5>
+                    <p>Xin chào, <span th:text="${user.fullName}"></span>&nbsp;!</p>
+                    <ul>
+                        <li>
+                            <a class="title-info" href="/user/profile">Thông tin tài khoản</a>
+                        </li>
+                        <li>
+                            <a class="title-info" href="/user/profile/invoice">Đơn hàng của bạn</a>
+                        </li>
+                        <li>
+                            <a class="title-info active" href="javascript:void(0);">Sửa thông tin cá nhân</a>
+                        </li>
+                        <li>
+                            <a class="title-info" href="/user/profile/updatePassword">Đổi mật khẩu</a>
+                        </li>
+                        <li>
+                            <a class="title-info" href="/user/profile/address">Địa chỉ nhận hàng</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-lg-9 col-right-ac">
+                <h1 class="title-head margin-top-0">Sửa thông tin cá nhân</h1>
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                        <div class="page-login">
+                            <form method="post" th:action="@{/user/profile/updateProfile}" th:object="${changeProfile}"  id="change_customer_password"
+                                  accept-charset="UTF-8"><input name="FormType" type="hidden"
+                                                                value="change_customer_password"/><input name="utf8"
+                                                                                                         type="hidden"
+                                                                                                         value="true"/>
+
+                                <div class="form-signup clearfix">
+                                    <fieldset class="form-group">
+                                        <label for="fullName">Tên đầy đủ</label>
+                                        <input type="text" name="fullName" id="fullName"
+                                               class="form-control form-control-lg" th:field="*{fullName}">
+                                        <div th:if="${#fields.hasErrors('fullName')}" class="myRed" th:errors="*{fullName}" ></div>
+                                    </fieldset>
+                                    <fieldset class="form-group">
+                                        <label for="address">Địa chỉ</label>
+                                        <input type="text" name="address" id="address"
+                                               class="form-control form-control-lg" th:field="*{address}">
+                                        <div th:if="${#fields.hasErrors('address')}" class="myRed" th:errors="*{address}" ></div>
+                                    </fieldset>
+                                    <fieldset class="form-group">
+                                            <label>Giới tính</label>
+                                            <input type="radio" name="sex" th:field="*{gender}"
+                                                   value="true">
+                                            Nam<br>
+                                            <input type="radio" name="sex" th:field="*{gender}"
+                                                   value="false">
+                                            Nữ<br>
+                                    </fieldset>
+                                    <fieldset class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="text" name="email" id="email"
+                                               class="form-control form-control-lg" th:field="*{email}">
+                                        <div th:if="${#fields.hasErrors('email')}" class="myRed" th:errors="*{email}" ></div>
+                                    </fieldset>
+                                    <fieldset class="form-group">
+                                        <label for="phone">Số điện thoại</label>
+                                        <input type="number" name="phone" id="phone"
+                                               class="form-control form-control-lg" th:field="*{phone}">
+                                        <div th:if="${#fields.hasErrors('phone')}" class="myRed" th:errors="*{phone}" ></div>
+                                    </fieldset>
+                                    <fieldset class="form-group">
+                                        <label for="dateOfBirth">Ngày sinh</label>
+                                        <input type="date" name="dateOfBirth" id="dateOfBirth"
+                                               class="form-control form-control-lg" th:field="*{dateOfBirth}">
+                                        <div th:if="${#fields.hasErrors('dateOfBirth')}" class="myRed" th:errors="*{dateOfBirth}" ></div>
+                                    </fieldset>
+                                    <button class="button btn-edit-addr btn btn-primary btn-more" type="submit"><i
+                                            class="hoverButton" ></i>Cập nhật
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="container">
+    <div id="brands-carousel" class="logo-slider wow fadeInUp">
+        <h3 class="section-title">Thương hiệu</h3>
+        <div class="logo-slider-inner">
+            <div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme" data-xl-items='6'
+                 data-lg-items='5' data-md-items='4' data-sm-items='2' data-xs-items='1' data-margin='0'
+                 data-nav='true'>
+
+
+                <div class="item">
+                    <a href="#" class="image">
+                        <img class="lazyload"
+                             src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/rolling.svg?1676016752114"
+                             data-src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/brand1.jpg?1676016752114"
+                             alt="Nokia">
+                    </a>
+                </div>
+
+
+                <div class="item">
+                    <a href="#" class="image">
+                        <img class="lazyload"
+                             src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/rolling.svg?1676016752114"
+                             data-src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/brand2.jpg?1676016752114"
+                             alt="Canon">
+                    </a>
+                </div>
+
+
+                <div class="item">
+                    <a href="#" class="image">
+                        <img class="lazyload"
+                             src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/rolling.svg?1676016752114"
+                             data-src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/brand3.jpg?1676016752114"
+                             alt="Samsung">
+                    </a>
+                </div>
+
+
+                <div class="item">
+                    <a href="#" class="image">
+                        <img class="lazyload"
+                             src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/rolling.svg?1676016752114"
+                             data-src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/brand4.jpg?1676016752114"
+                             alt="Apple">
+                    </a>
+                </div>
+
+
+                <div class="item">
+                    <a href="#" class="image">
+                        <img class="lazyload"
+                             src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/rolling.svg?1676016752114"
+                             data-src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/brand5.jpg?1676016752114"
+                             alt="HTC">
+                    </a>
+                </div>
+
+
+                <div class="item">
+                    <a href="#" class="image">
+                        <img class="lazyload"
+                             src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/rolling.svg?1676016752114"
+                             data-src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/brand6.jpg?1676016752114"
+                             alt="LG">
+                    </a>
+                </div>
+
+
+                <div class="item">
+                    <a href="#" class="image">
+                        <img class="lazyload"
+                             src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/rolling.svg?1676016752114"
+                             data-src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/brand7.jpg?1676016752114"
+                             alt="Nokia 2">
+                    </a>
+                </div>
+
+
+            </div>
+            <!-- /.owl-carousel #logo-slider -->
+        </div>
+        <!-- /.logo-slider-inner -->
+    </div>
+</div>
+
+
+<!-- ============================================================= FOOTER ============================================================= -->
+<footer th:replace="home/user/fragments/footer::footerUser"></footer>
+<!-- ============================================================= FOOTER : END============================================================= -->
+<div class="ajax-load">
+	<span class="loading-icon">
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+             width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;"
+             xml:space="preserve">
+			<rect x="0" y="10" width="4" height="10" fill="#333" opacity="0.2">
+				<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0s" dur="0.6s"
+                         repeatCount="indefinite"/>
+				<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0s" dur="0.6s"
+                         repeatCount="indefinite"/>
+				<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0s" dur="0.6s"
+                         repeatCount="indefinite"/>
+			</rect>
+			<rect x="8" y="10" width="4" height="10" fill="#333" opacity="0.2">
+				<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.15s" dur="0.6s"
+                         repeatCount="indefinite"/>
+				<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.15s" dur="0.6s"
+                         repeatCount="indefinite"/>
+				<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.15s" dur="0.6s"
+                         repeatCount="indefinite"/>
+			</rect>
+			<rect x="16" y="10" width="4" height="10" fill="#333" opacity="0.2">
+				<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.3s" dur="0.6s"
+                         repeatCount="indefinite"/>
+				<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.3s" dur="0.6s"
+                         repeatCount="indefinite"/>
+				<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.3s" dur="0.6s"
+                         repeatCount="indefinite"/>
+			</rect>
+		</svg>
+	</span>
+</div>
+
+
+<div class="error-popup awe-popup">
+    <div class="overlay no-background"></div>
+    <div class="popup-inner content">
+        <div class="error-message"></div>
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+</div>
+
+<a href="tel:19006750" class="suntory-alo-phone center-left suntory-alo-green " id="suntory-alo-phoneIcon">
+
+    <div class="suntory-alo-ph-img-circle"><i class="fa fa-phone"></i></div>
+</a>
+
+
+<div id="popupCartModal" class="modal fade" role="dialog">
+</div>
+
+
+<!-- Bizweb javascript -->
+<script src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/option-selectors.js?1676016752114"
+        type="text/javascript"></script>
+<script src="//bizweb.dktcdn.net/assets/themes_support/api.jquery.js" type="text/javascript"></script>
+<!-- Plugin JS -->
+<script src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/addtocart.js?1676016752114"
+        type="text/javascript"></script>
+
+
+<script src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/api.jquery.custom.js?1676016752114"
+        type="text/javascript"></script>
+
+
+<script src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/swiper.min.js?1676016752114"
+        type="text/javascript"></script>
+<script src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/main.js?1676016752114"
+        type="text/javascript"></script>
+
+
+<script src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/scripts.js?1676016752114"
+        type="text/javascript"></script>
+
+<script>
+
+    $('.xemthem').click(function (e) {
+        e.preventDefault();
+        $('nav.megamenu-horizontal ul.nav>li').css('display', 'block');
+        $(this).hide();
+        $('.thugon').show();
+    })
+    $('.thugon').click(function (e) {
+        e.preventDefault();
+        $('nav.megamenu-horizontal ul.nav>li').css('display', 'none');
+        $(this).hide();
+        $('.xemthem').show();
+    })
+
+    window.onload = function (e) {
+        var lil = $('.side-menu nav.megamenu-horizontal .menu-item').length;
+        var vw = $(window).width();
+
+        if (lil < 9 && vw < 1500 && vw > 1200) {
+            $('li.hidden-lgg').remove();
+        }
+    }
+</script>
+
+<script type='text/javascript'>
+
+    //<![CDATA[
+    function loadCSS(e, t, n) {
+        "use strict";
+        var i = window.document.createElement("link");
+        var o = t || window.document.getElementsByTagName("footer")[0];
+        i.rel = "stylesheet";
+        i.href = e;
+        i.media = "only x";
+        o.parentNode.insertBefore(i, o);
+        setTimeout(function () {
+            i.media = n || "all"
+        })
+    }
+
+    loadCSS("/home/font-awesome/4.5.0/css/font-awesome.min.css");
+    //]]>
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Select all search_item divs
+        const searchItems = document.querySelectorAll('.search_item');
+        searchItems.forEach(function(item) {
+            item.addEventListener('click', function() {
+                document.getElementById('categoryId').value = this.getAttribute('data-value') ;
+            });
+        });
+    });
+</script>
+</body>
+</html>

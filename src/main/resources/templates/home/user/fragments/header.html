@@ -1,0 +1,173 @@
+<header class="header-style-1" th:fragment="headerUser(keyword,sumPriceHeader,countProductHeader,categories)" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <!-- ============================================== TOP MENU ============================================== -->
+    <div class="top-bar animate-dropdown">
+        <div class="container">
+            <div class="header-top-inner">
+                <div class="cnt-account">
+                    Chào mừng bạn đã ghé thăm <b>Bigshop</b>
+                </div>
+                <!-- /.cnt-account -->
+                <div class="cnt-account" style="float: right;">
+                    <ul class="list-unstyled">
+                        <li><a href="/user/profile"><i class="icon fa fa-user"></i><span
+                                sec:authentication="principal.user.fullName"></span></a></li>
+                        <li>
+                            <form id="logoutForm" th:action="@{/logout}" method="post">
+                                <input type="submit" hidden="hidden" style="display: none">
+                                <a href="#" onclick="document.getElementById('logoutForm').submit();">
+                                    <i class="fa fa-sign-out"></i>Đăng xuất
+                                </a>
+                            </form>
+                        </li>
+                        <li class="hidden-md hidden-lg">
+                            <a href="/user/wishList" class="wishlist">
+                                <i class="fa fa-heart" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="hidden-md hidden-lg">
+                            <a href="/user/cart"><i class="fa fa-shoping-cart"></i> Giỏ hàng(<i class="cartCount" th:text="${countProductHeader}"></i>)</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.cnt-cart -->
+                <div class="clearfix"></div>
+            </div>
+            <!-- /.header-top-inner -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.header-top -->
+    <!-- ============================================== TOP MENU : END ============================================== -->
+    <div class="main-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
+                    <!-- ============================================================= LOGO ============================================================= -->
+                    <div class="logo">
+
+                        <a href="/user/home" class="logo-wrapper ">
+                            <img src="//bizweb.dktcdn.net/100/286/763/themes/802001/assets/logo.png?1676016752114"
+                                 alt="logo ">
+                        </a>
+
+                    </div>
+                    <!-- /.logo -->
+                    <!-- ============================================================= LOGO : END ============================================================= -->
+                </div>
+                <!-- /.logo-holder -->
+                <div class="col-xs-12 col-sm-12 col-md-5 top-search-holder">
+                    <div class="contact-row">
+                        <div class="phone inline">
+                            <i class="icon fa fa-phone"></i>
+
+                            <a href="callto:19006750"> 1900 6750</a>
+
+                        </div>
+                        <div class="contact inline">
+                            <i class="icon fa fa-envelope"></i>
+
+                            <a href="mailto:support@sapo.vn"> support@sapo.vn</a>
+
+                        </div>
+                    </div>
+                    <!-- /.contact-row -->
+                    <!-- ============================================================= SEARCH AREA ============================================================= -->
+                    <div class=" search-area clearfix">
+                        <form class="input-group search-bar" th:action="@{/user/search}" method="get" role="search">
+                            <div class="collection-selector categories-filter">
+                                <div class="search_text">Tất cả</div>
+                                <input type="hidden" name="categoryId" id="categoryId" value="">
+
+                                <!-- Search Info Section -->
+                                <div id="search_info" class="list_search" style="display: none;">
+                                    <div class="search_item" th:each="category : ${categories}" th:text="${category.name}" th:data-value="${category.id}"></div>
+                                    <div class="search_item active"  >Tất cả</div>
+                                </div>
+                            </div>
+                            <input type="search" name="keyword" th:value="${keyword}" placeholder="Tìm kiếm sản phẩm..." class="input-group-field st-default-search-input search-text" autocomplete="off" style="padding-left: 91px;">
+                            <span class="input-group-btn">
+                                <button class="btn icon-fallback-text search-button" type="submit"></button>
+                            </span>
+                        </form>
+                    </div>
+                    <!-- /.search-area -->
+                    <!-- ============================================================= SEARCH AREA : END ============================================================= -->
+                </div>
+                <!-- /.top-search-holder -->
+                <div class="col-xs-12 col-sm-12 col-md-4 animate-dropdown top-cart-row hidden-sm hidden-xs" style="display: flex;align-content: center;justify-content: flex-end">
+                    <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
+                    <a href="/user/wishList" class="wishlist" style=" margin-right: 20px; font-size: 20px;">
+                        <i class="fa fa-heart" aria-hidden="true"></i>
+                    </a>
+                    <div class="mini-cart text-xs-center dropdown dropdown-cart">
+                        <div class="heading-cart" >
+                            <a href="/user/cart" class="lnk-cart">
+                                <div class="items-cart-inner">
+                                    <div class="total-price-basket">
+                                        <span class="lbl">Giỏ hàng -</span>
+                                        <span class="total-price">
+											<span class="value sumPriceHeader"  th:text="${sumPriceHeader}"></span>
+										</span>
+                                    </div>
+                                    <div class="basket" href="/user/cart">
+                                        <i class="fa fa-shopping-cart"></i>
+                                    </div>
+                                    <div class="basket-item-count"><span class="count"><span
+                                            class="cartCount count_item_pr countProductHeader" id="cart-total" th:text="${countProductHeader}"></span></span></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /.dropdown-cart -->
+                    <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= -->
+                </div>
+                <!-- /.top-cart-row -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.main-header -->
+    <!-- ============================================== NAVBAR ============================================== -->
+    <div class="header-nav animate-dropdown">
+        <div class="container">
+            <div class="yamm navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <span class="hidden-md hidden-lg"
+                          style=" font-size: 18px; line-height: 50px; color: #fff; text-transform: uppercase; ">Menu</span>
+                    <button data-target="#mc-horizontal-menu-collapse" data-toggle="collapse"
+                            class="navbar-toggle collapsed" type="button">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="nav-bg-class">
+                    <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
+                        <div class="nav-outer">
+                            <ul class="nav navbar-nav">
+                                <li class=""><a class="" href="/user/home">Trang chủ</a></li>
+                                <li class="">
+                                    <a href="/user/shop">Sản phẩm</a>
+                                </li>
+                                <li class=""><a class="" href="/user/news">Tin tức</a></li>
+                                <li class=""><a class="" href="/user/contact">Liên hệ</a></li>
+                            </ul>
+                            <!-- /.navbar-nav -->
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- /.nav-outer -->
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.nav-bg-class -->
+            </div>
+            <!-- /.navbar-default -->
+        </div>
+        <!-- /.container-class -->
+    </div>
+    <!-- /.header-nav -->
+    <!-- ============================================== NAVBAR : END ============================================== -->
+</header>
+

@@ -1,0 +1,31 @@
+<script th:fragment="changeStatusOrder">
+  function changeColorOrder() {
+    const badgeSpans = document.querySelectorAll('#responsive-data-table .badge');
+    badgeSpans.forEach(function(span) {
+      if (span.textContent.trim() === 'CONFIRMED') {
+        span.classList.remove('badge-warning');
+        span.classList.add('badge-success');
+      } else {
+        span.classList.remove('badge-success');
+        span.classList.add('badge-warning');
+      }
+    });
+  }
+  window.addEventListener('DOMContentLoaded', changeColorOrder);
+
+  // function confirmOrder(id) {
+  //   $.ajax({
+  //     type: "GET",
+  //     url: '/admin/confirmOrder/' + id,
+  //     success: function() {
+  //       $("tr[name='" + id + "']").remove();
+  //       changeColor();
+  //       console.log('Yêu cầu đã được gửi thành công.');
+  //     },
+  //     error: function(xhr, status, error) {
+  //       // Xử lý lỗi nếu có
+  //       console.error('Đã xảy ra lỗi: ' + error);
+  //     }
+  //   });
+  // }
+</script>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+
+<!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/user-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Feb 2024 08:33:56 GMT -->
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="BIGSHOP - Admin ">
+    <title>BIGSHOP - Admin </title>
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@400;500;700;900&amp;display=swap"
+          rel="stylesheet">
+
+    <link href="/admin/css/materialdesignicons.min.css" rel="stylesheet"/>
+
+    <!-- PLUGINS CSS STYLE -->
+    <link href="/admin/plugins/simplebar/simplebar.css" rel="stylesheet"/>
+
+    <!-- custom css -->
+    <link id="style.css" rel="stylesheet" href="/admin/css/style.css"/>
+
+    <!-- FAVICON -->
+    <link href="/admin/img/logo/icon.png" rel="shortcut icon"/>
+</head>
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
+<!-- WRAPPER -->
+<div class="wrapper">
+    <!-- LEFT MAIN SIDEBAR -->
+    <div th:replace="admin/fragments/sidebar :: sidebarFragment"></div>
+    <!-- PAGE WRAPPER -->
+    <div class="ec-page-wrapper">
+        <!-- Header -->
+        <header th:replace="admin/fragments/header :: headerFragment"></header>
+        <!-- CONTENT WRAPPER -->
+        <div class="ec-content-wrapper">
+            <div class="content">
+                <div class="breadcrumb-wrapper breadcrumb-contacts">
+                    <div>
+                        <h1>Trang cá nhân</h1>
+                        <p class="breadcrumbs"><span><a href="/admin">Trang chủ</a></span>
+                            <span><i class="mdi mdi-chevron-right"></i></span>Trang cá nhân
+                        </p>
+                    </div>
+                </div>
+                <div class="user_profile_wrapper_top card">
+                    <div class="user_profile_top_bg"></div>
+                    <div class="user_profile_top_des">
+                        <div class="user_profile_img">
+                            <img width="180" height="200" th:src="@{|/uploads/*{aUserResponse.image}|}" alt="Dont have image">
+                        </div>
+                        <div class="user_profile_text_top">
+                            <h3 th:text="*{aUserResponse.fullName}"></h3>
+                            <p th:text="*{aUserResponse.username}"></p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card bg-white profile-content">
+                    <div class="row">
+                        <div class="col-lg-8 col-xl-9">
+                            <div class="profile-content-right profile-right-spacing py-5">
+                                <div class="tab-content px-3 px-xl-5" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="purchased" role="tabpanel"
+                                         aria-labelledby="purchased-tab">
+                                        <div class="tab-widget mt-5">
+                                            <div class="user_profile_top_heading">
+                                                <h3>Thông tin cá nhân</h3>
+                                            </div>
+                                            <div class="contact_info_sidebar_item">
+                                                <h3>Địa chỉ:</h3>
+                                                <p th:text="*{aUserResponse.address}"></p>
+                                            </div>
+                                            <div class="contact_info_sidebar_item">
+                                                <h3>Email</h3>
+                                                <p th:text="*{aUserResponse.email}"></p>
+                                            </div>
+                                            <div class="contact_info_sidebar_item">
+                                                <h3>Số điện thoại</h3>
+                                                <p th:text="*{aUserResponse.phone}"></p>
+                                            </div>
+                                            <div class="contact_info_sidebar_item">
+                                                <h3>Giới tính</h3>
+                                                <p th:text="*{aUserResponse.gender}?'Nam':'Nữ'"></p>
+                                            </div>
+                                            <div class="contact_info_sidebar_item">
+                                                <h3>Ngày sinh</h3>
+                                                <p th:text="*{aUserResponse.dateOfBirth}"></p>
+                                            </div>
+                                            <div class="contact_info_sidebar_item">
+                                                <h3>Ngày tạo tài khoản</h3>
+                                                <p th:text="*{aUserResponse.createdDate}"></p>
+                                            </div>
+                                            <div class="contact_info_sidebar_item">
+                                                <h3>Ngày cập nhật tài khoản</h3>
+                                                <p th:text="*{aUserResponse.modifyDate}==null?'Chưa cập nhật':${aUserResponse.modifyDate}"></p>
+                                            </div>
+                                            <div class="contact_info_sidebar_item">
+                                                <h3>Mạng xã hội</h3>
+                                                <ul>
+                                                    <li>
+                                                        <a href="#"
+                                                           class="mb-1 btn btn-outline btn-twitter rounded-circle">
+                                                            <i class="mdi mdi-twitter"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"
+                                                           class="mb-1 btn btn-outline btn-linkedin rounded-circle">
+                                                            <i class="mdi mdi-linkedin"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"
+                                                           class="mb-1 btn btn-outline btn-facebook rounded-circle">
+                                                            <i class="mdi mdi-facebook"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"
+                                                           class="mb-1 btn btn-outline btn-skype rounded-circle">
+                                                            <i class="mdi mdi-skype"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End Content -->
+        </div> <!-- End Content Wrapper -->
+
+        <!-- Footer -->
+        <footer class="footer mt-auto">
+            <div class="copyright bg-white">
+                <p>
+                    Copyright © 2023. All right reserved.
+                </p>
+            </div>
+        </footer>
+
+    </div> <!-- End Page Wrapper -->
+</div> <!-- End Wrapper -->
+
+
+<!-- Common Javascript -->
+<script src="/admin/plugins/jquery/jquery-3.5.1.min.js"></script>
+<script src="/admin/js/bootstrap.bundle.min.js"></script>
+<script src="/admin/plugins/simplebar/simplebar.min.js"></script>
+<script src="/admin/plugins/jquery-zoom/jquery.zoom.min.js"></script>
+<script src="/admin/plugins/slick/slick.min.js"></script>
+
+<!-- Option Switcher -->
+<script src="/admin/plugins/options-sidebar/optionswitcher.js"></script>
+
+<!-- custom js -->
+<script src="/admin/js/custom.js"></script>
+
+<script th:replace="admin/fragments/updateFile :: updateFileFragment"></script>
+
+</body>
+
+
+<!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/user-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Feb 2024 08:33:56 GMT -->
+</html>

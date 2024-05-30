@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+
+<!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/invoice.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Feb 2024 08:34:03 GMT -->
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="BIGSHOP - Admin ">
+	<title>BIGSHOP - Admin </title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- GOOGLE FONTS -->
+	<link rel="preconnect" href="https://fonts.googleapis.com/">
+	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@400;500;700;900&amp;display=swap"
+		rel="stylesheet">
+
+	<link href="/admin/css/materialdesignicons.min.css" rel="stylesheet" />
+
+	<!-- PLUGINS CSS STYLE -->
+	<link href="/admin/plugins/simplebar/simplebar.css" rel="stylesheet" />
+
+	<!-- Data-Tables -->
+	<link href='/admin/plugins/data-tables/datatables.bootstrap5.min.css' rel='stylesheet'>
+	<link href='/admin/plugins/data-tables/responsive.datatables.min.css' rel='stylesheet'>
+
+	<!-- custom css -->
+	<link id="style.css" rel="stylesheet" href="/admin/css/style.css" />
+
+	<!-- FAVICON -->
+	<link href="/admin/img/logo/icon.png" rel="shortcut icon" />
+</head>
+
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
+
+	<!-- WRAPPER -->
+	<div class="wrapper">
+
+		<!-- LEFT MAIN SIDEBAR -->
+		<div th:replace="admin/fragments/sidebar :: sidebarFragment"></div>
+
+		<!-- PAGE WRAPPER -->
+		<div class="ec-page-wrapper">
+
+			<!-- Header -->
+			<header th:replace="admin/fragments/header :: headerFragment"></header>
+
+			<!-- CONTENT WRAPPER -->
+			<div class="ec-content-wrapper">
+				<div class="content">
+					<div class="breadcrumb-wrapper breadcrumb-contacts">
+						<div>
+							<h1>Hóa đơn khách hàng</h1>
+							<p class="breadcrumbs"><span><a href="/admin">Trang chủ</a></span>
+								<span><i class="mdi mdi-chevron-right"></i></span>Danh sách hóa đơn khách hàng đã xác thực
+							</p>
+						</div>
+						<div>
+							<a href="/admin/invoice" class="btn btn-primary">Hóa đơn chưa hoàn thành</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card card-default">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table id="responsive-data-table" class="table text-center" style="width: 100%">
+											<thead>
+												<tr>
+													<th>STT</th>
+													<th>Tên khách hàng</th>
+													<th>Số serial</th>
+													<th>Ngày tạo</th>
+													<th>Tổng giá</th>
+													<th>Trạng thái</th>
+													<th>Chi tiết</th>
+												</tr>
+											</thead>
+											<tbody>
+											<div th:each="invoice,item:${invoices}">
+												<tr th:name="*{invoice.id}">
+													<td th:text="*{item.index+1}"></td>
+													<td th:text="*{invoice.username}"></td>
+													<td th:text="*{invoice.serialNumber}"></td>
+													<td th:text="*{invoice.createdDate}"></td>
+													<td th:text="*{invoice.totalPrice}"></td>
+													<td> <span  class="badge badge-success" th:name="*{invoice.id}" th:text="*{invoice.statusInvoice}"></span> </td>
+													<td>
+														<div class="btn-group mb-1">
+															<a type="button"
+															   class="btn btn-outline-success" th:href="@{/admin/invoiceDetail/{id}(id=*{invoice.id})}">Chi tiết</a>
+														</div>
+													</td>
+												</tr>
+											</div>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- End Content -->
+			</div> <!-- End Content Wrapper -->
+
+			<!-- Footer -->
+			<footer class="footer mt-auto">
+				<div class="copyright bg-white">
+					<p>
+						Copyright © 2023. All right reserved.
+					</p>
+				</div>
+			</footer>
+
+		</div> <!-- End Page Wrapper -->
+	</div> <!-- End Wrapper -->
+
+	<!-- Common Javascript -->
+	<script src="/admin/plugins/jquery/jquery-3.5.1.min.js"></script>
+	<script src="/admin/js/bootstrap.bundle.min.js"></script>
+	<script src="/admin/plugins/simplebar/simplebar.min.js"></script>
+	<script src="/admin/plugins/jquery-zoom/jquery.zoom.min.js"></script>
+	<script src="/admin/plugins/slick/slick.min.js"></script>
+
+	<!-- Data-Tables -->
+	<script src='/admin/plugins/data-tables/jquery.datatables.min.js'></script>
+	<script src='/admin/plugins/data-tables/datatables.bootstrap5.min.js'></script>
+	<script src='/admin/plugins/data-tables/datatables.responsive.min.js'></script>
+
+	<!-- Option Switcher -->
+	<script src="/admin/plugins/options-sidebar/optionswitcher.js"></script>
+
+	<!-- custom js -->
+	<script src="/admin/js/custom.js"></script>
+<!--	<div th:replace="admin/fragments/changeStatusInvoice :: changeStatusInvoice"></div>-->
+</body>
+
+
+<!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/invoice.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Feb 2024 08:34:03 GMT -->
+</html>

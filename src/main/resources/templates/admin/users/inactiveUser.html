@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+
+<!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/user-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Feb 2024 08:33:56 GMT -->
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="BIGSHOP - Admin ">
+	<title>BIGSHOP - Admin </title>
+	<!-- GOOGLE FONTS -->
+	<link rel="preconnect" href="https://fonts.googleapis.com/">
+	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+
+	<link href="/admin/css/materialdesignicons.min.css" rel="stylesheet" />
+	<!-- PLUGINS CSS STYLE -->
+	<link href="/admin/plugins/simplebar/simplebar.css" rel="stylesheet" />
+
+	<!-- Data Tables -->
+	<link href='/admin/plugins/data-tables/datatables.bootstrap5.min.css' rel='stylesheet'>
+	<link href='/admin/plugins/data-tables/responsive.datatables.min.css' rel='stylesheet'>
+
+	<!-- custom css -->
+	<link id="style.css" rel="stylesheet" href="/admin/css/style.css" />
+
+	<!-- FAVICON -->
+	<link href="/admin/img/logo/icon.png" rel="shortcut icon" />
+</head>
+
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
+
+	<!-- WRAPPER -->
+	<div class="wrapper">
+
+		<!-- LEFT MAIN SIDEBAR -->
+		<div th:replace="admin/fragments/sidebar :: sidebarFragment"></div>
+
+		<!-- PAGE WRAPPER -->
+		<div class="ec-page-wrapper">
+
+			<!-- Header -->
+			<header th:replace="admin/fragments/header :: headerFragment"></header>
+
+			<!-- CONTENT WRAPPER -->
+			<div class="ec-content-wrapper">
+				<div class="content">
+					<div class="breadcrumb-wrapper breadcrumb-contacts">
+						<div>
+							<h1>Người dùng</h1>
+							<p class="breadcrumbs"><span><a href="/admin">Trang chủ</a></span>
+								<span><i class="mdi mdi-chevron-right"></i></span>Danh sách người dùng
+							</p>
+						</div>
+						<div>
+							<a href="/admin/user" class="btn btn-primary">Người dùng đang hoạt động</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xl-12 col-lg-12">
+							<div class="ec-cat-list card card-default">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table id="responsive-data-table" class="table text-center" style="width: 100%">
+											<thead>
+												<tr>
+													<th>Stt</th>
+													<th>Ảnh đại diện</th>
+													<th>Họ và tên</th>
+													<th>Email</th>
+													<th>Số điện thoại</th>
+													<th>Giới tính</th>
+													<th>Địa chỉ</th>
+													<th>Tên đăng nhập</th>
+													<th>Trạng thái</th>
+													<th>Hoạt động</th>
+												</tr>
+											</thead>
+
+											<tbody >
+											<div th:each="user,item:${users}">
+												<tr th:name="*{user.id}">
+													<td th:text="*{item.index+1}"> </td>
+													<td ><img class="cat-thumb" th:src="@{|/uploads/*{user.image}|}" alt="img"></td>
+													<td th:text="*{user.fullName}"></td>
+													<td th:text="*{user.email}"></td>
+													<td th:text="*{user.phone}"></td>
+													<td th:text="*{user.gender}?'Male':'Female'"></td>
+													<td th:text="*{user.address}"></td>
+													<td th:text="*{user.username}"></td>
+													<td><span class="badge" th:name="*{user.id}" th:text="*{user.status}"></span></td>
+													<td>
+														<div class="btn-group">
+															<button type="button"
+																	class="btn btn-outline-success"><a  th:name="*{user.id}" style="cursor: pointer;" onclick="changeStatus(this.getAttribute('name'),'changeStatusUser')">Mở khóa</a></button>
+														</div>
+													</td>
+												</tr>
+											</div>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- End Content -->
+			</div> 
+			<!-- End Content Wrapper -->
+
+			<!-- Footer -->
+			<footer class="footer mt-auto">
+				<div class="copyright bg-white">
+					<p>
+						Copyright © 2023. All right reserved.
+					</p>
+				</div>
+			</footer>
+
+		</div> <!-- End Page Wrapper -->
+	</div> <!-- End Wrapper -->
+
+	<!-- Common Javascript -->
+	<script src="/admin/plugins/jquery/jquery-3.5.1.min.js"></script>
+	<script src="/admin/js/bootstrap.bundle.min.js"></script>
+	<script src="/admin/plugins/simplebar/simplebar.min.js"></script>
+	<script src="/admin/plugins/jquery-zoom/jquery.zoom.min.js"></script>
+	<script src="/admin/plugins/slick/slick.min.js"></script>
+
+	<!-- Data Tables -->
+	<script src='/admin/plugins/data-tables/jquery.datatables.min.js'></script>
+	<script src='/admin/plugins/data-tables/datatables.bootstrap5.min.js'></script>
+	<script src='/admin/plugins/data-tables/datatables.responsive.min.js'></script>
+	<script src="/admin/plugins/options-sidebar/optionswitcher.js"></script>
+
+	<!-- custom js -->
+	<script src="/admin/js/custom.js"></script>
+</body>
+<script th:fragment="changeStatusColor">
+	function changeColor() {
+		const badgeSpans = document.querySelectorAll('#responsive-data-table .badge');
+		badgeSpans.forEach(function(span) {
+			if (span.textContent.trim() === 'ACTIVE') {
+				span.classList.remove('badge-danger');
+				span.classList.add('badge-success');
+			} else {
+				span.classList.remove('badge-success');
+				span.classList.add('badge-danger');
+			}
+		});
+	}
+	window.addEventListener('DOMContentLoaded', changeColor);
+</script><div th:replace="admin/fragments/changeStatus :: changeStatus"></div>
+
+
+
+<!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/user-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Feb 2024 08:33:56 GMT -->
+</html>

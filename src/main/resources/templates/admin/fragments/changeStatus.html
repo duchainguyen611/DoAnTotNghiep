@@ -1,0 +1,18 @@
+<script th:fragment="changeStatus">
+    function changeStatus(id,field) {
+        $.ajax({
+            type: "GET",
+            url: '/admin/'+field+'/' + id,
+            success: function(data) {
+                $("tr[name='" + id + "']").remove();
+                $("span[name='" + id + "']").text(data.status);
+                changeColor();
+                console.log('Yêu cầu đã được gửi thành công.');
+            },
+            error: function(xhr, status, error) {
+                // Xử lý lỗi nếu có
+                console.error('Đã xảy ra lỗi: ' + error);
+            }
+        });
+    }
+</script>
