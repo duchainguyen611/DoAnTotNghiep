@@ -350,7 +350,7 @@
                                     <span><i class="fa fa-remove"></i></span></a></div>
                                 <div style="width: 13%;align-items: flex-end;padding-right: 0;" class="a-center">
                                     <span class="cart-price">
-                                        <span class="money product_total product_total2" th:id="${cart.id}"
+                                        <span class="money product_total " th:id="${cart.id}"
                                               th:text="${cart.unitPrice*cart.cartQuantity}"></span>
                                     </span>
                                 </div>
@@ -685,7 +685,6 @@
         let amountElements = document.querySelectorAll(".product_total");
         let totalElement = document.querySelectorAll(".totalAmountElement");
         let totalElementsMobile = document.querySelectorAll('.totalAmountElementsMobile');
-
         priceElements.forEach(function (element) {
             let price = parseFloat(element.textContent.trim());
             element.textContent = price.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
@@ -715,6 +714,7 @@
             let amount = input.parentElement.parentElement.parentElement.querySelector('.product_total');
             let total = Number.parseFloat(price.replace('₫', '').replace(/\./g, '').replace(',', '.')) * inputValue;
             amount.innerText = total.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
+
             calculateTotalAmount();
         }
     }
@@ -729,8 +729,10 @@
         let amount = input.parentElement.parentElement.parentElement.querySelector('.product_total');
         let total = Number.parseFloat(price.replace('₫', '').replace(/\./g, '').replace(',', '.')) * inputValue;
         amount.innerText = total.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
+
         calculateTotalAmount();
     }
+
     function updateBothInputs(cartId, value) {
         document.getElementById('input-mobile-' + cartId).value = value;
         document.getElementById('input-desktop-' + cartId).value = value;
@@ -740,16 +742,13 @@
     function calculateTotalAmount() {
         let totalAmountElements = document.querySelectorAll('.totalAmountElement');
         let totalAmountElementsMobile = document.querySelectorAll('.totalAmountElementsMobile');
-        let productTotalElements = document.querySelectorAll('.product_total2');
+        let productTotalElements = document.querySelectorAll('.product_total');
         let sumPriceHeaders = document.querySelectorAll('.sumPriceHeader');
         let totalAmount = 0;
 
         productTotalElements.forEach(function (totalElement) {
             let number = Number.parseFloat(totalElement.textContent.replace('₫', '').replace(/\./g, '').replace(',', '.'));
-            totalAmount += number || 0;
-        });
-        totalAmountElementsMobile.forEach(function (totalAmountElementMobile) {
-            totalAmountElementMobile.textContent = totalAmount.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
+            totalAmount += number;
         });
         totalAmountElements.forEach(function (totalAmountElement) {
             totalAmountElement.textContent = totalAmount.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
@@ -757,7 +756,9 @@
         sumPriceHeaders.forEach(function (sumPriceHeader) {
             sumPriceHeader.textContent = totalAmount.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
         });
-
+        totalAmountElementsMobile.forEach(function (totalAmountElementMobile) {
+            totalAmountElementMobile.textContent = totalAmount.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
+        });
     }
 
 
