@@ -3,7 +3,6 @@ package com.ra.controller.payment;
 import com.ra.model.entity.ENUM.PaymentMethods;
 import com.ra.model.entity.dto.response.user.CheckOutInforDTO;
 import com.ra.model.service.ShoppingCartService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,17 +40,17 @@ public class PaymentController {
     }
 
     @PostMapping("/user/payment")
-    public RedirectView getPay(@RequestParam("typePay") String typePay, @ModelAttribute("checkOutInfor") CheckOutInforDTO checkOutInfor
-            , @RequestParam("totalPriceAll") double totalPriceAll, HttpServletRequest request) throws UnsupportedEncodingException {
+    public RedirectView getPay(@RequestParam("typePay") String typePay
+            , @ModelAttribute("checkOutInfor") CheckOutInforDTO checkOutInfor
+            , @RequestParam("totalPriceAll") double totalPriceAll) throws UnsupportedEncodingException {
         checkOutInforStatic = checkOutInfor;
-        System.out.println(checkOutInforStatic.getReceiveName());
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "other";
         long amount = (long) (totalPriceAll * 100);
         String bankCode = typePay;
         String vnp_TxnRef = Config.getRandomNumber(8);
-        String vnp_IpAddr = getClientIp(request);
+        String vnp_IpAddr = "3.209.172.72";
         String vnp_TmnCode = Config.vnp_TmnCode;
         Map<String, String> vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", vnp_Version);
@@ -76,18 +75,24 @@ public class PaymentController {
         String vnp_ExpireDate = formatter.format(cld.getTime());
         vnp_Params.put("vnp_ExpireDate", vnp_ExpireDate);
 
-        List<String> fieldNames = new ArrayList<>(vnp_Params.keySet());
+        List fieldNames = new ArrayList(vnp_Params.keySet());
         Collections.sort(fieldNames);
         StringBuilder hashData = new StringBuilder();
         StringBuilder query = new StringBuilder();
-        for (String fieldName : fieldNames) {
-            String fieldValue = vnp_Params.get(fieldName);
+        Iterator itr = fieldNames.iterator();
+        while (itr.hasNext()) {
+            String fieldName = (String) itr.next();
+            String fieldValue = (String) vnp_Params.get(fieldName);
             if ((fieldValue != null) && (fieldValue.length() > 0)) {
-                // Build hash data
-                hashData.append(fieldName).append('=').append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
-                // Build query
-                query.append(URLEncoder.encode(fieldName, StandardCharsets.US_ASCII.toString())).append('=').append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
-                if (fieldNames.indexOf(fieldName) < fieldNames.size() - 1) {
+                //Build hash data
+                hashData.append(fieldName);
+                hashData.append('=');
+                hashData.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
+                //Build query
+                query.append(URLEncoder.encode(fieldName, StandardCharsets.US_ASCII.toString()));
+                query.append('=');
+                query.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
+                if (itr.hasNext()) {
                     query.append('&');
                     hashData.append('&');
                 }
@@ -99,17 +104,5 @@ public class PaymentController {
         String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
         return new RedirectView(paymentUrl);
     }
-
-    private String getClientIp(HttpServletRequest request) {
-        String remoteAddr = "";
-        if (request != null) {
-            remoteAddr = request.getHeader("X-FORWARDED-FOR");
-            if (remoteAddr == null || "".equals(remoteAddr)) {
-                remoteAddr = request.getRemoteAddr();
-            }
-        }
-        return remoteAddr;
-    }
-
 
 }
