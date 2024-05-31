@@ -6,7 +6,7 @@ public class PasswordValidator {
     {
         if (password.length() > 15 || password.length() < 8)
         {
-            return "Mật khẩu phải dài ít hơn 15 và dài hơn 8 ký tự!";
+            return "Mật khẩu phải ít hơn 15 và dài hơn 8 ký tự!";
         }
         String upperCaseChars = "(.*[A-Z].*)";
         if (!password.matches(upperCaseChars ))
