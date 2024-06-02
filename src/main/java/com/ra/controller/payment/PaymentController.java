@@ -50,7 +50,7 @@ public class PaymentController {
         long amount = (long) (totalPriceAll * 100);
         String bankCode = typePay;
         String vnp_TxnRef = Config.getRandomNumber(8);
-        String vnp_IpAddr = request.getRemoteAddr(); // Get client IP address
+        String vnp_IpAddr = request.getRemoteAddr();
         String vnp_TmnCode = Config.vnp_TmnCode;
         Map<String, String> vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", vnp_Version);
@@ -79,20 +79,14 @@ public class PaymentController {
         Collections.sort(fieldNames);
         StringBuilder hashData = new StringBuilder();
         StringBuilder query = new StringBuilder();
-        Iterator<String> itr = fieldNames.iterator();
-        while (itr.hasNext()) {
-            String fieldName = itr.next();
+        for (String fieldName : fieldNames) {
             String fieldValue = vnp_Params.get(fieldName);
-            if ((fieldValue != null) && (!fieldValue.isEmpty())) {
+            if (fieldValue != null && !fieldValue.isEmpty()) {
                 // Build hash data
-                hashData.append(fieldName);
-                hashData.append('=');
-                hashData.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
+                hashData.append(fieldName).append('=').append(URLEncoder.encode(fieldValue, StandardCharsets.UTF_8.toString()));
                 // Build query
-                query.append(URLEncoder.encode(fieldName, StandardCharsets.US_ASCII.toString()));
-                query.append('=');
-                query.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
-                if (itr.hasNext()) {
+                query.append(URLEncoder.encode(fieldName, StandardCharsets.UTF_8.toString())).append('=').append(URLEncoder.encode(fieldValue, StandardCharsets.UTF_8.toString()));
+                if (fieldNames.indexOf(fieldName) < fieldNames.size() - 1) {
                     query.append('&');
                     hashData.append('&');
                 }
@@ -100,7 +94,7 @@ public class PaymentController {
         }
         String queryUrl = query.toString();
         String vnp_SecureHash = Config.hmacSHA512(Config.secretKey, hashData.toString());
-        queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
+        queryUrl += "&vnp_SecureHash=" + URLEncoder.encode(vnp_SecureHash, StandardCharsets.UTF_8.toString());
         String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
         return new RedirectView(paymentUrl);
     }
