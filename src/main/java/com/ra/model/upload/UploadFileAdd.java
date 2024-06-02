@@ -1,8 +1,9 @@
-package com.ra.model.entity.dto.request;
+package com.ra.model.upload;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

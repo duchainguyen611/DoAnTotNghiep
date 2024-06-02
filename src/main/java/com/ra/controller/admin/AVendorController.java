@@ -2,8 +2,8 @@ package com.ra.controller.admin;
 
 import com.ra.model.entity.ENUM.ActiveStatus;
 import com.ra.model.entity.Vendor;
-import com.ra.model.entity.dto.request.UploadFileAdd;
-import com.ra.model.entity.dto.request.UploadFileUpdate;
+import com.ra.model.upload.UploadFileAdd;
+import com.ra.model.upload.UploadFileUpdate;
 import com.ra.model.entity.dto.request.admin.AVendorRequestDTO;
 import com.ra.model.entity.dto.request.admin.AVendorUpdateRequestDTO;
 import com.ra.model.entity.dto.response.StringError;

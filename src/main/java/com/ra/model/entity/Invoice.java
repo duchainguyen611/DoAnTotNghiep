@@ -48,7 +48,7 @@ public class Invoice  extends BaseModel {
     @JoinColumn(name = "userId",referencedColumnName = "id")
     private User user;
 
-    @OneToMany(mappedBy = "invoice")
+    @OneToMany(mappedBy = "invoice",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<InvoiceDetail> invoiceDetails;
 }

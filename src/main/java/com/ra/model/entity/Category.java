@@ -27,7 +27,7 @@ public class Category extends BaseModel {
     @Enumerated(EnumType.STRING)
     private ActiveStatus status;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category",cascade = CascadeType.REMOVE)
     @JsonIgnore
     List<Product> products;
 }

@@ -34,7 +34,7 @@ public class Order extends BaseModel {
     @JoinColumn(name = "vendorId",referencedColumnName = "id")
     private Vendor vendor;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<OrderDetail> orderDetails;
 }

@@ -111,9 +111,9 @@
                                                             <p>Bạn có thực sự muốn xóa danh mục này? Quá trình này không thể hoàn tác và xóa những dữ liệu liên quan.</p>
                                                         </div>
                                                         <div class="modal-footer justify-content-center">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                                                            <button type="button" class="btn btn-danger" th:name="*{category.id}"
-                                                                    th:href="@{/admin/deleteCategory/{id}(id=${category.id})}">Xóa</button>
+                                                            <a type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</a>
+                                                            <a type="button" class="btn btn-danger" th:name="*{category.id}"
+                                                                    th:href="@{/admin/deleteCategory/{id}(id=${category.id})}">Xóa</a>
                                                         </div>
                                                     </div>
                                                 </div>

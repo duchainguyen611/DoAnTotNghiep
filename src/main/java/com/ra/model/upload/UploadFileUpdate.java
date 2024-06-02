@@ -1,4 +1,4 @@
-package com.ra.model.entity.dto.request;
+package com.ra.model.upload;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.validation.BindingResult;

@@ -30,7 +30,7 @@ public class Vendor  extends BaseModel {
     @Enumerated(EnumType.STRING)
     private ActiveStatus status;
 
-    @OneToMany(mappedBy = "vendor")
+    @OneToMany(mappedBy = "vendor",cascade = CascadeType.REMOVE)
     @JsonIgnore
     List<Order> orders;
 }

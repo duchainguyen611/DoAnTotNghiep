@@ -36,7 +36,7 @@ public class Brand extends BaseModel {
     @Column(name = "status")
     private ActiveStatus status;
 
-    @OneToMany(mappedBy = "brand")
+    @OneToMany(mappedBy = "brand",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<Product> products;
 }

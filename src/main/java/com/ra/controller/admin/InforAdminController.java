@@ -3,7 +3,7 @@ package com.ra.controller.admin;
 import com.ra.model.entity.User;
 import com.ra.model.entity.dto.request.ChangePasswordDTO;
 import com.ra.model.entity.dto.request.ChangeProfileDTO;
-import com.ra.model.entity.dto.request.UploadFileUpdate;
+import com.ra.model.upload.UploadFileUpdate;
 import com.ra.model.entity.dto.response.StringError;
 import com.ra.model.entity.dto.response.admin.AUserResponseDTO;
 import com.ra.model.service.UserService;

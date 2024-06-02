@@ -136,8 +136,8 @@
 																	<p>Bạn có thực sự muốn xóa sản phẩm này? Quá trình này không thể hoàn tác và xóa những dữ liệu liên quan.</p>
 																</div>
 																<div class="modal-footer justify-content-center">
-																	<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-																	<button type="button" class="btn btn-danger" th:name="${product.id}" th:href="@{/admin/deleteProduct/{id}(id=${product.id})}">Xóa</button>
+																	<a type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</a>
+																	<a type="button" class="btn btn-danger" th:name="${product.id}" th:href="@{/admin/deleteProduct/{id}(id=${product.id})}">Xóa</a>
 <!--																			onclick="deleteData(document.getElementById('deleteButton').getAttribute('name'),'deleteProduct')"-->
 
 																</div>

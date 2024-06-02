@@ -6,7 +6,6 @@ import com.ra.model.entity.base.BaseModel;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -35,19 +34,19 @@ public class Product extends BaseModel {
     @JoinColumn(name = "categoryId", referencedColumnName = "id")
     private Category category;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<InvoiceDetail> invoiceDetails;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<OrderDetail> orderDetails;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<WishList> wishLists;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<ShoppingCart> shoppingCarts;
 
