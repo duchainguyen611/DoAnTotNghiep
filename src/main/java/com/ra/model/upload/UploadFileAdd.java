@@ -30,7 +30,6 @@ public class UploadFileAdd {
         }
 
         Path filePath = directoryPath.resolve(fileName);
-        System.out.println(filePath);
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
         return true;
     }

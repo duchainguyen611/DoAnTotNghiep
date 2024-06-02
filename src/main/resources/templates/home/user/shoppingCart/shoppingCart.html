@@ -350,7 +350,7 @@
                                     <span><i class="fa fa-remove"></i></span></a></div>
                                 <div style="width: 13%;align-items: flex-end;padding-right: 0;" class="a-center">
                                     <span class="cart-price">
-                                        <span class="money product_total " th:id="${cart.id}"
+                                        <span class="money product_total " th:id="'product-total-desktop-'+${cart.id}"
                                               th:text="${cart.unitPrice*cart.cartQuantity}"></span>
                                     </span>
                                 </div>
@@ -372,7 +372,7 @@
                                     <tr>
                                         <td colspan="20" class="a-right"></td>
                                         <td class="a-right"><span>Tổng tiền:</span> <strong><span
-                                                class="totals_price totalAmountElement"
+                                                class="totals_price totalAmountElement" id="sumPrice"
                                                 th:text="${sumPrice}"></span></strong></td>
                                     </tr>
                                     </tfoot>
@@ -424,24 +424,24 @@
 
                                     </a>
                              </h3>
-                                <p>Giá: <span class="product-price" th:text="*{cart.unitPrice}"></span></p></div>
+                                <p>Giá: <span class="product-price-mobile" th:text="*{cart.unitPrice}"></span></p></div>
                             <div class="select-item-qty-mobile">
                                 <div class="txt_center">
                                     <input class="variantID" type="hidden" name="variantId">
                                     <button th:data-field="${cart.id}" class="btn-minus-mobile " type="button"
-                                            data-quantity="minus" onclick="decreaseQuantity(this)">–
+                                            data-quantity="minus" onclick="decreaseQuantityMobile(this)">–
                                     </button>
                                     <input type="text" maxlength="12" min="1" th:id="'input-mobile-'+${cart.id}"
                                            class="input-text number-sidebar"
                                            th:name="${cart.id}" th:value="${cart.cartQuantity}"
                                            onchange="updateCartItemQuantity(this.getAttribute('name'), this.value);">
                                     <button th:data-field="${cart.id}" class="btn-plus-mobile "
-                                            data-quantity="plus" type="button" onclick="increaseQuantity(this)">+
+                                            data-quantity="plus" type="button" onclick="increaseQuantityMobile(this)">+
                                     </button>
                                 </div>
                                 <div style="width: 13%;align-items: flex-end;padding-right: 0;" class="a-center" hidden="hidden">
                                     <span class="cart-price">
-                                        <span class="money product_total">0</span>
+                                        <span class="money product_total_mobile" th:id="'product-total-mobile-'+${cart.id}" th:text="${cart.unitPrice*cart.cartQuantity}"></span>
                                     </span>
                                 </div>
                                 <a class="button remove-item remove-item-cart"
@@ -454,7 +454,7 @@
                 </div>
                 <div class="header-cart-price" style="">
                     <div class="title-cart "><h3 class="text-xs-left">Tổng tiền</h3><a
-                            class="text-xs-right totalAmountElementsMobile" th:text="${sumPriceMobile}"></a>
+                            class="text-xs-right totalAmountElementsMobile" id="sumPriceMobile" th:text="${sumPriceMobile}"></a>
                     </div>
                     <div class="checkout">
                         <button class="btn-proceed-checkout-mobile" title="Tiến hành thanh toán" type="button"
@@ -682,14 +682,24 @@
 
     document.addEventListener("DOMContentLoaded", function () {
         let priceElements = document.querySelectorAll(".product-price");
+        let priceElementsMobile = document.querySelectorAll(".product-price-mobile");
         let amountElements = document.querySelectorAll(".product_total");
+        let amountElementsMobile = document.querySelectorAll(".product_total_mobile");
         let totalElement = document.querySelectorAll(".totalAmountElement");
         let totalElementsMobile = document.querySelectorAll('.totalAmountElementsMobile');
         priceElements.forEach(function (element) {
             let price = parseFloat(element.textContent.trim());
             element.textContent = price.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
         });
+        priceElementsMobile.forEach(function (element) {
+            let price = parseFloat(element.textContent.trim());
+            element.textContent = price.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
+        });
         amountElements.forEach(function (element) {
+            let price = parseFloat(element.textContent.trim());
+            element.textContent = price.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
+        });
+        amountElementsMobile.forEach(function (element) {
             let price = parseFloat(element.textContent.trim());
             element.textContent = price.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
         });
@@ -701,20 +711,22 @@
             let price = parseFloat(element.textContent.trim());
             element.textContent = price.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
         });
+
     });
 
     function decreaseQuantity(button) {
         let input = button.nextElementSibling;
         if (parseInt(input.value) > parseInt(input.getAttribute('min')) && parseInt(input.value) > 0) {
             input.value = parseFloat(input.value) - 1;
-            updateBothInputs(input.getAttribute('name'), input.value);
-            // updateCartItemQuantity(input.getAttribute('name'), input.value, input);
+            document.getElementById('input-mobile-' + input.getAttribute('name')).value = input.value;
+            // updateBothInputs(input.getAttribute('name'), input.value);
+            updateCartItemQuantity(input.getAttribute('name'), input.value, input);
             let inputValue = input.value;
             let price = input.parentElement.parentElement.parentElement.querySelector('.product-price').textContent;
             let amount = input.parentElement.parentElement.parentElement.querySelector('.product_total');
             let total = Number.parseFloat(price.replace('₫', '').replace(/\./g, '').replace(',', '.')) * inputValue;
             amount.innerText = total.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
-
+            document.getElementById('product-total-mobile-' + input.getAttribute('name')).innerText = amount.innerText;
             calculateTotalAmount();
         }
     }
@@ -722,27 +734,76 @@
     function increaseQuantity(button) {
         let input = button.previousElementSibling;
         input.value = parseInt(input.value) + 1;
-        updateBothInputs(input.getAttribute('name'), input.value);
-        // updateCartItemQuantity(input.getAttribute('name'), input.value, input);
+        document.getElementById('input-mobile-' + input.getAttribute('name')).value = input.value;
+        // updateBothInputs(input.getAttribute('name'), input.value);
+        updateCartItemQuantity(input.getAttribute('name'), input.value, input);
         let inputValue = input.value;
         let price = input.parentElement.parentElement.parentElement.querySelector('.product-price').textContent;
         let amount = input.parentElement.parentElement.parentElement.querySelector('.product_total');
         let total = Number.parseFloat(price.replace('₫', '').replace(/\./g, '').replace(',', '.')) * inputValue;
         amount.innerText = total.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
-
+        document.getElementById('product-total-mobile-' + input.getAttribute('name')).innerText = amount.innerText;
         calculateTotalAmount();
     }
 
-    function updateBothInputs(cartId, value) {
-        document.getElementById('input-mobile-' + cartId).value = value;
-        document.getElementById('input-desktop-' + cartId).value = value;
-        updateCartItemQuantity(cartId, value);
+    function decreaseQuantityMobile(button) {
+        let input = button.nextElementSibling;
+        if (parseInt(input.value) > parseInt(input.getAttribute('min')) && parseInt(input.value) > 0) {
+            input.value = parseFloat(input.value) - 1;
+            document.getElementById('input-desktop-' + input.getAttribute('name')).value = input.value;
+            // updateBothInputs(input.getAttribute('name'), input.value);
+            updateCartItemQuantity(input.getAttribute('name'), input.value, input);
+            let inputValue = input.value;
+            let price = input.parentElement.parentElement.parentElement.querySelector('.product-price-mobile').textContent;
+            let amount = input.parentElement.parentElement.parentElement.querySelector('.product_total_mobile');
+            let total = Number.parseFloat(price.replace('₫', '').replace(/\./g, '').replace(',', '.')) * inputValue;
+            amount.innerText = total.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
+            document.getElementById('product-total-desktop-' + input.getAttribute('name')).innerText = amount.innerText;
+            calculateTotalAmountMobile();
+        }
+    }
+
+    function increaseQuantityMobile(button) {
+        let input = button.previousElementSibling;
+        input.value = parseInt(input.value) + 1;
+        document.getElementById('input-desktop-' + input.getAttribute('name')).value = input.value;
+        // updateBothInputs(input.getAttribute('name'), input.value);
+        updateCartItemQuantity(input.getAttribute('name'), input.value, input);
+        let inputValue = input.value;
+        let price = input.parentElement.parentElement.parentElement.querySelector('.product-price-mobile').textContent;
+        let amount = input.parentElement.parentElement.parentElement.querySelector('.product_total_mobile');
+        let total = Number.parseFloat(price.replace('₫', '').replace(/\./g, '').replace(',', '.')) * inputValue;
+        amount.innerText = total.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
+        document.getElementById('product-total-desktop-' + input.getAttribute('name')).innerText = amount.innerText;
+        calculateTotalAmountMobile();
     }
 
     function calculateTotalAmount() {
         let totalAmountElements = document.querySelectorAll('.totalAmountElement');
         let totalAmountElementsMobile = document.querySelectorAll('.totalAmountElementsMobile');
         let productTotalElements = document.querySelectorAll('.product_total');
+        let sumPriceHeaders = document.querySelectorAll('.sumPriceHeader');
+        let totalAmount = 0;
+
+        productTotalElements.forEach(function (totalElement) {
+            let number = Number.parseFloat(totalElement.textContent.replace('₫', '').replace(/\./g, '').replace(',', '.'));
+            totalAmount += number;
+        });
+        totalAmountElements.forEach(function (totalAmountElement) {
+            totalAmountElement.textContent = totalAmount.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
+        });
+        sumPriceHeaders.forEach(function (sumPriceHeader) {
+            sumPriceHeader.textContent = totalAmount.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
+        });
+        totalAmountElementsMobile.forEach(function (totalAmountElementMobile) {
+            totalAmountElementMobile.textContent = totalAmount.toLocaleString('vi-VN', {minimumFractionDigits: 0}) + '₫';
+        });
+    }
+
+    function calculateTotalAmountMobile() {
+        let totalAmountElements = document.querySelectorAll('.totalAmountElement');
+        let totalAmountElementsMobile = document.querySelectorAll('.totalAmountElementsMobile');
+        let productTotalElements = document.querySelectorAll('.product_total_mobile');
         let sumPriceHeaders = document.querySelectorAll('.sumPriceHeader');
         let totalAmount = 0;
 
