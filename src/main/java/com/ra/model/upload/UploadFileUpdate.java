@@ -1,10 +1,8 @@
 package com.ra.model.upload;
 
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,9 +21,12 @@ public class UploadFileUpdate {
             return false;
         }
         String fileName = file.getOriginalFilename();
-        File saveFile = new ClassPathResource("static/uploads").getFile();
-        Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + fileName);
-        Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+        Path directoryPath = Paths.get("src/main/resources/static/uploads");
+        if (!Files.exists(directoryPath)) {
+            Files.createDirectories(directoryPath);
+        }
+        Path filePath = directoryPath.resolve(fileName);
+        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
         return true;
     }
 }
