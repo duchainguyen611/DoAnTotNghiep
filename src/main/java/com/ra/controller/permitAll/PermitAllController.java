@@ -200,15 +200,19 @@ public class PermitAllController {
             isCheck = true;
         }
         if (filter!=null){
+            String sortText = getSortText(filter);
             String[] sortArray = filter.split("-");
             field = sortArray[0];
             sort = sortArray[1];
             model.addAttribute("filter", filter);
+            model.addAttribute("sortText", sortText);
             isCheck = true;
         }
         if (isCheck) {
             products = productService.sortPageFilterProduct(brandId, categoryId, startPriceString, endPriceString, field, sort, pageNo);
         }
+        model.addAttribute("categoryIdChecked", categoryId);
+        model.addAttribute("brandIdChecked", brandId);
         model.addAttribute("keyword", keyword);
         model.addAttribute("categories", categories);
         model.addAttribute("brands", brands);
@@ -216,6 +220,17 @@ public class PermitAllController {
         model.addAttribute("totalPage", products.getTotalPages());
         model.addAttribute("currentPage", pageNo);
         return "home/permitAll/product/shopProduct";
+    }
+
+    private String getSortText(String sort) {
+        return switch (sort) {
+            case "product_name-asc" -> "A → Z";
+            case "product_name-desc" -> "Z → A";
+            case "unit_price-asc" -> "Giá tăng dần";
+            case "unit_price-desc" -> "Giá giảm dần";
+            case "id-asc" -> "Hàng cũ nhất";
+            default -> "Mặc định";
+        };
     }
 
 

@@ -185,8 +185,7 @@
             </div>
 
 
-            <div class="category-products category-product products">
-
+            <div class=" category-product products">
                 <div class="sortPagiBar">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-lg-12 text-xs-left text-sm-right">
@@ -203,14 +202,14 @@
                                     <label class="left hidden-xs">Sắp xếp</label>
                                     <ul>
                                         <li>
-                                            <span>Mặc định</span>
+                                            <span th:text="${sortText!=null}?${sortText}:'Mặc định'"></span>
                                             <ul id="sort-options">
-                                                <li><a href="#" class="awe_sortby" data-value="id-desc">Mặc định</a></li>
-                                                <li><a href="#" class="awe_sortby" data-value="product_name-asc">A &rarr; Z</a></li>
-                                                <li><a href="#" class="awe_sortby" data-value="product_name-desc">Z &rarr; A</a></li>
-                                                <li><a href="#" class="awe_sortby" data-value="unit_price-asc">Giá tăng dần</a></li>
-                                                <li><a href="#" class="awe_sortby" data-value="unit_price-desc">Giá giảm dần</a></li>
-                                                <li><a href="#" class="awe_sortby" data-value="id-asc">Hàng cũ nhất</a></li>
+                                                <li><a href="#" class="awe_sort_by" data-value="id-desc">Mặc định</a></li>
+                                                <li><a href="#" class="awe_sort_by" data-value="product_name-asc">A &rarr; Z</a></li>
+                                                <li><a href="#" class="awe_sort_by" data-value="product_name-desc">Z &rarr; A</a></li>
+                                                <li><a href="#" class="awe_sort_by" data-value="unit_price-asc">Giá tăng dần</a></li>
+                                                <li><a href="#" class="awe_sort_by" data-value="unit_price-desc">Giá giảm dần</a></li>
+                                                <li><a href="#" class="awe_sort_by" data-value="id-asc">Hàng cũ nhất</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -346,12 +345,12 @@
                         </div>
                         <div class="aside-content filter-group">
                             <ul>
-                                <li class="filter-item filter-item--check-box filter-item--green"
+                                <li class="filter-item"
                                     th:each="item:${categories}">
                                     <span>
                                         <form class="filterForm" action="/shop">
                                             <label>
-                                                <input type="checkbox" th:id="'categoryId'+${item.id}" name="categoryId" th:value="*{item.id}">
+                                                <input type="checkbox" th:id="'categoryId'+${item.id}" name="categoryId" th:value="*{item.id}" th:checked="${#strings.equals(categoryIdChecked, item.id)}">
                                                 <input type="hidden"
                                                        th:attr="name=${brandId != null ? 'brandId' : null}, value=${brandId != null ? brandId : null}"/>
                                                 <input type="hidden"
@@ -374,14 +373,14 @@
                         </div>
                         <div class="aside-content filter-group">
                             <ul>
-                                <li class="filter-item filter-item--check-box filter-item--green"
+                                <li class="filter-item "
                                     th:each="item:${brands}">
                                         <span>
                                             <form class="filterForm" action="/shop">
                                                 <label>
                                                     <input type="hidden"
                                                            th:attr="name=${categoryId != null ? 'categoryId' : null}, value=${categoryId != null ? categoryId : null}"/>
-                                                    <input type="checkbox" name="brandId" data-group="Hãng" class="brandId" th:value="*{item.id}" >
+                                                    <input type="checkbox" name="brandId" data-group="Hãng" class="brandId" th:value="*{item.id}" th:checked="${#strings.equals(brandIdChecked, item.id)}">
                                                     <input type="hidden"
                                                            th:attr="name=${startPrice != null ? 'startPrice' : null}, value=${startPrice != null ? startPrice : null}"/>
                                                     <input type="hidden"
@@ -410,6 +409,7 @@
                                 <div id='slider'></div>
                                 <div id='start'><input name="startPrice" class="startPrice" value="0"></div>
                                 <div id='stop'><input name="endPrice"  class="endPrice" value="100000000₫"></div>
+                                <input type="hidden" th:attr="name=${filter != null ? 'filter' : null}, value=${filter != null ? filter : null}" />
                                 <a id="old-value" href="javascript:;"></a>
                                 <button id="filter-value" class="btn btn-primary" href="javascript:;" type="submit"
                                         data-value="(>-1 AND <10000001)">Lọc giá
@@ -707,7 +707,7 @@
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const sortLinks = document.querySelectorAll(".awe_sortby");
+        const sortLinks = document.querySelectorAll(".awe_sort_by");
         sortLinks.forEach(function(link) {
             link.addEventListener("click", function(event) {
                 event.preventDefault();
