@@ -187,7 +187,7 @@
                                         <div class="image">
                                             <a th:href="@{/product/productDetail/{id}(id=*{product.id})}"
                                                title="Samsung Galaxy Tab A 10.1 (T585)">
-                                                <img class="lazyload" th:src="@{|/uploads/*{product.image}|}"
+                                                <img class="lazyload" th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${product.image}+'?alt=media'}"
                                                      th:alt="*{product.productName}">
                                             </a>
                                         </div>

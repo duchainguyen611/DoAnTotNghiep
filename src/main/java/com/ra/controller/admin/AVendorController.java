@@ -90,17 +90,24 @@ public class AVendorController {
     @PostMapping(value = "/updateVendor/{id}")
     public String edit(@Valid @ModelAttribute("aVendorUpdateRequest") AVendorUpdateRequestDTO aVendorUpdateRequest
             , BindingResult bindingResult
-            , @RequestParam("imageVendor") MultipartFile file
+            , @RequestParam("imageVendor") MultipartFile[] files
             , @PathVariable Long id
             ,  RedirectAttributes redirAttrs) throws IOException {
-        if (bindingResult.hasErrors() || !UploadFileUpdate.saveImage(file, bindingResult)) {
+        if (bindingResult.hasErrors() || !UploadFileUpdate.saveImage(files, bindingResult)) {
             return "admin/vendor/updateVendor";
         }
-        if (file.isEmpty()) {
+        MultipartFile image = files[0];
+        if (image.isEmpty()) {
             aVendorUpdateRequest.setImage(vendorService.findById(id).getImage());
-        } else {
-            String fileName = file.getOriginalFilename();
-            aVendorUpdateRequest.setImage(fileName);
+        }else {
+            for (MultipartFile file : files) {
+                try {
+                    aVendorUpdateRequest.setImage(imageService.save(file));
+                } catch (Exception e) {
+                    bindingResult.rejectValue("image","uploadError", "Lỗi khi lưu ảnh hoặc thêm thương hiệu!");
+                    return "admin/vendor/updateVendor";
+                }
+            }
         }
         StringError stringError = vendorService.updateVendor(aVendorUpdateRequest,id);
         if(stringError!=null){

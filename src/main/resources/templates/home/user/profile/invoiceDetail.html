@@ -266,8 +266,8 @@
                                             <div class="image_order">
                                                 <a th:title="${invoiceDetail.nameProduct}"
                                                    th:href="@{/user/shop/productDetail/{id}(id=*{invoiceDetail.idProduct})}">
-                                                    <img  th:src="@{|/uploads/*{invoiceDetail.imageProduct}|}"
-                                                          th:alt="*{invoiceDetail.nameProduct}"/>
+                                                    <img th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${invoiceDetail.imageProduct}+'?alt=media'}"
+                                                         th:alt="*{invoiceDetail.nameProduct}"/>
                                                 </a>
                                             </div>
                                             <div class="content_right">

@@ -325,7 +325,8 @@
                                         <td class="product__image">
                                             <div class="product-thumbnail">
                                                 <div class="product-thumbnail__wrapper" data-tg-static>
-                                                    <img th:src="@{|/uploads/${cart.imageProduct}|}" alt=""
+                                                    <img th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${cart.imageProduct}+'?alt=media'}"
+                                                         alt=""
                                                          class="product-thumbnail__image"/>
                                                 </div>
                                                 <span class="product-thumbnail__quantity"

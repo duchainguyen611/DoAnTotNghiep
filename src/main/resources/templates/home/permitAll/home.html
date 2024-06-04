@@ -310,7 +310,7 @@
                                                                                 <a th:href="@{/shop/productDetail/{id}(id=${productByNewest.id})}"
                                                                                    th:title="${productByNewest.productName}">
                                                                                     <img class="lazyload"
-                                                                                         th:src="@{|/uploads/*{productByNewest.image}|}"
+                                                                                         th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${productByNewest.image}+'?alt=media'}"
                                                                                          th:alt="${productByNewest.productName}">
                                                                                 </a>
                                                                             </div>
@@ -391,7 +391,7 @@
                                                                 <a th:href="@{/shop/productDetail/{id}(id=*{productByBestSelling.id})}"
                                                                    th:title="${productByBestSelling.productName}">
                                                                     <img class="lazyload"
-                                                                         th:src="@{|/uploads/*{productByBestSelling.image}|}"
+                                                                         th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${productByBestSelling.image}+'?alt=media'}"
                                                                          th:alt="${productByBestSelling.productName}">
                                                                 </a>
                                                             </div>
@@ -570,7 +570,7 @@
                                                         <div class="image">
                                                             <a th:href="@{/shop/productDetail/{id}(id=*{productByRandom1.id})}">
                                                                 <img class="lazyload"
-                                                                     th:src="@{|/uploads/*{productByRandom1.image}|}"
+                                                                     th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${productByRandom1.image}+'?alt=media'}"
                                                                      th:alt="*{productByRandom1.productName}">
                                                             </a>
                                                         </div>
@@ -611,7 +611,7 @@
                                                         <div class="image">
                                                             <a th:href="@{/shop/productDetail/{id}(id=*{productByRandom2.id})}">
                                                                 <img class="lazyload"
-                                                                     th:src="@{|/uploads/*{productByRandom2.image}|}"
+                                                                     th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${productByRandom2.image}+'?alt=media'}"
                                                                      th:alt="*{productByRandom2.productName}">
                                                             </a>
                                                         </div>

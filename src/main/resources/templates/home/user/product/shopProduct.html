@@ -188,7 +188,7 @@
                     <div class="image">
                         <a href="#">
                             <img class="img-responsive lazyload"
-                                 src="/uploads/img_1.png"
+                                 src="https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/img_1.png?alt=media"
                                  alt="banner danh sách sản phẩm">
                         </a>
                     </div>
@@ -237,7 +237,7 @@
                                         <div class="image">
                                             <a th:href="@{/user/shop/productDetail/{id}(id=*{product.id})}">
                                                 <img class="lazyload"
-                                                     th:src="@{|/uploads/*{product.image}|}"
+                                                     th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${product.image}+'?alt=media'}"
                                                      th:alt="*{product.productName}">
                                             </a>
                                         </div>

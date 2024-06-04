@@ -17,6 +17,4 @@ public class AProductDetailResponseDTO {
     private Integer stockQuantity;
     private String image;
     private String status;
-    private String createdDate;
-    private String modifyDate;
 }

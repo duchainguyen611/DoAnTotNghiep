@@ -111,7 +111,7 @@ public class AProductController {
     @PostMapping("/updateProduct/{id}")
     public String edit(@Valid @ModelAttribute("aProductUpdateRequest") AProductUpdateRequestDTO aProductUpdateRequest
             , BindingResult bindingResult
-            , @RequestParam("imageProduct") MultipartFile file
+            , @RequestParam("imageProduct") MultipartFile[] files
             , @PathVariable Long id
             ,  RedirectAttributes redirAttrs
             , Model model) throws IOException {
@@ -119,14 +119,21 @@ public class AProductController {
         model.addAttribute("categories", categories);
         List<ABrandResponseDTO> brands = brandService.AFindAllByStatus(ActiveStatus.ACTIVE);
         model.addAttribute("brands", brands);
-        if (bindingResult.hasErrors() || !UploadFileUpdate.saveImage(file, bindingResult)) {
+        if (bindingResult.hasErrors() || !UploadFileUpdate.saveImage(files, bindingResult)) {
             return "admin/product/updateProduct";
         }
-        if (file.isEmpty()) {
+        MultipartFile image = files[0];
+        if (image.isEmpty()) {
             aProductUpdateRequest.setImage(productService.findById(id).getImage());
-        } else {
-            String fileName = file.getOriginalFilename();
-            aProductUpdateRequest.setImage(fileName);
+        }else {
+            for (MultipartFile file : files) {
+                try {
+                    aProductUpdateRequest.setImage(imageService.save(file));
+                } catch (Exception e) {
+                    bindingResult.rejectValue("image","uploadError", "Lỗi khi lưu ảnh hoặc thêm thương hiệu!");
+                    return "admin/product/updateProduct";
+                }
+            }
         }
         StringError stringError = productService.updateProduct(aProductUpdateRequest, id);
         if (stringError != null) {

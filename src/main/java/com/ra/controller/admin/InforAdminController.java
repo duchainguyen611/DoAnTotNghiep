@@ -3,6 +3,7 @@ package com.ra.controller.admin;
 import com.ra.model.entity.User;
 import com.ra.model.entity.dto.request.ChangePasswordDTO;
 import com.ra.model.entity.dto.request.ChangeProfileDTO;
+import com.ra.model.firebase.IImageService;
 import com.ra.model.upload.UploadFileUpdate;
 import com.ra.model.entity.dto.response.StringError;
 import com.ra.model.entity.dto.response.admin.AUserResponseDTO;
@@ -27,6 +28,7 @@ import java.io.IOException;
 public class InforAdminController {
     private final UserLogin userLogin;
     private final UserService userService;
+    private final IImageService imageService;
 
     @InitBinder
     private void initBinder(WebDataBinder dataBinder) {
@@ -53,17 +55,24 @@ public class InforAdminController {
     @PostMapping("/updateProfile")
     public String updateProfileAdmin(@Valid @ModelAttribute("changeProfile") ChangeProfileDTO changeProfile
             , BindingResult bindingResult
-            , @RequestParam("imageAdmin") MultipartFile file
+            , @RequestParam("imageAdmin") MultipartFile[] files
             , RedirectAttributes redirAttrs) throws IOException {
         User user = userLogin.userLogin();
-        if (bindingResult.hasErrors() || !UploadFileUpdate.saveImage(file, bindingResult)) {
+        if (bindingResult.hasErrors() || !UploadFileUpdate.saveImage(files, bindingResult)) {
             return "admin/inforAdmin/updateProfile";
         }
-        if (file.isEmpty()) {
+        MultipartFile image = files[0];
+        if (image.isEmpty()) {
             changeProfile.setImage(user.getImage());
         } else {
-            String fileName = file.getOriginalFilename();
-            changeProfile.setImage(fileName);
+            for (MultipartFile file : files) {
+                try {
+                    changeProfile.setImage(imageService.save(file));
+                } catch (Exception e) {
+                    bindingResult.rejectValue("image","uploadError", "Lỗi khi lưu ảnh hoặc thêm thương hiệu!");
+                    return "admin/brand/updateBrand";
+                }
+            }
         }
         StringError stringError = userService.updateProfile(changeProfile, user);
         if (stringError != null) {

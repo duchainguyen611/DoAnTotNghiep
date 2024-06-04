@@ -317,7 +317,7 @@
                                         width="120"
                                         height="auto"
                                         th:alt="*{cart.nameProduct}"
-                                        th:src="@{|/uploads/*{cart.imageProduct}|}"></a>
+                                        th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${cart.imageProduct}+'?alt=media'}"></a>
                                 </div>
                                 <div style="width: 28%;align-items: flex-start;" class="a-center">
                                     <h2 class="product-name"><a
@@ -414,7 +414,7 @@
                                    th:href="@{/user/shop/productDetail/{id}(id=${cart.productId})}" class="product-images1">
                                 <img max-width="80"
                                     th:alt="*{cart.nameProduct}"
-                                    th:src="@{|/uploads/*{cart.imageProduct}|}">
+                                     th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${cart.imageProduct}+'?alt=media'}">
                                 </a>
                             </div>
                             <div class="title-product-cart-mobile">

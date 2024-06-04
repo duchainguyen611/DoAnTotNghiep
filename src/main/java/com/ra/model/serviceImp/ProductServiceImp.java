@@ -18,7 +18,6 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.text.NumberFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 
@@ -242,8 +241,6 @@ public class ProductServiceImp implements ProductService{
                 .stockQuantity(product.getStockQuantity())
                 .image(product.getImage())
                 .status(product.getStatus().toString())
-                .createdDate(product.getCreatedDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
-                .modifyDate(product.getModifyDate()==null?null:product.getModifyDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
                 .build();
     }
 

@@ -90,16 +90,23 @@ public class ABrandController {
     @PostMapping("/updateBrand/{id}")
     public String edit(@Valid @ModelAttribute("aBrandUpdateRequest") ABrandUpdateRequestDTO aBrandUpdateRequest
             , BindingResult bindingResult
-            , @RequestParam("imageBrand") MultipartFile file
+            , @RequestParam("imageBrand") MultipartFile[] files
             , @PathVariable Long id, RedirectAttributes redirAttrs) throws IOException {
-        if (bindingResult.hasErrors() || !UploadFileUpdate.saveImage(file, bindingResult)) {
+        if (bindingResult.hasErrors() || !UploadFileUpdate.saveImage(files, bindingResult)) {
             return "admin/brand/updateBrand";
         }
-        if (file.isEmpty()) {
+        MultipartFile image = files[0];
+        if (image.isEmpty()) {
             aBrandUpdateRequest.setImage(brandService.findById(id).getImage());
         } else {
-            String fileName = file.getOriginalFilename();
-            aBrandUpdateRequest.setImage(fileName);
+            for (MultipartFile file : files) {
+                try {
+                    aBrandUpdateRequest.setImage(imageService.save(file));
+                } catch (Exception e) {
+                    bindingResult.rejectValue("image","uploadError", "Lỗi khi lưu ảnh hoặc thêm thương hiệu!");
+                    return "admin/brand/updateBrand";
+                }
+            }
         }
         StringError stringError = brandService.updateBrand(aBrandUpdateRequest, id);
         if (stringError != null) {

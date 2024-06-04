@@ -103,7 +103,7 @@
 													<div class="ec-vendor-main-img">
 														<div class="avatar-upload">
 															<div class="col-md-3 mb-3">
-																<img th:src="@{|/uploads/${aVendorUpdateRequest.image}|}" width="100%" id="previewImage">
+																<img th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${aVendorUpdateRequest.image}+'?alt=media'}" width="100%" id="previewImage">
 																<input type="hidden" th:field="*{image}">
 															</div>
 															<div class="col-md-9 mb-3">
