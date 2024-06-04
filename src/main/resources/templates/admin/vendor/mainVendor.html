@@ -87,7 +87,7 @@
 												<div th:each="vendor,item:${vendors}">
 													<tr th:name="*{vendor.id}">
 														<td th:text="*{item.index+1}"> </td>
-														<td><img width="150" th:src="@{|/uploads/${vendor.image}|}"></td>
+														<td><img width="150" th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${vendor.image}+'?alt=media'}"></td>
 														<td th:text="*{vendor.vendorName}"></td>
 														<td th:text="*{vendor.email}"></td>
 														<td th:text="*{vendor.phone}"></td>

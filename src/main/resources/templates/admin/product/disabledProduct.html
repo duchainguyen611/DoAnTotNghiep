@@ -98,7 +98,7 @@
 												<div th:each="product,item:${products}">
 													<tr th:name="*{product.id}" >
 														<td th:text="*{item.index+1}"></td>
-														<td ><img width="150" th:src="@{|/uploads/*{product.image}|}"></td>
+														<td ><img width="150" th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${product.image}+'?alt=media'}"></td>
 														<td th:text="*{product.productName}"></td>
 														<td th:text="*{product.categoryName}"></td>
 														<td th:text="*{product.unitPrice}"></td>

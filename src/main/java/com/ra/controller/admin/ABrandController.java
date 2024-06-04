@@ -2,6 +2,7 @@ package com.ra.controller.admin;
 
 import com.ra.model.entity.Brand;
 import com.ra.model.entity.ENUM.ActiveStatus;
+import com.ra.model.firebase.IImageService;
 import com.ra.model.upload.UploadFileAdd;
 import com.ra.model.upload.UploadFileUpdate;
 import com.ra.model.entity.dto.request.admin.ABrandUpdateRequestDTO;
@@ -28,6 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ABrandController {
     private final BrandService brandService;
+    private final IImageService imageService;
 
     @InitBinder
     private void initBinder(WebDataBinder dataBinder) {
@@ -55,17 +57,24 @@ public class ABrandController {
         model.addAttribute("aBrandRequest", aBrandRequest);
         return "admin/brand/addBrand";
     }
+
     @PostMapping("/addBrand")
     public String save(@Valid @ModelAttribute("aBrandRequest") ABrandRequestDTO aBrandRequest,
                        BindingResult bindingResult,
-                       @RequestParam("imageBrand") MultipartFile file,
+                       @RequestParam("imageBrand") MultipartFile[] files,
                        RedirectAttributes redirAttrs) throws IOException {
-        if (bindingResult.hasErrors() || !UploadFileAdd.saveImage(file,bindingResult)) {
+        if (bindingResult.hasErrors() || !UploadFileAdd.saveImage(files, bindingResult)) {
             return "admin/brand/addBrand";
         }
-        String fileName = file.getOriginalFilename();
-        aBrandRequest.setImage(fileName);
-        brandService.addBrand(aBrandRequest);
+        for (MultipartFile file : files) {
+            try {
+                aBrandRequest.setImage(imageService.save(file));
+                brandService.addBrand(aBrandRequest);
+            } catch (Exception e) {
+                bindingResult.rejectValue("image","uploadError", "Lỗi khi lưu ảnh hoặc thêm thương hiệu!");
+                return "admin/brand/addBrand";
+            }
+        }
         redirAttrs.addFlashAttribute("success", "Thêm thành công!");
         return "redirect:/admin/brand";
     }
@@ -82,21 +91,24 @@ public class ABrandController {
     public String edit(@Valid @ModelAttribute("aBrandUpdateRequest") ABrandUpdateRequestDTO aBrandUpdateRequest
             , BindingResult bindingResult
             , @RequestParam("imageBrand") MultipartFile file
-            , @PathVariable Long id,  RedirectAttributes redirAttrs) throws IOException {
-        if (bindingResult.hasErrors() || ! UploadFileUpdate.saveImage(file,bindingResult)) {
+            , @PathVariable Long id, RedirectAttributes redirAttrs) throws IOException {
+        if (bindingResult.hasErrors() || !UploadFileUpdate.saveImage(file, bindingResult)) {
             return "admin/brand/updateBrand";
         }
-        if (file.isEmpty()){
+        if (file.isEmpty()) {
             aBrandUpdateRequest.setImage(brandService.findById(id).getImage());
-        }else {
+        } else {
             String fileName = file.getOriginalFilename();
             aBrandUpdateRequest.setImage(fileName);
         }
-        StringError stringError = brandService.updateBrand(aBrandUpdateRequest,id);
-        if(stringError!=null){
-            if (stringError.getEmail()!=null) bindingResult.rejectValue("email", "email exist",stringError.getEmail());
-            if (stringError.getName()!=null) bindingResult.rejectValue("brandName", "name exist",stringError.getName());
-            if (stringError.getPhone()!=null) bindingResult.rejectValue("phone", "phone exist",stringError.getPhone());
+        StringError stringError = brandService.updateBrand(aBrandUpdateRequest, id);
+        if (stringError != null) {
+            if (stringError.getEmail() != null)
+                bindingResult.rejectValue("email", "email exist", stringError.getEmail());
+            if (stringError.getName() != null)
+                bindingResult.rejectValue("brandName", "name exist", stringError.getName());
+            if (stringError.getPhone() != null)
+                bindingResult.rejectValue("phone", "phone exist", stringError.getPhone());
             return "admin/brand/updateBrand";
         }
         redirAttrs.addFlashAttribute("success", "Cập nhật thành công!");
@@ -112,7 +124,7 @@ public class ABrandController {
 
 
     @GetMapping("/deleteBrand/{id}")
-    public String delete(@PathVariable Long id,  RedirectAttributes redirAttrs) {
+    public String delete(@PathVariable Long id, RedirectAttributes redirAttrs) {
         brandService.delete(id);
         redirAttrs.addFlashAttribute("success", "Xóa thành công!");
         return "redirect:/admin/disabledBrand";

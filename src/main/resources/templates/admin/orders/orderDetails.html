@@ -108,7 +108,7 @@
 															<tr th:name="*{orderDetail.id}" >
 																<td th:text="*{item.index+1}"></td>
 																<td><img class="product-img"
-																		 th:src="@{|/uploads/*{orderDetail.productImage}|}" alt="img" /></td>
+																		 th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${orderDetail.productImage}+'?alt=media'}" alt="img" /></td>
 																<td th:text="*{orderDetail.productName}"></td>
 																<td th:text="*{orderDetail.orderQuantity}"></td>
 																<td th:text="*{orderDetail.productUnitPrice}"></td>

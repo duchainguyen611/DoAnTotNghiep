@@ -77,7 +77,7 @@
 														<div class="single-product-cover">
 															<div class="single-slide zoom-image-hover">
 																<img class="img-responsive"
-																	 th:src="@{|/uploads/${aProductDetailResponse.image}|}" alt="">
+																	 th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${aProductDetailResponse.image}+'?alt=media'}" alt="">
 															</div>
 														</div>
 													</div>
@@ -129,10 +129,6 @@
 																			class="span_block_area" th:text="*{categoryName}"></span></li>
 																	<li>Thương hiệu: <span
 																			class="span_block_area" th:text="*{brandName}"></span></li>
-																	<li>Ngày tạo sản phẩm: <span
-																			class="span_block_area" th:text="*{createdDate}"></span></li>
-																	<li>Ngày cập nhật sản phẩm: <span
-																			class="span_block_area" th:text="*{modifyDate}==null?'Chưa cập nhật':*{modifyDate}"></span></li>
 																</ul>
 															</div>
 														</div>

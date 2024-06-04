@@ -87,7 +87,7 @@
 												<div th:each="brand,item:${brands}">
 													<tr th:name="*{brand.id}"  >
 														<td th:text="*{item.index+1}"></td>
-														<td><img width="150" th:src="@{|/uploads/*{brand.image}|}" alt="Not found img"></td>
+														<td><img width="150" th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${brand.image}+'?alt=media'}" alt="Not found img"></td>
 														<td th:text="*{brand.brandName}"></td>
 														<td th:text="*{brand.email}"></td>
 														<td th:text="*{brand.phone}"></td>

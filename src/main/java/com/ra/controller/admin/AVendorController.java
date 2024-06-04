@@ -2,13 +2,14 @@ package com.ra.controller.admin;
 
 import com.ra.model.entity.ENUM.ActiveStatus;
 import com.ra.model.entity.Vendor;
-import com.ra.model.upload.UploadFileAdd;
-import com.ra.model.upload.UploadFileUpdate;
 import com.ra.model.entity.dto.request.admin.AVendorRequestDTO;
 import com.ra.model.entity.dto.request.admin.AVendorUpdateRequestDTO;
 import com.ra.model.entity.dto.response.StringError;
 import com.ra.model.entity.dto.response.admin.AVendorResponseDTO;
+import com.ra.model.firebase.IImageService;
 import com.ra.model.service.VendorService;
+import com.ra.model.upload.UploadFileAdd;
+import com.ra.model.upload.UploadFileUpdate;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -28,6 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AVendorController {
     private final VendorService vendorService;
+    private final IImageService imageService ;
 
     @InitBinder
     private void initBinder(WebDataBinder dataBinder) {
@@ -60,13 +62,19 @@ public class AVendorController {
     public String save(@Valid @ModelAttribute("aVendorRequest") AVendorRequestDTO aVendorRequest
             , BindingResult bindingResult
             ,  RedirectAttributes redirAttrs
-            , @RequestParam("imageVendor") MultipartFile file) throws IOException {
-        if (bindingResult.hasErrors() || !UploadFileAdd.saveImage(file, bindingResult)) {
+            , @RequestParam("imageVendor") MultipartFile[] files) throws IOException {
+        if (bindingResult.hasErrors() || !UploadFileAdd.saveImage(files, bindingResult)) {
             return "admin/vendor/addVendor";
         }
-        String fileName = file.getOriginalFilename();
-        aVendorRequest.setImage(fileName);
-        vendorService.addVendor(aVendorRequest);
+        for (MultipartFile file : files) {
+            try {
+                aVendorRequest.setImage(imageService.save(file));
+                vendorService.addVendor(aVendorRequest);
+            } catch (Exception e) {
+                bindingResult.rejectValue("image","uploadError", "Lỗi khi lưu ảnh hoặc thêm nhà cung cấp!");
+                return "admin/vendor/addVendor";
+            }
+        }
         redirAttrs.addFlashAttribute("success", "Thêm thành công!");
         return "redirect:/admin/vendor";
     }

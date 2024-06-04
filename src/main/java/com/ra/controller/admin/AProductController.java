@@ -2,6 +2,7 @@ package com.ra.controller.admin;
 
 import com.ra.model.entity.ENUM.ActiveStatus;
 import com.ra.model.entity.Product;
+import com.ra.model.firebase.IImageService;
 import com.ra.model.upload.UploadFileAdd;
 import com.ra.model.upload.UploadFileUpdate;
 import com.ra.model.entity.dto.request.admin.AProductRequestDTO;
@@ -35,6 +36,7 @@ public class AProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
     private final BrandService brandService;
+    private final IImageService imageService;
 
     @InitBinder
     private void initBinder(WebDataBinder dataBinder) {
@@ -70,19 +72,25 @@ public class AProductController {
     @PostMapping("/addProduct")
     public String save(@Valid @ModelAttribute("aProductRequest") AProductRequestDTO aProductRequest
             , BindingResult bindingResult
-            , @RequestParam("imageProduct") MultipartFile file
+            , @RequestParam("imageProduct") MultipartFile[] files
                        ,  RedirectAttributes redirAttrs
             , Model model) throws IOException {
         List<ACategoryResponseDTO> categories = categoryService.AFindAllByStatus(ActiveStatus.ACTIVE);
         model.addAttribute("categories", categories);
         List<ABrandResponseDTO> brands = brandService.AFindAllByStatus(ActiveStatus.ACTIVE);
         model.addAttribute("brands", brands);
-        if (bindingResult.hasErrors() || !UploadFileAdd.saveImage(file, bindingResult)) {
+        if (bindingResult.hasErrors() || !UploadFileAdd.saveImage(files, bindingResult)) {
             return "admin/product/addProduct";
         }
-        String fileName = file.getOriginalFilename();
-        aProductRequest.setImage(fileName);
-        productService.addProduct(aProductRequest);
+        for (MultipartFile file : files) {
+            try {
+                aProductRequest.setImage(imageService.save(file));
+                productService.addProduct(aProductRequest);
+            } catch (Exception e) {
+                bindingResult.rejectValue("image","uploadError", "Lỗi khi lưu ảnh hoặc thêm sản phẩm!");
+                return "admin/product/addProduct";
+            }
+        }
         redirAttrs.addFlashAttribute("success", "Thêm thành công!");
         return "redirect:/admin/product";
 

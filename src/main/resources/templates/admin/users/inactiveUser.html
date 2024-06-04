@@ -81,7 +81,7 @@
 											<div th:each="user,item:${users}">
 												<tr th:name="*{user.id}">
 													<td th:text="*{item.index+1}"> </td>
-													<td ><img class="cat-thumb" th:src="@{|/uploads/*{user.image}|}" alt="img"></td>
+													<td ><img class="cat-thumb" th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${user.image}+'?alt=media'}" alt="img"></td>
 													<td th:text="*{user.fullName}"></td>
 													<td th:text="*{user.email}"></td>
 													<td th:text="*{user.phone}"></td>

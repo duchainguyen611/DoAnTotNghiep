@@ -26,7 +26,7 @@
                     <button class="dropdown-toggle nav-link ec-drop" data-bs-toggle="dropdown"
                             aria-expanded="false">
                         <img th:if="${#authentication.principal.user.image}"
-                             th:src="${'/uploads/'+#authentication.principal.user.image}" class="user-image"  alt="User Image"/>
+                             th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${#authentication.principal.user.image}+'?alt=media'}" class="user-image"  alt="User Image"/>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right ec-dropdown-menu">
                         <!-- User image -->

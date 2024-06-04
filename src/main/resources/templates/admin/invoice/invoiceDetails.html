@@ -107,7 +107,7 @@
 															<tr th:nname="*{invoiceDetail.id}">
 																<td th:text="*{item.index+1}"></td>
 																<td><img class="product-img"
-																		 th:src="@{|/uploads/${invoiceDetail.productImage}|}" alt="img" /></td>
+																		 th:src="@{'https://firebasestorage.googleapis.com/v0/b/project-fcfdd.appspot.com/o/'+${invoiceDetail.productImage}+'?alt=media'}" alt="img" /></td>
 																<td th:text="*{invoiceDetail.productName}"></td>
 																<td th:text="*{invoiceDetail.invoiceQuantity}"></td>
 																<td th:text="*{invoiceDetail.productUnitPrice}"></td>
