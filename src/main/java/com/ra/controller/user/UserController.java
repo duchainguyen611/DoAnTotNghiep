@@ -193,6 +193,9 @@ public class UserController {
         model.addAttribute("currentPage", pageNo);
         List<UCategoryResponseDTO> categories = categoryService.UFindAllByStatus(ActiveStatus.ACTIVE);
         model.addAttribute("categories",categories);
+        if (products.getNumberOfElements()==0){
+            return "home/user/product/searchProductNoProduct";
+        }
         return "home/user/product/searchProduct";
     }
 
@@ -254,6 +257,12 @@ public class UserController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("categories", categories);
         model.addAttribute("brands", brands);
+        if (isCheck) {
+            products = productService.sortPageFilterProduct(brandId, categoryId, startPriceString, endPriceString, field, sort, pageNo);
+            if (products.getNumberOfElements()==0){
+                return "home/user/product/shopProductNoProduct";
+            }
+        }
         model.addAttribute("products", products);
         model.addAttribute("totalPage", products.getTotalPages());
         model.addAttribute("currentPage", pageNo);

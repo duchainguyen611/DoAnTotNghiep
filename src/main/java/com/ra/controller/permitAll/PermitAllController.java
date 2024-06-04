@@ -157,13 +157,16 @@ public class PermitAllController {
             , @RequestParam(defaultValue = "1", name = "pageNo") Integer pageNo
             , @RequestParam(name = "categoryId",required = false) String categoryId){
         Page<UProductResponseDTO> products = productService.findAllByCategoryAndProductNamePage(keyword,pageNo,categoryId);
-        model.addAttribute("products", products);
         model.addAttribute("keyword",keyword);
         model.addAttribute("sumProduct",productService.findAllByCategoryAndProductName(keyword,categoryId).size());
         model.addAttribute("totalPage", products.getTotalPages());
         model.addAttribute("currentPage", pageNo);
         List<UCategoryResponseDTO> categories = categoryService.UFindAllByStatus(ActiveStatus.ACTIVE);
         model.addAttribute("categories",categories);
+        if (products.getNumberOfElements()==0){
+            return "home/permitAll/product/searchProductNoProduct";
+        }
+        model.addAttribute("products", products);
         return "home/permitAll/product/searchProduct";
     }
 
@@ -208,14 +211,17 @@ public class PermitAllController {
             model.addAttribute("sortText", sortText);
             isCheck = true;
         }
-        if (isCheck) {
-            products = productService.sortPageFilterProduct(brandId, categoryId, startPriceString, endPriceString, field, sort, pageNo);
-        }
         model.addAttribute("categoryIdChecked", categoryId);
         model.addAttribute("brandIdChecked", brandId);
         model.addAttribute("keyword", keyword);
         model.addAttribute("categories", categories);
         model.addAttribute("brands", brands);
+        if (isCheck) {
+            products = productService.sortPageFilterProduct(brandId, categoryId, startPriceString, endPriceString, field, sort, pageNo);
+            if (products.getNumberOfElements()==0){
+                return "home/permitAll/product/shopProductNoProduct";
+            }
+        }
         model.addAttribute("products", products);
         model.addAttribute("totalPage", products.getTotalPages());
         model.addAttribute("currentPage", pageNo);
