@@ -168,7 +168,7 @@
                                                 <td th:text="*{order.createdDate}"></td>
                                                 <td th:text="*{order.totalPrice}"></td>
                                                 <td>
-                                                    <span class="badge badge-success badge-warning"
+                                                    <span class="badge statusOrder badge-success badge-warning"
                                                           th:name="*{order.id}" th:text="*{order.statusOrder}"></span>
                                                 </td>
                                                 <td>
@@ -247,15 +247,6 @@
             </div> <!-- End Content -->
         </div> <!-- End Content Wrapper -->
 
-        <!-- Footer -->
-        <footer class="footer mt-auto">
-            <div class="copyright bg-white">
-                <p>
-                    Copyright © 2023. All right reserved.
-                </p>
-            </div>
-        </footer>
-
     </div> <!-- End Page Wrapper -->
 </div> <!-- End Wrapper -->
 
@@ -280,7 +271,21 @@
 
 <div th:replace="admin/fragments/delete :: delete"></div>
 <div th:replace="admin/fragments/changeStatusOrder :: changeStatusOrder"></div>
-
+<script>
+    const badgeSpans = document.querySelectorAll('.statusOrder');
+    badgeSpans.forEach(function (span) {
+        switch (span.textContent.trim()) {
+            case 'CONFIRMED': {
+                span.textContent = "ĐÃ DUYỆT";
+                break;
+            }
+            case 'UNCONFIRMED': {
+                span.textContent = "ĐỢI DUYỆT";
+                break;
+            }
+        }
+    });
+</script>
 
 <!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/invoice.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Feb 2024 08:34:03 GMT -->
 </html>

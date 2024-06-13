@@ -106,16 +106,6 @@
 				</div> <!-- End Content -->
 			</div> 
 			<!-- End Content Wrapper -->
-
-			<!-- Footer -->
-			<footer class="footer mt-auto">
-				<div class="copyright bg-white">
-					<p>
-						Copyright © 2023. All right reserved.
-					</p>
-				</div>
-			</footer>
-
 		</div> <!-- End Page Wrapper -->
 	</div> <!-- End Wrapper -->
 
@@ -150,7 +140,21 @@
 	}
 	window.addEventListener('DOMContentLoaded', changeColor);
 </script><div th:replace="admin/fragments/changeStatus :: changeStatus"></div>
-
+<script>
+	const badgeSpans = document.querySelectorAll('.badge');
+	badgeSpans.forEach(function (span) {
+		switch (span.textContent.trim()) {
+			case 'ACTIVE': {
+				span.textContent = "HOẠT ĐỘNG";
+				break;
+			}
+			case 'INACTIVE': {
+				span.textContent = "KHÔNG HOẠT ĐỘNG";
+				break;
+			}
+		}
+	});
+</script>
 
 
 <!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/user-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Feb 2024 08:33:56 GMT -->

@@ -20,7 +20,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
@@ -123,10 +122,15 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/checkOut")
-    public String checkOut(@ModelAttribute("checkOutInfor") CheckOutInforDTO checkOutInfor) {
-        checkOutInfor.setPaymentMethods(PaymentMethods.COD);
-        shoppingCartService.checkOut(checkOutInfor);
-        return "redirect:/user/profile/invoice";
+    public String checkOut(@ModelAttribute("checkOutInfor") CheckOutInforDTO checkOutInfor, RedirectAttributes redirAttrs) {
+        if (checkOutInfor.getReceiveName().isEmpty()){
+            redirAttrs.addFlashAttribute("error", "Chọn đỉa chỉ nhận hàng trước khi thanh toán!");
+            return "redirect:/user/cart/checkOut";
+        }else {
+            checkOutInfor.setPaymentMethods(PaymentMethods.COD);
+            shoppingCartService.checkOut(checkOutInfor);
+            return "redirect:/user/profile/invoice";
+        }
     }
 
 }

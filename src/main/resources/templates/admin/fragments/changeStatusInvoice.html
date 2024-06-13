@@ -1,11 +1,39 @@
 <script th:fragment="changeStatusInvoice">
-    function changeColorInvoice(id) {
+    function ColorInvoice() {
         const badgeSpans = document.querySelectorAll('#responsive-data-table .badge');
         badgeSpans.forEach(function (span) {
             span.classList.remove(...span.classList);
-            switch (span.textContent.trim()) {
-                case 'WAITING': {
+            switch (span.textContent) {
+                case 'CHỜ XÁC NHẬN': {
                     span.classList.add('badge-warning', 'badge');
+                    break;
+                }
+                case 'ĐANG GIAO HÀNG': {
+                    span.classList.add('badge-primary', 'badge');
+                    break;
+                }
+                case 'ĐÃ XÁC NHẬN': {
+                    span.classList.add('badge-info', 'badge');
+                    break;
+                }
+                case 'ĐÃ HỦY': {
+                    span.classList.add('badge-danger', 'badge');
+                    break;
+                }
+                case 'BỊ TỪ CHỐI': {
+                    span.classList.add('badge-secondary', 'badge');
+                    break;
+                }
+            }
+        });
+    }
+    function changeColorInvoice(id) {
+        const badgeSpans = document.getElementById(id);
+            badgeSpans.classList.remove(...badgeSpans.classList);
+            switch (badgeSpans.textContent.trim()) {
+                case 'WAITING': {
+                    badgeSpans.textContent = "CHỜ XÁC NHẬN";
+                    badgeSpans.classList.add('badge-warning', 'badge');
                     break;
                 }
                 case 'SUCCESS': {
@@ -13,25 +41,28 @@
                     break;
                 }
                 case 'DELIVERY': {
-                    span.classList.add('badge-primary', 'badge');
+                    badgeSpans.textContent = "ĐANG GIAO HÀNG";
+                    badgeSpans.classList.add('badge-primary', 'badge');
                     break;
                 }
                 case 'CONFIRM': {
-                    span.classList.add('badge-info', 'badge');
+                    badgeSpans.textContent = "ĐÃ XÁC NHẬN";
+                    badgeSpans.classList.add('badge-info', 'badge');
                     break;
                 }
                 case 'CANCEL': {
-                    span.classList.add('badge-danger', 'badge');
+                    badgeSpans.textContent = "ĐÃ HỦY";
+                    badgeSpans.classList.add('badge-danger', 'badge');
                     break;
                 }
                 case 'DENIED': {
-                    span.classList.add('badge-secondary', 'badge');
+                    badgeSpans.textContent = "BỊ TỪ CHỐI";
+                    badgeSpans.classList.add('badge-secondary', 'badge');
                     break;
                 }
             }
-        });
     }
-    window.addEventListener('DOMContentLoaded', changeColorInvoice);
+    window.addEventListener('DOMContentLoaded', ColorInvoice);
 
     function changeStatusInvoice(status, id) {
         // Gửi yêu cầu AJAX đến controller

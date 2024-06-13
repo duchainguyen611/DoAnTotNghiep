@@ -4,6 +4,7 @@ import com.ra.model.entity.ENUM.PaymentMethods;
 import com.ra.model.entity.dto.response.user.CheckOutInforDTO;
 import com.ra.model.service.ShoppingCartService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,8 +42,12 @@ public class PaymentController {
     }
 
     @PostMapping("/user/payment")
-    public RedirectView getPay(@RequestParam("typePay") String typePay, @ModelAttribute("checkOutInfor") CheckOutInforDTO checkOutInfor
-            , @RequestParam("totalPriceAll") double totalPriceAll, HttpServletRequest request) throws UnsupportedEncodingException {
+    public RedirectView getPay(@RequestParam("typePay") String typePay,@Valid @ModelAttribute("checkOutInfor") CheckOutInforDTO checkOutInfor
+            , @RequestParam("totalPriceAll") double totalPriceAll, HttpServletRequest request,RedirectAttributes redirAttrs) throws UnsupportedEncodingException {
+        if (checkOutInfor.getReceiveName().isEmpty()){
+            redirAttrs.addFlashAttribute("error", "Chọn đỉa chỉ nhận hàng trước khi thanh toán!");
+            return new RedirectView("/user/cart/checkOut");
+        }
         checkOutInforStatic = checkOutInfor;
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";

@@ -87,7 +87,7 @@
 													<td th:text="*{invoice.serialNumber}"></td>
 													<td th:text="*{invoice.createdDate}"></td>
 													<td th:text="*{invoice.totalPrice}"></td>
-													<td> <span  class="badge badge-success" th:name="*{invoice.id}" th:text="*{invoice.statusInvoice}"></span> </td>
+													<td> <span  class="badge statusInvoice badge-success" th:name="*{invoice.id}" th:text="*{invoice.statusInvoice}"></span> </td>
 													<td>
 														<div class="btn-group mb-1">
 															<a type="button"
@@ -105,16 +105,6 @@
 					</div>
 				</div> <!-- End Content -->
 			</div> <!-- End Content Wrapper -->
-
-			<!-- Footer -->
-			<footer class="footer mt-auto">
-				<div class="copyright bg-white">
-					<p>
-						Copyright © 2023. All right reserved.
-					</p>
-				</div>
-			</footer>
-
 		</div> <!-- End Page Wrapper -->
 	</div> <!-- End Wrapper -->
 
@@ -137,7 +127,37 @@
 	<script src="/admin/js/custom.js"></script>
 <!--	<div th:replace="admin/fragments/changeStatusInvoice :: changeStatusInvoice"></div>-->
 </body>
-
+<script>
+	const badgeSpans = document.querySelectorAll('.statusInvoice');
+	badgeSpans.forEach(function (span) {
+		switch (span.textContent.trim()) {
+			case 'WAITING': {
+				span.textContent = "CHỜ XÁC NHẬN";
+				break;
+			}
+			case 'SUCCESS': {
+				span.textContent = "THÀNH CÔNG";
+				break;
+			}
+			case 'DELIVERY': {
+				span.textContent = "ĐANG GIAO";
+				break;
+			}
+			case 'CONFIRM': {
+				span.textContent = "ĐÃ XÁC NHẬN";
+				break;
+			}
+			case 'CANCEL': {
+				span.textContent = "ĐÃ HỦY";
+				break;
+			}
+			case 'DENIED': {
+				span.textContent = "BỊ TỪ CHỐI";
+				break;
+			}
+		}
+	});
+</script>
 
 <!-- Mirrored from andit.co/projects/html/andshop/andshop-dashboard/invoice.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Feb 2024 08:34:03 GMT -->
 </html>
