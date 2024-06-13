@@ -116,7 +116,7 @@ public class DashboardController{
             for (DashboardProductDTO productDTO : products){
                 productDTO.setId((long) id++);
             }
-            ByteArrayInputStream in = excelService.exportToExcel(products);
+            ByteArrayInputStream in = excelService.exportToExcel(products,"Thống kê sản phẩm");
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.parseMediaType("application/vnd.ms-excel"));
@@ -135,7 +135,7 @@ public class DashboardController{
             , @RequestParam(name = "createdDateEnd",required = false)String createdDateEnd){
         try {
             List<DashboardRevenueDTO> revenues = dashboardService.dashboardRevenue(createdDateStart,createdDateEnd);
-            ByteArrayInputStream in = excelService.exportToExcel(revenues);
+            ByteArrayInputStream in = excelService.exportToExcel(revenues,"Thống kê doanh thu");
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.parseMediaType("application/vnd.ms-excel"));
@@ -161,7 +161,7 @@ public class DashboardController{
             for (DashboardImportGoodsDTO importGoodsDTO:importGoods){
                 importGoodsDTO.setId((long) id++);
             }
-            ByteArrayInputStream in = excelService.exportToExcel(importGoods);
+            ByteArrayInputStream in = excelService.exportToExcel(importGoods,"Thống kê nhập hàng");
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.parseMediaType("application/vnd.ms-excel"));
@@ -186,7 +186,7 @@ public class DashboardController{
             for (DashboardSellGoodsDTO sellGoodsDTO:sellGoods){
                 sellGoodsDTO.setId((long) id++);
             }
-            ByteArrayInputStream in = excelService.exportToExcel(sellGoods);
+            ByteArrayInputStream in = excelService.exportToExcel(sellGoods,"Thống kê bán hàng");
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.parseMediaType("application/vnd.ms-excel"));
             headers.setContentDispositionFormData("attachment", "data.xlsx");
