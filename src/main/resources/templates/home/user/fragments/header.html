@@ -76,7 +76,7 @@
                         <form class="input-group search-bar" action="/user/search" method="get" role="search">
                             <div class="collection-selector categories-filter">
                                 <div class="search_text">Tất cả</div>
-                                <input type="hidden" name="categoryId" value="">
+                                <input type="hidden" name="categoryId" id="categoryId" value="">
                                 <!-- Search Info Section -->
                                 <div id="search_info" class="list_search" style="display: none;">
                                     <div class="search_item" th:each="category : ${categories}" th:text="${category.name}" th:data-value="${category.id}"></div>

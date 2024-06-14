@@ -199,6 +199,7 @@ public class UserController {
             return "home/user/product/searchProductNoProduct";
         }
         model.addAttribute("products", products);
+        model.addAttribute("categoryId", categoryId);
         return "home/user/product/searchProduct";
     }
 
