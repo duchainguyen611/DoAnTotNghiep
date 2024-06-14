@@ -161,10 +161,6 @@ public class PermitAllController {
         }
         Page<UProductResponseDTO> products = productService.findAllByCategoryAndProductNamePage(keyword,pageNo,categoryId);
         model.addAttribute("keyword",keyword);
-        System.out.println(products.getNumberOfElements());
-        System.out.println(keyword);
-        System.out.println(pageNo);
-        System.out.println(categoryId);
         model.addAttribute("sumProduct",productService.findAllByCategoryAndProductName(keyword,categoryId).size());
         model.addAttribute("totalPage", products.getTotalPages());
         model.addAttribute("currentPage", pageNo);

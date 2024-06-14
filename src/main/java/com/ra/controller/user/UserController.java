@@ -189,10 +189,6 @@ public class UserController {
         model.addAttribute("sumPriceHeader",NumberFormat.getInstance(new Locale("vi", "VN")).format(sumPriceHeader)+ "₫");
         model.addAttribute("countProductHeader", countProductHeader);
         Page<UProductResponseDTO> products = productService.findAllByCategoryAndProductNamePage(keyword,pageNo,categoryId);
-        System.out.println(products.getNumberOfElements());
-        System.out.println(keyword);
-        System.out.println(pageNo);
-        System.out.println(categoryId);
         model.addAttribute("keyword",keyword);
         model.addAttribute("sumProduct",productService.findAllByCategoryAndProductName(keyword,categoryId).size());
         model.addAttribute("totalPage", products.getTotalPages());
