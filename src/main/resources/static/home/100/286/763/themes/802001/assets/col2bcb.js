@@ -388,12 +388,12 @@ function clearAllFiltered() {
 
 	 
 	 
-	 var maxx = 10000000/10;
+	 var maxx = 100000000/10;
 	 $('#slider').slider({
 		 min: '0',
 		 max: maxx,
 		 range: true,
-		 values: [0,10000000],
+		 values: [0,100000000],
 		 slide: function(event, ui) {
 			 if(ui.values[0] >= ui.values[1]) {
 				 if(ui.handle == $("#slider a")[0]) {
