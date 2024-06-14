@@ -176,6 +176,9 @@ public class UserController {
             , @RequestParam(name = "keyword", required = false) String keyword
             , @RequestParam(defaultValue = "1", name = "pageNo") Integer pageNo
             , @RequestParam(name = "categoryId",required = false) String categoryId){
+        if (categoryId.isEmpty()){
+            categoryId=null;
+        }
         User user = userLogin.userLogin();
         List<CartResponseDTO> carts = shoppingCartService.displayCartByUser(user);
         int countProductHeader=carts.size();
@@ -186,6 +189,10 @@ public class UserController {
         model.addAttribute("sumPriceHeader",NumberFormat.getInstance(new Locale("vi", "VN")).format(sumPriceHeader)+ "₫");
         model.addAttribute("countProductHeader", countProductHeader);
         Page<UProductResponseDTO> products = productService.findAllByCategoryAndProductNamePage(keyword,pageNo,categoryId);
+        System.out.println(products.getNumberOfElements());
+        System.out.println(keyword);
+        System.out.println(pageNo);
+        System.out.println(categoryId);
         model.addAttribute("keyword",keyword);
         model.addAttribute("sumProduct",productService.findAllByCategoryAndProductName(keyword,categoryId).size());
         model.addAttribute("totalPage", products.getTotalPages());

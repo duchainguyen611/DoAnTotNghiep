@@ -73,15 +73,14 @@
                     <!-- /.contact-row -->
                     <!-- ============================================================= SEARCH AREA ============================================================= -->
                     <div class=" search-area clearfix">
-                        <form class="input-group search-bar" th:action="@{/user/search}" method="get" role="search">
+                        <form class="input-group search-bar" action="/user/search" method="get" role="search">
                             <div class="collection-selector categories-filter">
                                 <div class="search_text">Tất cả</div>
-                                <input type="hidden" name="categoryId" id="categoryId" value="">
-
+                                <input type="hidden" name="categoryId" value="">
                                 <!-- Search Info Section -->
                                 <div id="search_info" class="list_search" style="display: none;">
                                     <div class="search_item" th:each="category : ${categories}" th:text="${category.name}" th:data-value="${category.id}"></div>
-                                    <div class="search_item active"  >Tất cả</div>
+                                    <div class="search_item active">Tất cả</div>
                                 </div>
                             </div>
                             <input type="search" name="keyword" th:value="${keyword}" placeholder="Tìm kiếm sản phẩm..." class="input-group-field st-default-search-input search-text" autocomplete="off" style="padding-left: 91px;">

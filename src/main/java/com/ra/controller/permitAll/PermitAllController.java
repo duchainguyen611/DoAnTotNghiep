@@ -156,8 +156,15 @@ public class PermitAllController {
             , @RequestParam(name = "keyword", required = false) String keyword
             , @RequestParam(defaultValue = "1", name = "pageNo") Integer pageNo
             , @RequestParam(name = "categoryId",required = false) String categoryId){
+        if (categoryId.isEmpty()){
+            categoryId=null;
+        }
         Page<UProductResponseDTO> products = productService.findAllByCategoryAndProductNamePage(keyword,pageNo,categoryId);
         model.addAttribute("keyword",keyword);
+        System.out.println(products.getNumberOfElements());
+        System.out.println(keyword);
+        System.out.println(pageNo);
+        System.out.println(categoryId);
         model.addAttribute("sumProduct",productService.findAllByCategoryAndProductName(keyword,categoryId).size());
         model.addAttribute("totalPage", products.getTotalPages());
         model.addAttribute("currentPage", pageNo);
