@@ -186,7 +186,6 @@ public class UserController {
         model.addAttribute("sumPriceHeader",NumberFormat.getInstance(new Locale("vi", "VN")).format(sumPriceHeader)+ "₫");
         model.addAttribute("countProductHeader", countProductHeader);
         Page<UProductResponseDTO> products = productService.findAllByCategoryAndProductNamePage(keyword,pageNo,categoryId);
-        model.addAttribute("products", products);
         model.addAttribute("keyword",keyword);
         model.addAttribute("sumProduct",productService.findAllByCategoryAndProductName(keyword,categoryId).size());
         model.addAttribute("totalPage", products.getTotalPages());
@@ -196,6 +195,7 @@ public class UserController {
         if (products.getNumberOfElements()==0){
             return "home/user/product/searchProductNoProduct";
         }
+        model.addAttribute("products", products);
         return "home/user/product/searchProduct";
     }
 
