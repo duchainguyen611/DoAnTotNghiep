@@ -1,2 +1,1 @@
-web: java -Dserver.port=$PORT -jar build/libs/DoAnTotNghiep-0.0.1-SNAPSHOT.jar
-web: your-web-server-command --compression=gzip
+web: java -Dserver.port=$PORT -Dserver.compression.enabled=true -Dserver.compression.mime-types=application/json,application/xml,text/html,text/xml,text/plain,text/css,text/javascript,application/javascript -jar build/libs/DoAnTotNghiep-0.0.1-SNAPSHOT.jar
