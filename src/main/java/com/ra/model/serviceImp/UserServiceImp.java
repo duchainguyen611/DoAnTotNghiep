@@ -1,6 +1,5 @@
 package com.ra.model.serviceImp;
 
-import com.ra.model.entity.Address;
 import com.ra.model.entity.ENUM.ActiveStatus;
 import com.ra.model.entity.ENUM.RoleName;
 import com.ra.model.entity.Role;
@@ -61,13 +60,6 @@ public class UserServiceImp implements UserService {
                 .roles(roles)
                 .build();
         userRepository.save(newUser);
-        Address newAddress = Address.builder()
-                .user(newUser)
-                .receiveAddress(newUser.getAddress())
-                .receiveName(newUser.getFullName())
-                .receivePhone(newUser.getPhone())
-                .build();
-        addressService.save(newAddress);
     }
 
     @Override

@@ -99,6 +99,9 @@ public class ShoppingCartController {
         if (carts.isEmpty()){
             redirAttrs.addFlashAttribute("error", "Không có sản phẩm trong giỏ hàng!");
             return "redirect:/user/cart";
+        }if (addressService.displayAllByUser(user).isEmpty()){
+            redirAttrs.addFlashAttribute("error", "Chưa có địa chỉ nhận hàng! Hãy thêm địa chỉ nhận hàng ở trang khách hàng ở chỗ tên khách hàng!");
+            return "redirect:/user/cart";
         }else {
             List<AddressResponseDTO> addresses = addressService.displayAllByUser(user);
             model.addAttribute("carts", carts);
