@@ -219,7 +219,7 @@
                                 th:href="@{'?pageNo=' + ${(currentPage)-1}}"><i class="fa fa-angle-left"></i></a></li>
                         <li class="active page-item disabled" th:each="i:${#numbers.sequence(1,totalPage)}"
                             th:classappend="${currentPage==i?'active':''}">
-                            <a th:href="@{'?keyword='+${keyword}+'&pageNo='+${i}}" th:text="${i}"></a>
+                            <a th:href="@{${categoryId != null ?'?categoryId='+categoryId+'&':'?'}+'keyword='+${keyword}+'&pageNo='+${i}}" th:text="${i}"></a>
                         </li>
                         <li class="next page-item" th:if="${currentPage<totalPage}"><a
                                 th:href="@{'?pageNo='+${currentPage+1}}"><i class="fa fa-angle-right"></i></a></li>

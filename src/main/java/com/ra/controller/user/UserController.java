@@ -176,8 +176,8 @@ public class UserController {
             , @RequestParam(name = "keyword", required = false) String keyword
             , @RequestParam(defaultValue = "1", name = "pageNo") Integer pageNo
             , @RequestParam(name = "categoryId",required = false) String categoryId){
-        if (categoryId.isEmpty()){
-            categoryId=null;
+        if (categoryId == null || categoryId.isEmpty()) {
+            categoryId = null;
         }
         User user = userLogin.userLogin();
         List<CartResponseDTO> carts = shoppingCartService.displayCartByUser(user);

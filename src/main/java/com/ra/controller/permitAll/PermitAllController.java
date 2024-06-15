@@ -166,6 +166,7 @@ public class PermitAllController {
         if (products.getNumberOfElements()==0){
             return "home/permitAll/product/searchProductNoProduct";
         }
+        model.addAttribute("categoryId", categoryId);
         model.addAttribute("products", products);
         return "home/permitAll/product/searchProduct";
     }
