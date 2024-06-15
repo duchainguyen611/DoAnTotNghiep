@@ -680,7 +680,7 @@
                     <h3 class="section-title">Thẻ thương hiệu</h3>
                     <div class="sidebar-widget-body outer-top-xs">
                         <div class="tag-list">
-                            <a class="item" th:each="brand:${brands}" th:href="@{'/shop?brandId=' + ${brand.id}}" th:text="${brand.brandName}"></a>
+                            <a class="item" th:each="brand:${brands}" th:href="@{'/user/shop?brandId=' + ${brand.id}}" th:text="${brand.brandName}"></a>
                         </div>
                         <!-- /.tag-list -->
                     </div>
