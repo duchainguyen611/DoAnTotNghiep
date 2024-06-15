@@ -234,7 +234,7 @@
                     <nav class="yamm megamenu-horizontal" role="navigation">
                         <ul class="nav">
                             <li class="dropdown menu-item" th:each="category:${categories}">
-                                <a th:href="@{'/shop?categoryId=' + ${category.id}}" th:text="${category.name}"></a>
+                                <a th:href="@{'/user/shop?categoryId=' + ${category.id}}" th:text="${category.name}"></a>
                                 <i class="fa fa-plus-circle f-right hidden-md hidden-lg"></i>
                             </li>
                             <!-- /.menu-item -->
