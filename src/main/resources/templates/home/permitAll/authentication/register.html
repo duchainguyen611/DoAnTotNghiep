@@ -244,7 +244,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <fieldset class="form-group">
-                                        <label for="password">Mật khẩu</label>
+                                        <label for="password">Mật khẩu (Từ 8 -> 15 ký tự, ít nhất 1 chữ cái viết hoa, ít nhất 1 chữ số)</label>
                                         <input type="password" class="form-control form-control-lg" th:value="*{password}"
                                                name="password" id="password" placeholder="Mật khẩu*">
                                         <div th:if="${#fields.hasErrors('password')}" class=" myRed" th:errors="*{password}"></div>

@@ -23,11 +23,6 @@ public class PasswordValidator {
         {
             return "Mật khẩu phải chứa ít nhất một số!";
         }
-        String specialChars = "(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)";
-        if (!password.matches(specialChars))
-        {
-            return "Mật khẩu phải chứa ít nhất một ký tự đặc biệt!";
-        }
         return null;
     }
 }
