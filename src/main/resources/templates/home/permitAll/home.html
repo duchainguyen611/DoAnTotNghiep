@@ -315,7 +315,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="product-info text-left">
-                                                                            <h3 class="name"><a
+                                                                            <h3 class="name nameProductsNew"><a
                                                                                     th:href="@{shop/productDetail/{id}(id=${productByNewest.id})}"
                                                                                     th:title="${productByNewest.productName}"   th:text="${productByNewest.productName}">Apple</a></h3>
                                                                             <div class="rating">
@@ -911,6 +911,17 @@
                 document.getElementById('categoryId').value = this.getAttribute('data-value') ;
             });
         });
+    });
+    function truncateString(str, num) {
+        if (str.length <= num) {
+            return str;
+        }
+        return str.slice(0, num) + "...";
+    }
+
+    let names = document.querySelectorAll('.nameProductsNew a');
+    names.forEach(function (name) {
+        name.textContent = truncateString(name.textContent, 35);
     });
 </script>
 <!-- Mirrored from bigshop-1.mysapo.net/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 Apr 2024 02:11:39 GMT -->
