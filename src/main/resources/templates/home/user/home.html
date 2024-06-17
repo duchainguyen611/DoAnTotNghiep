@@ -947,10 +947,31 @@
         return str.slice(0, num) + "...";
     }
 
-    let names = document.querySelectorAll('.nameProductsNew a');
-    names.forEach(function (name) {
-        name.textContent = truncateString(name.textContent, 35);
-    });
+    function updateNameLengths() {
+        let maxLength;
+        if (window.innerWidth <= 750) {
+            maxLength = 35;
+        } else {
+            maxLength = null;
+        }
+
+        let names = document.querySelectorAll('.nameProductsNew a');
+        names.forEach(function (name) {
+            if (maxLength !== null) {
+                if (!name.dataset.originalText) {
+                    name.dataset.originalText = name.textContent;
+                }
+                name.textContent = truncateString(name.dataset.originalText, maxLength);
+            } else {
+                if (name.dataset.originalText) {
+                    name.textContent = name.dataset.originalText;
+                }
+            }
+        });
+    }
+
+    updateNameLengths();
+    window.addEventListener('resize', updateNameLengths);
 
 </script>
 <!-- Mirrored from bigshop-1.mysapo.net/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 Apr 2024 02:11:39 GMT -->
