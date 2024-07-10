@@ -136,26 +136,6 @@ public class UserProfileController {
         return "home/user/profile/updateProfile";
     }
 
-    @PostMapping("/updateProfile")
-    public String updateProfileAdmin(@Valid @ModelAttribute("changeProfile") ChangeProfileDTO changeProfile
-            , BindingResult bindingResult
-            , RedirectAttributes redirAttrs) throws IOException {
-        User user = userLogin.userLogin();
-        changeProfile.setImage(user.getImage());
-        if (bindingResult.hasErrors()) {
-            return "home/user/profile/updateProfile";
-        }
-        StringError stringError = userService.updateProfile(changeProfile, user);
-        if (stringError != null) {
-            if (stringError.getEmail() != null)
-                bindingResult.rejectValue("email", "email exist", stringError.getEmail());
-            if (stringError.getPhone() != null)
-                bindingResult.rejectValue("phone", "phone exist", stringError.getPhone());
-            return "home/user/profile/updateProfile";
-        }
-        redirAttrs.addFlashAttribute("success", "Cập nhật thành công!");
-        return "redirect:/user/profile/updateProfile";
-    }
 
     @PostMapping("/addAddress")
     public String addAddress(@Valid @ModelAttribute("addressRequest") AddressRequestDTO addressRequest) {
@@ -192,6 +172,27 @@ public class UserProfileController {
         return "redirect:/user/profile/address";
     }
 
+    @PostMapping("/updateProfile")
+    public String updateProfileAdmin(@Valid @ModelAttribute("changeProfile") ChangeProfileDTO changeProfile
+            , BindingResult bindingResult, Model model
+            , RedirectAttributes redirAttrs) throws IOException {
+        User user = userLogin.userLogin();
+        model.addAttribute("user", user);
+        changeProfile.setImage(user.getImage());
+        if (bindingResult.hasErrors()) {
+            return "home/user/profile/updateProfile";
+        }
+        StringError stringError = userService.updateProfile(changeProfile, user);
+        if (stringError != null) {
+            if (stringError.getEmail() != null)
+                bindingResult.rejectValue("email", "email exist", stringError.getEmail());
+            if (stringError.getPhone() != null)
+                bindingResult.rejectValue("phone", "phone exist", stringError.getPhone());
+            return "home/user/profile/updateProfile";
+        }
+        redirAttrs.addFlashAttribute("success", "Cập nhật thành công!");
+        return "redirect:/user/profile/updateProfile";
+    }
 
     @PostMapping("/updatePassword")
     public String updatePasswordAdmin(@Valid @ModelAttribute("changePassword") ChangePasswordDTO changePassword
